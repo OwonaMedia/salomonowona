@@ -1,0 +1,28 @@
+{
+  "rewrites": [
+    {
+      "source": "/en",
+      "destination": "/en.html"
+    },
+    {
+      "source": "/en/",
+      "destination": "/en.html"
+    },
+    {
+      "source": "/fr",
+      "destination": "/fr.html"
+    },
+    {
+      "source": "/fr/",
+      "destination": "/fr.html"
+    },
+    {
+      "source": "/sw",
+      "destination": "/sw.html"
+    },
+    {
+      "source": "/sw/",
+      "destination": "/sw.html"
+    }
+  ]
+}

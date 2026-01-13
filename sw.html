@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninatoka wapi, ninaenda wapi... | Salomon Firmin Owona</title>
+    <meta name="description" content="Tovuti ya Salomon Firmin Owona. Kati ya Kamerun na Ujerumani. Sanaa, Teknolojia, Historia na Wakati Ujao.">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        :root {
+            --bg-body: #0f1115;
+            --bg-surface: #1a1d23;
+            --bg-surface-hover: #252932;
+            --text-main: #e0e0e0;
+            --text-muted: #9ca3af;
+            --accent: #d4a373;
+            --accent-dim: rgba(212, 163, 115, 0.1);
+            --border: #333842;
+            --font-main: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
+        }
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3 { font-weight: 700; color: #fff; }
+        h2 {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+        }
+        .container-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        /* HEADER & NAV */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 17, 21, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .logo {
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        /* AUDIO UI */
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            background: var(--bg-surface);
+            padding: 4px 12px;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            margin: 0 1rem;
+            max-width: 350px;
+            flex: 1;
+            overflow: hidden;
+        }
+        .play-btn {
+            background: var(--accent);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+        .play-btn:hover { transform: scale(1.1); }
+        .track-info {
+            font-size: 0.75rem;
+            margin-left: 10px;
+            white-space: nowrap;
+            color: var(--text-muted);
+        }
+        /* HAMBURGER */
+        .hamburger {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 1100;
+        }
+        .hamburger span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: #fff;
+            transition: 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        /* SIDEBAR MENU */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--bg-surface);
+            z-index: 1050;
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            padding: 100px 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border);
+        }
+        .sidebar.active { right: 0; }
+        .sidebar-nav a {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s;
+        }
+        .sidebar-nav a:hover { color: var(--accent); }
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+        }
+        .overlay.active { opacity: 1; visibility: visible; }
+        /* SECTIONS */
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        /* HERO */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(15,17,21,0.5), rgba(15,17,21,0.5)), url('Salomon.png') center/cover no-repeat fixed;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+        /* TIMELINE */
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 25px;
+            bottom: -45px;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item:last-child::after { display: none; }
+        /* GRID */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: var(--bg-surface);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        /* LANG SWITCHER */
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .lang-btn.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+        /* LAYOUT UTILITIES */
+        .container-shifted {
+            max-width: 900px;
+            margin-left: 15%;
+            margin-right: auto;
+        }
+        .highlight {
+            color: var(--accent);
+        }
+        .bio-text {
+            font-size: 1.1rem;
+            max-width: 700px;
+        }
+        .timeline {
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 3rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 18px;
+            bottom: -30px;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        .timeline-date {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .values-box {
+            background: var(--bg-surface);
+            padding: 3rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+        .values-lead {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card {
+            background: var(--bg-surface);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            background: var(--bg-surface-hover);
+        }
+        .project-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+        .contact-area {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        .contact-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .contact-btn:hover {
+            background: var(--accent);
+            color: #000;
+        }
+        .patreon-widget {
+            max-width: 400px;
+            width: 100%;
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover::before {
+            transform: scale(1.1);
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(212, 163, 115, 0.3);
+        }
+        .social-icon:hover {
+            transform: translateY(-2px);
+        }
+        .social-text {
+            font-size: 1.2rem;
+            z-index: 1;
+            position: relative;
+        }
+        .social-icon {
+            color: #fff;
+        }
+        .social-icon:hover {
+            color: var(--accent);
+        }
+        /* MOBILE FIXES */
+        @media (max-width: 640px) {
+            .audio-controls {
+                max-width: 140px;
+                margin: 0 0.5rem;
+            }
+            .track-info {
+                display: none;
+            }
+            .logo { font-size: 0.65rem; }
+            section { padding: 60px 0; }
+            .container-shifted {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            .values-box {
+                padding: 1.5rem;
+                margin-top: 1rem;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .project-card {
+                padding: 1.5rem;
+            }
+            .timeline-item {
+                padding-left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-inner">
+            <a href="#home" class="logo">Salomon Owona</a>
+            <div class="audio-controls">
+                <button class="play-btn" onclick="toggleArchiveRadio()" id="playIcon">▶</button>
+                <div class="track-info" id="trackName">Redio ya Kumbukumbu</div>
+            </div>
+            <div class="hamburger" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+            <a href="#home">Nyumbani</a>
+            <a href="#about">Kuhusu Mimi</a>
+            <a href="#doing">Ninachofanya</a>
+            <a href="#values">Maadili</a>
+            <a href="#projects">Miradi</a>
+            <a href="#contact">Wasiliana</a>
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('sw')">SW</button>
+                <button class="lang-btn" onclick="switchLanguage('de')">DE</button>
+                <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
+            </div>
+        </nav>
+    </div>
+    <main>
+        <!-- 1. Ukurasa wa Nyumbani -->
+        <section id="home">
+            <div class="container hero-content">
+                <h1>Ninatoka wapi, ninaenda wapi...</h1>
+                <span class="hero-sub">Ninafikiri, ninajifunza, ninajenga, ninauliza.<br>
+                Kati ya Kamerun na Ujerumani.<br>
+                Kati ya Sanaa, Teknolojia, Historia na Wakati Ujao.</span>
+                <div class="hero-meta">
+                    Ukurasa huu si portfolio.<br>
+                    Ni dirisha wazi kuelekea ulimwengu wangu.<br>
+                    Si kamili, si iliyosafishwa – ya kweli.
+                </div>
+                <div style="margin-top: 4rem;">
+                    <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: var(--text-muted);">
+                        Siamini katika historia za maisha ya moja kwa moja.<br>
+                        Yangu yamekuwa daima ya kusogea, kutafuta, kukua.<br>
+                        Ukisoma hapa, kaa kidogo.<br>
+                        Labda utajipata mahali –<br>
+                        katika mashaka yangu, ushindi wangu, maswali yangu.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- 2. Kuhusu Mimi -->
+        <section id="about">
+            <div class="container-shifted">
+                <h2>Kuhusu Mimi</h2>
+                <div class="bio-text">
+                    <p>Jina langu ni Salomon Firmin Owona na nilizaliwa Kamerun mwaka 1981.<br>
+                    Kumbukumbu zangu za kwanza ni za siku za jua huko Yaoundé:<br>
+                    ladha ya udongo mwekundu nilipokuwa nikicheza uani,<br>
+                    mshtuko wa umeme nilipojaribu kucheza na soketi kwa udadisi,<br>
+                    mama yangu, aliyechoka lakini akitabasamu akitoka kazini,<br>
+                    dada yangu, aliyezungumza kwa masaa na rafiki yake.<br>
+                    Tulikuwa kikundi cha furaha, daima kutafuta<br>
+                    matukio mapya.</p>
+                    <p>Mwaka 1989 nilikuja Ujerumani na mama yangu na ndugu zangu –<br>
+                    kwa baba yangu na dada yangu Patricia.<br>
+                    <br>
+                    Sikutaka kuondoka Kamerun,<br>
+                    lakini dada yangu Ginette alinishawishi<br>
+                    kwa baiskeli.<br>
+                    Ninakumbuka vizuri asubuhi hiyo baridi ya majira ya baridi<br>
+                    huko Erkrath-Hochdahl.<br>
+                    Kila kitu kilikuwa safi sana, kigeni sana – hakuna rangi,<br>
+                    hakuna joto.<br>
+                    Kila mtu alituangalia kama hatukuwa wa<br>
+                    ulimwengu huu.<br>
+                    Mama yangu hakupokewa vizuri uwanja wa ndege,<br>
+                    macho ya maafisa yalikuwa baridi na ya kukataa.<br>
+                    Ilikuwa baridi sana, si hali ya hewa tu –<br>
+                    baridi ya kihisia ambayo sitaisahau kamwe.<br>
+                    Hata hivyo, kulikuwa na msisimko – kuanza maisha mapya.</p>
+                    <p>Kufika haikuwa tukio.<br>
+                    Ilikuwa mchakato mrefu, wakati mwingine wenye uchungu.<br>
+                    Nilijifunza kujirekebisha, kujenga madaraja<br>
+                    na wakati huo huo kuhifadhi mizizi yangu.</p>
+                    <p>Nilikulia Erkrath-Hochdahl.<br>
+                    Shule ya msingi Sandheide, ambapo nilipata marafiki wangu wa kwanza –<br>
+                    lakini pia ambapo nilipata pambano langu la kwanza la kweli.<br>
+                    Ninakumbuka pigo kichwani,<br>
+                    baada ya kusisitiza kwamba kifaa cha kuandikia ni changu.<br>
+                    Hilo halikukubalika na mtu fulani.<br>
+                    Nilipoteza fahamu. Sijui kwa muda gani.<br>
+                    Sikuwahi kuwaambia wazazi wangu.<br>
+                    Shule ya sekondari Hochdahl – mahali penye majeraha mengi.<br>
+                    Mwalimu wangu wa historia alikuwa amemwamuru mwanafunzi mwingine,<br>
+                    madarasa kadhaa juu yangu, Mhindi au Pakistani (sikumbuki),<br>
+                    kunipiga.<br>
+                    Nilikuwa na nguvu na mwenye mazoezi kwa umri wangu.<br>
+                    Mwalimu alikuwepo. Nilisimama tu.<br>
+                    Hali ilikuwa ya kusumbua sana.<br>
+                    Mwalimu huyo huyo alikuwa amempiga mvulana koridoni mwaka huo huo.<br>
+                    Hizo zilikuwa miaka ya 90 shuleni ya sekondari.<br>
+                    Hata hivyo, nilianza kuuliza maswali pale.<br>
+                    Baadaye Shule ya Juu ya Biashara huko Hilden,<br>
+                    ambapo nilijifunza kuwa maarifa ni nguvu.</p>
+                    <p>Likizo za majira ya joto kila mwaka nilipokuwa mtoto zilikuwa za aina mbalimbali.<br>
+                    Wakati mwingine nilikwenda kambi ya burudani,<br>
+                    au nilitembea tu na marafiki kutoka kikapu cha mpira mmoja hadi mwingine.<br>
+                    Hakujawa na kuchosha kamwe.<br>
+                    Hadithi za ndege kwenda visiwa vya kigeni au Gran Canaria<br>
+                    sikuwa nazo za kusimulia kama watoto wengine.<br>
+                    Lakini ilikuwa sawa.<br>
+                    Ni ajabu tu kwamba hakuna yeyote wa wanafunzi hao wenye pesa nyingi<br>
+                    aliyeijua bara la Afrika.<br>
+                    Kilichonifuata mapema kilikuwa kujifunza mwenyewe.<br>
+                    Si kama chaguo la kuvutia, bali kama ulazima mtupu.<br>
+                    Ukionekana tofauti na kuzungumza tofauti,<br>
+                    lazima uwe bora zaidi ili uweze kushindana.<br>
+                    Kutoka ulazima huo ikaja shauku –<br>
+                    furaha ya kugundua, kuelewa, kukua.</p>
+                    <p>Ninaangalia, ninajaribu, ninaelewa.<br>
+                    Iwe muziki, teknolojia, biashara au watu –<br>
+                    kila kitu ni jaribio kubwa kwangu.<br>
+                    Kwa nini watu wanafanya wanachokifanya?<br>
+                    Nini kinawasukuma? Nini kinawazuia?<br>
+                    Maswali haya yamenishughulisha kwa miaka.</p>
+                    <p>Ninapenda kukimbia kuzunguka ziwa la kuogelea.<br>
+                    Si kwa afya, bali kwa uwazi wa mawazo.<br>
+                    Kwa kila hatua ninapanga mawazo,<br>
+                    ninaangalia thamani zangu kwenye saa ya michezo<br>
+                    na kujiuliza: Je, bado niko njia sahihi?</p>
+                    <p>Mimi ni baba wa watoto watatu:<br>
+                    <span class="highlight">Afidi, Otis na Salomon Jr.</span><br>
+                    Wao ni nanga yangu katika ulimwengu huu usio na utulivu.<br>
+                    Wakati kila kitu kinachonizunguka kinabadilika,<br>
+                    wananikumbusha kinachofanya thamani ya kweli:<br>
+                    Upendo, kicheko, kukubalika bila masharti.<br>
+                    Wananitegemeza zaidi ya dhana yoyote,<br>
+                    falsafa yoyote, mafanikio yoyote.</p>
+                    <p>Kwa familia yangu ningeweza kupita motoni,<br>
+                    kwa sababu najua wangefanya hivyo kwa ajili yangu pia.<br>
+                    Ni mtu asiye rahisi, kwa sababu mimi ni mdogo kati ya ndugu,<br>
+                    lakini bado na sauti kubwa – katika tamaduni za Kiafrika wadogo hawana mengi ya kusema.<br>
+                    Hata hivyo! Daima niliinua sauti yangu,<br>
+                    nilisema maoni yangu, nilifuata ndoto zangu.<br>
+                    Hiyo imenifanya: mwenye heshima kwa wazee,<br>
+                    lakini kamwe si kimya dhidi ya dhuluma.</p>
+                </div>
+            </div>
+        </section>
+        <!-- 3. Ninachofanya -->
+        <section id="doing">
+            <div class="container-shifted">
+                <h2>Ninachofanya</h2>
+                <p>Sijawahi kufanya jambo moja tu.</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="timeline-date">Miaka ya awali hadi takriban umri wa miaka 30</span>
+                        <h3>Rap & Muziki – Kupata Sauti Yangu</h3>
+                        <p>Katika miaka yangu ya awali ilikuwa rap – si muziki tu, bali tiba.<br>
+                        Maneno kuhusu utambulisho, kuwa na mahali, maumivu ya kuwa kati-kati.<br>
+                        Jina langu la kisanaa lilikuwa Mr. F.o.b.s. Herufi zangu za kwanza.<br>
+                        Wakati wa mafunzo nilijua underground ya Pforzheim.<br>
+                        Na vijana kutoka Mühlacker nilipiga video yangu ya kwanza ya muziki "Fobsheim".<br>
+                        Mpforzheimer alinileta wazo – "Fobs' Heim", mchezo mzuri wa maneno.<br>
+                        Ninakumbuka onyesho lile la kichawi mwaka 2003 huko Stuttgart Sillenbuch:<br>
+                        Niliomba wanipate mic kwenye mlango wa nyuma.<br>
+                        Kuanzia nje: "Mic-check 1-2, Stuttgart, mko tayari sema hoooh!!"<br>
+                        Hawakujua nani anakuja. Nikitoa rap kutoka nyuma kabisa nikielekea jukwaani<br>
+                        ghafla nilikuwa na umati nyuma yangu,<br>
+                        na umati mkubwa zaidi uliotaka kujua mimi ni nani.<br>
+                        Nikizunguka kona nikitoa rap kuhusu harakati ya mpira wa kikapu –<br>
+                        waliniona na wakaanza kushangilia. Ilikuwa ya kichawi.<br>
+                        Baadaye uzalishaji wa muziki: kutengeneza beats katika chumba changu kidogo,<br>
+                        majukwaa, maonyesho, adrenaline ya taa.<br>
+                        Nilikuwa nikifanya maonyesho mara kwa mara na kujulikana ndani ya mtaa –<br>
+                        mara ya kwanza kweli kuonekana.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">2002 – 2005</span>
+                        <h3>Mbunifu wa Vyombo vya Habari – Teknolojia kama Lugha</h3>
+                        <p>Mafunzo katika Huduma ya Utangazaji ya Kiinjili Baden huko Karlsruhe.<br>
+                        Hapa nilijifunza kusimulia picha, kuunda sauti.<br>
+                        Teknolojia ikawa chombo changu cha kusafirisha hadithi.<br>
+                        Kwa mara ya kwanza nilijisikia kweli mwenye uwezo katika maisha ya kazi.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">2007</span>
+                        <h3>Uwasilishaji wa Moja kwa Moja – Mburudishaji</h3>
+                        <p>Kwa miezi kadhaa mwasilishaji wa moja kwa moja katika NRW TV.<br>
+                        Ghafla nilisimama mbele ya kamera, nikifanya mahojiano,<br>
+                        nikiwafanya watu wacheke, wafikiri.<br>
+                        Jukumu lililonifaa – mpatanishi, mjenzi wa madaraja.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">2018 – 2020</span>
+                        <h3>Biashara & E-Commerce – Biashara na Saikolojia</h3>
+                        <p>Amazon FBA ikawa chuo kikuu changu cha biashara.<br>
+                        Bidhaa za mauzo bora, uagizaji/usafirishaji, Amazon SEO, orodha.<br>
+                        Lakini zaidi ya yote: saikolojia ya mauzo.<br>
+                        Kwa nini watu wananunua? Nini kinasukuma maamuzi?<br>
+                        Nilijifunza zaidi kuhusu asili ya binadamu kuliko masomo yoyote.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Tangu 2017</span>
+                        <h3>Crypto & Ugatuzi – Kutafuta Uhuru</h3>
+                        <p>Crypto haikuwa hype kwangu kamwe – ilikuwa swali la kifalsafa.<br>
+                        Nini kinatokea pesa isipodhibitiwa tena na taasisi?<br>
+                        Nguvu inapogatuliwa?<br>
+                        Nilizama ndani sana: kusoma whitepaper usiku,<br>
+                        kujenga jamii, kuendesha majadiliano ya kifalsafa.<br>
+                        Ilikuwa kutafuta kwangu mfumo wa haki zaidi.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Tangu 2024</span>
+                        <h3>Vibe Coding & SaaS – Karakana ya Kidijitali</h3>
+                        <p>Sasa ninajenga ulimwengu wa kidijitali: bidhaa za SaaS,<br>
+                        ikiwa ni pamoja na whatsapp.owona.de.<br>
+                        Code kama aina ya sanaa, bidhaa kama suluhisho za matatizo.<br>
+                        Kila siku furaha ya kuunda kitu kutoka hakuna kitu,<br>
+                        kinachowasaidia wengine kuboresha maisha yao.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">Sambamba kwa miaka</span>
+                        <h3>Ndasi.com – Mizizi na Wakati Ujao</h3>
+                        <p>Uongozi wa Ndasi.com huko Kamerun – mchango wangu nyumbani.<br>
+                        Uzalishaji, uagizaji wa mashine za kutengeneza matofali.<br>
+                        Si msaada wa maendeleo, bali ujenzi.<br>
+                        Kuunda nafasi za kazi, kuhamisha maarifa,<br>
+                        kuwezesha kizazi kijacho.<br>
+                        Kwa sababu najua jinsi ilivyo kuja kutoka nje.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 4. Maadili & Msimamo -->
+        <section id="values">
+            <div class="container-shifted">
+                <h2>Maadili & Msimamo</h2>
+                <div class="values-box">
+                    <p class="values-lead">Mimi ni mpiganaji hai dhidi ya ubaguzi wa rangi.<br>
+                    Si kwa imani peke yake – bali kwa sababu nimeiishi kila siku.<br>
+                    Tangu ujana wangu Ujerumani, ambapo "mgeni" lilikuwa bado neno la matusi.</p>
+                    <p>Ubaguzi wa rangi si suala la pembeni.<br>
+                    Unaunda njia za maisha, unaharibu ndoto, unajenga kuta zisizoonekana.<br>
+                    Uliamua shule zipi ningeweza kuhudhuria,<br>
+                    kazi zipi nilipata, milango ipi ilifunguka.<br>
+                    Na umenifanya kuwa na nguvu zaidi – mwenye kustahimili, mwenye huruma, mwenye azimio.</p>
+                    <p>Ndiyo maana ninafanya kazi na marafiki kwenye jamii za mtandao duniani kote<br>
+                    kama Black Lives Memorial Heidelberg.<br>
+                    Tunafanya Historia ya Watu Weusi ionekane,<br>
+                    tunashiriki maarifa, tunajenga madaraja kati ya tamaduni.<br>
+                    Kwa sababu kumbukumbu ni ufunguo wa mabadiliko.</p>
+                    <p>Ninaamini katika elimu kama silaha, muktadha kama uelewa,<br>
+                    kumbukumbu kama msingi.<br>
+                    Na kwamba teknolojia na historia lazima zifikiriwe pamoja –<br>
+                    kwa sababu algorithimu zinaonyesha upendeleo wa waumbaji wao,<br>
+                    na kwa sababu nafasi za kidijitali lazima ziwe za haki kama zile za kimwili.</p>
+                </div>
+            </div>
+        </section>
+        <!-- 5. Miradi & Alama -->
+        <section id="projects">
+            <div class="container-shifted">
+                <h2>Miradi & Alama – Ulimwengu Wangu wa Kidijitali na Halisi</h2>
+                <p>Baadhi ya alama zangu za sasa na za zamani.<br>
+                Si kama orodha kamili, bali kama mtazamo wa ulimwengu wangu mbalimbali:</p>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <span class="project-icon">🎧</span>
+                        <div class="project-title">Muziki & Beats</div>
+                        <div class="project-desc">Wasifu wangu hai wa Beatstars Producer tangu 2020. Uzalishaji na instrumental na Roland MC-707 Sequencer na AKAI MPC Sampler. Beats kama kielelezo cha roho – kutoka midundo ya jadi ya Kiafrika hadi sauti za kisasa za Trap. <a href="https://www.beatstars.com/afrodisiaque" target="_blank" style="color: var(--accent);">Tembelea →</a></div>
+                    </div>
+                    <div class="project-card">
+                        <span class="project-icon">🎙️</span>
+                        <div class="project-title">Podcast kuhusu Upendo & Uhusiano</div>
+                        <div class="project-desc">Mazungumzo ya kweli kuhusu kinachofanya thamani ya kweli: uhusiano kati ya watu. Hakuna ushauri wa juu juu, bali uzoefu wa kweli kutoka maishani.</div>
+                    </div>
+                    <div class="project-card">
+                        <span class="project-icon">💻</span>
+                        <div class="project-title">SaaS & Vibe Coding</div>
+                        <div class="project-desc">Kujenga bidhaa za kidijitali zinazowasaidia watu. Kama whatsapp.owona.de – kwa sababu ninaamini teknolojia inaweza kuwa rahisi na ya kibinadamu zaidi.</div>
+                    </div>
+                    <div class="project-card">
+                        <span class="project-icon">🌍</span>
+                        <div class="project-title">Ndasi.com – Kamerun</div>
+                        <div class="project-desc">Mchango wangu nyumbani. Utengenezaji wa matofali, uagizaji wa mashine, nafasi za kazi. Si kama hadithi ya kishujaa, bali kama wajibu kwa mizizi yangu.</div>
+                    </div>
+                    <div class="project-card">
+                        <span class="project-icon">🧠</span>
+                        <div class="project-title">Jamii za Historia ya Watu Weusi</div>
+                        <div class="project-desc">Jamii za mtandao duniani kote kwa kuonekana. Kufanya kazi na marafiki kurekebisha historia, kushiriki maarifa, kuwezesha kizazi kijacho. Kwa sababu kumbukumbu inaponya.</div>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; font-size: 1rem; font-style: italic; color: var(--text-muted);">
+                    Si yote yamekamilika. Mengine ni mchakato. Mengine ni ghafi kwa makusudi.<br>
+                    Kwa sababu maisha si ya moja kwa moja – na mimi pia si.
+                </p>
+            </div>
+        </section>
+        <!-- 6. Wasiliana -->
+        <section id="contact">
+            <div class="container-shifted contact-area">
+                <h2>Wasiliana – Hebu Tuzungumze</h2>
+                <p>Sipendi fomu za mawasiliano zisizo na uhai.<br>
+                Zinahisi kama mahojiano ya kazi – zisizo za kibinafsi na za mbali.</p>
+                <p>Ukitaka kuandika, andika.<br>
+                Iwe wazo linalokusumbua.<br>
+                Mradi unaotaka kuanza.<br>
+                Swali linalokuzunguka.<br>
+                Au mwangwi tu – kwa sababu kitu fulani<br>
+                ulichokisoma hapa kimekufikia.</p>
+                <p>Sijibu mara moja kila wakati.<br>
+                Wakati mwingine ninahitaji muda wa kufikiri.<br>
+                Lakini ninajibu kwa uaminifu kila wakati.</p>
+                <a href="mailto:salomon@owona.de" class="contact-btn">
+                    Andika Ujumbe
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container-shifted">
+            <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
+                <!-- Patreon Widget -->
+                <div class="patreon-widget">
+                    <iframe src="https://patreon.com/SalomonO" frameborder="0" width="100%" height="200" style="border-radius: 8px;"></iframe>
+                </div>
+                <!-- Social Media Icons -->
+                <div class="social-icons">
+                    <a href="https://www.tiktok.com/@salomonowona" class="social-icon tiktok" target="_blank" rel="noopener noreferrer" title="TikTok">
+                        <span class="social-text">📱</span>
+                    </a>
+                    <a href="https://www.facebook.com/salomonowona" class="social-icon facebook" target="_blank" rel="noopener noreferrer" title="Facebook">
+                        <span class="social-text">📘</span>
+                    </a>
+                    <a href="https://www.youtube.com/@salomonowona" class="social-icon youtube" target="_blank" rel="noopener noreferrer" title="YouTube">
+                        <span class="social-text">📺</span>
+                    </a>
+                    <a href="https://podcasts.apple.com/de/podcast/[dein-podcast]" class="social-icon apple" target="_blank" rel="noopener noreferrer" title="Apple Podcasts">
+                        <span class="social-text"></span>
+                    </a>
+                    <a href="https://www.amazon.de/s?k=salomon+owona" class="social-icon amazon" target="_blank" rel="noopener noreferrer" title="Amazon">
+                        <span class="social-text">📦</span>
+                    </a>
+                </div>
+                <p>&copy; 1981-2026 Salomon Firmin Owona. Kati ya Ulimwengu.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Archive.org Radio Player -->
+    <audio id="archiveRadioPlayer" preload="none" style="display: none;">
+        <source id="audioSource" src="" type="audio/mpeg">
+    </audio>
+    <script>
+        // Archive.org Radio Playlist kwa hotuba za kihistoria
+        const archivePlaylist = [
+            "https://archive.org/download/malcolm-x-revolution/malcolm-x-revolution.mp3",
+            "https://archive.org/download/tenor-homme/tenor-homme.mp3",
+            "https://archive.org/download/nkrumah-unity/nkrumah-unity.mp3",
+            "https://archive.org/download/locko-margo/locko-margo.mp3",
+            "https://archive.org/download/diop-civilization/diop-civilization.mp3",
+            "https://archive.org/download/petit-pays-eboki/petit-pays-eboki.mp3",
+            "https://archive.org/download/king-dream/king-dream.mp3",
+            "https://archive.org/download/lady-ponce-leve-toi/lady-ponce-leve-toi.mp3",
+            "https://archive.org/download/stanley-enow/stanley-enow.mp3",
+            "https://archive.org/download/traore-sovereignty/traore-sovereignty.mp3",
+            "https://archive.org/download/daphne-jusqua-la-gare/daphne-jusqua-la-gare.mp3",
+            "https://archive.org/download/lumumba-independence/lumumba-independence.mp3",
+            "https://archive.org/download/sankara-revolution/sankara-revolution.mp3"
+        ];
+        const trackTitles = [
+            "Malcolm X - Ujumbe wa Mapinduzi",
+            "Tenor - L'Homme (Cameroun Makossa 2020)",
+            "Kwame Nkrumah - Umoja wa Afrika",
+            "Locko - MARGO (Cameroun Afrobeat 2019)",
+            "Cheikh Anta Diop - Ustaarabu wa Afrika",
+            "Petit Pays - Eboki (Cameroun Makossa)",
+            "Martin Luther King - Nina Ndoto",
+            "Lady Ponce - Lève Toi (Cameroun Rap 2017)",
+            "Stanley Enow - Hein Père (Cameroun Highlife 2021)",
+            "Ibrahim Traoré - Uhuru wa Burkina",
+            "Daphne - Jusqu'à La Gare (Cameroun Pop 2023)",
+            "Patrice Lumumba - Uhuru wa Kongo",
+            "Thomas Sankara - Mapinduzi ya Burkina"
+        ];
+        let archivePlayer;
+        let audioSource;
+        let currentArchiveTrack = 0;
+        let isArchivePlaying = false;
+        // Mfumo wa Preloading kwa uchezaji wa haraka
+        let preloadBuffers = [];
+        let maxPreloadBuffers = 3;
+        function initArchiveRadio() {
+            console.log('🎵 Redio ya Kumbukumbu imeanzishwa na', archivePlaylist.length, 'hotuba');
+            archivePlayer = document.getElementById('archiveRadioPlayer');
+            audioSource = document.getElementById('audioSource');
+            if (!archivePlayer) {
+                console.error('❌ kipengele cha archiveRadioPlayer hakijapatikana!');
+                return;
+            }
+            if (!audioSource) {
+                console.error('❌ kipengele cha audioSource hakijapatikana!');
+                return;
+            }
+            archivePlayer.addEventListener('ended', () => {
+                console.log('🎵 Wimbo umeisha, wimbo unaofuata...');
+                playNextArchiveTrack();
+            });
+            archivePlayer.addEventListener('error', (e) => {
+                console.error('❌ Kosa la Audio:', e);
+                setTimeout(() => playNextArchiveTrack(), 2000);
+            });
+            initPreloading();
+            updateArchiveTitle();
+            console.log('🎵 Redio ya Kumbukumbu iko tayari!');
+        }
+        function initPreloading() {
+            for (let i = 0; i < maxPreloadBuffers; i++) {
+                const buffer = new Audio();
+                buffer.preload = 'none';
+                buffer.volume = 0;
+                preloadBuffers.push({
+                    audio: buffer,
+                    loaded: false,
+                    trackIndex: -1
+                });
+            }
+        }
+        function preloadNextTracks() {
+            for (let i = 0; i < maxPreloadBuffers; i++) {
+                const nextTrackIndex = (currentArchiveTrack + i + 1) % archivePlaylist.length;
+                const buffer = preloadBuffers[i];
+                if (buffer.loaded && buffer.trackIndex === nextTrackIndex) {
+                    continue;
+                }
+                buffer.audio.src = archivePlaylist[nextTrackIndex];
+                buffer.audio.preload = 'metadata';
+                buffer.trackIndex = nextTrackIndex;
+                buffer.loaded = false;
+                buffer.audio.addEventListener('canplaythrough', () => {
+                    buffer.loaded = true;
+                }, { once: true });
+                buffer.audio.load();
+            }
+        }
+        function getPreloadedTrack(trackIndex) {
+            for (const buffer of preloadBuffers) {
+                if (buffer.trackIndex === trackIndex && buffer.loaded) {
+                    return buffer.audio;
+                }
+            }
+            return null;
+        }
+        function toggleArchiveRadio() {
+            if (!archivePlayer) {
+                initArchiveRadio();
+            }
+            const button = document.querySelector('.play-btn');
+            button.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+                if (isArchivePlaying) {
+                    archivePlayer.pause();
+                    isArchivePlaying = false;
+                } else {
+                    if (archivePlayer.src === '' || archivePlayer.src !== archivePlaylist[currentArchiveTrack]) {
+                        archivePlayer.src = archivePlaylist[currentArchiveTrack];
+                        archivePlayer.load();
+                    }
+                    archivePlayer.play().then(() => {
+                        isArchivePlaying = true;
+                    }).catch(error => {
+                        console.error('🎵 Play failed:', error);
+                    });
+                }
+            }, 150);
+        }
+        function playNextArchiveTrack() {
+            currentArchiveTrack = (currentArchiveTrack + 1) % archivePlaylist.length;
+            if (isArchivePlaying) {
+                const preloadedAudio = getPreloadedTrack(currentArchiveTrack);
+                if (preloadedAudio) {
+                    archivePlayer.src = preloadedAudio.src;
+                    archivePlayer.currentTime = 0;
+                    archivePlayer.play().then(() => {
+                        updateArchiveTitle();
+                        setTimeout(() => preloadNextTracks(), 1000);
+                    }).catch(error => {
+                        archivePlayer.src = archivePlaylist[currentArchiveTrack];
+                        archivePlayer.load();
+                        archivePlayer.play().catch(err => console.error('Fallback failed:', err));
+                    });
+                } else {
+                    archivePlayer.src = archivePlaylist[currentArchiveTrack];
+                    archivePlayer.load();
+                    archivePlayer.play().catch(error => {
+                        console.error('Auto-play failed:', error);
+                    });
+                }
+            }
+        }
+        function updateArchiveTitle() {
+            const titleElement = document.getElementById('trackName');
+            if (titleElement && trackTitles[currentArchiveTrack]) {
+                titleElement.textContent = trackTitles[currentArchiveTrack];
+            }
+        }
+        // Hamburger Menu Functions
+        function toggleMenu() {
+            const hamburger = document.getElementById('navToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+        const navToggle = document.getElementById('navToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const links = document.querySelectorAll('.sidebar-nav a');
+        navToggle.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+        links.forEach(link => link.addEventListener('click', toggleMenu));
+        // Language switcher function
+        function switchLanguage(lang) {
+            const currentUrl = window.location.href;
+            const isLocalhost = currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1');
+            let newUrl;
+            if (isLocalhost) {
+                if (lang === 'de') {
+                    newUrl = 'index.html';
+                } else {
+                    newUrl = lang + '.html';
+                }
+            } else {
+                const baseUrl = currentUrl.split('/').slice(0, 3).join('/');
+                if (lang === 'de') {
+                    newUrl = baseUrl + '/';
+                } else {
+                    newUrl = baseUrl + '/' + lang;
+                }
+            }
+            window.location.href = newUrl;
+        }
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎵 Redio ya Salomon inaanza...');
+            initArchiveRadio();
+        });
+    </script>
+</body>
+</html>
