@@ -6,8 +6,12 @@
     <title>D'où viens-je, où vais-je... | Salomon Firmin Owona</title>
     <meta name="description" content="Présence en ligne de Salomon Firmin Owona. Entre Cameroun et Allemagne. Art, technologie, histoire et avenir.">
     <link rel="canonical" href="https://salomonowona.com/fr">
-    <link rel="alternate" hreflang="de" href="https://salomonowona.com/">
+    <link rel="alternate" hreflang="sw" href="https://salomonowona.com/">
+    <link rel="alternate" hreflang="de" href="https://salomonowona.com/de">
     <link rel="alternate" hreflang="en" href="https://salomonowona.com/en">
+    <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr">
+    <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/">
+<link rel="alternate" hreflang="en" href="https://salomonowona.com/en">
     <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr">
     <link rel="alternate" hreflang="sw" href="https://salomonowona.com/sw">
     <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/">
@@ -1090,19 +1094,18 @@
             let newUrl;
 
             if (isLocalhost) {
-                if (lang === 'de') {
-                    newUrl = 'index.html'; // For local, use filename
+                if (lang === 'sw') {
+                    newUrl = 'index.html';
                 } else {
-                    newUrl = lang + '.html'; // For local, use filename
+                    newUrl = lang + '.html';
                 }
             } else {
-                // Server: Verwende Pfade (/en, /fr, /sw)
                 const baseUrl = currentUrl.split('/').slice(0, 3).join('/');
-            if (lang === 'de') {
-                newUrl = baseUrl + '/';
-            } else {
-                newUrl = baseUrl + '/' + lang;
-            }
+                if (lang === 'sw') {
+                    newUrl = baseUrl + '/';
+                } else {
+                    newUrl = baseUrl + '/' + lang;
+                }
             }
             window.location.href = newUrl;
         }

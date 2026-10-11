@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ninatoka wapi, naenda wapi... | Salomon Firmin Owona</title>
     <meta name="description" content="Mtandao wa Salomon Firmin Owona. Kati ya Cameroon na Ujerumani. Sanaa, teknolojia, historia na mustakabali.">
-    <link rel="canonical" href="https://salomonowona.com/sw">
-    <link rel="alternate" hreflang="de" href="https://salomonowona.com/">
+    <link rel="canonical" href="https://salomonowona.com/">
+    <link rel="alternate" hreflang="sw" href="https://salomonowona.com/">
+    <link rel="alternate" hreflang="de" href="https://salomonowona.com/de">
     <link rel="alternate" hreflang="en" href="https://salomonowona.com/en">
+    <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr">
+    <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/">
+<link rel="alternate" hreflang="en" href="https://salomonowona.com/en">
     <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr">
     <link rel="alternate" hreflang="sw" href="https://salomonowona.com/sw">
     <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/">
@@ -1090,15 +1094,14 @@
             let newUrl;
 
             if (isLocalhost) {
-                if (lang === 'de') {
-                    newUrl = 'index.html'; // For local, use filename
+                if (lang === 'sw') {
+                    newUrl = 'index.html';
                 } else {
-                    newUrl = lang + '.html'; // For local, use filename
+                    newUrl = lang + '.html';
                 }
             } else {
-                // Server: Verwende Pfade (/en, /fr, /sw)
                 const baseUrl = currentUrl.split('/').slice(0, 3).join('/');
-                if (lang === 'de') {
+                if (lang === 'sw') {
                     newUrl = baseUrl + '/';
                 } else {
                     newUrl = baseUrl + '/' + lang;

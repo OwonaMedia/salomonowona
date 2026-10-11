@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wo komm' ich her, wo geh ich hin... | Salomon Firmin Owona</title>
+    <meta name="description" content="Internetpräsenz von Salomon Firmin Owona. Zwischen Kamerun und Deutschland. Kunst, Technik, Geschichte und Zukunft.">
+    <link rel="canonical" href="https://salomonowona.com/de">
+    <link rel="alternate" hreflang="sw" href="https://salomonowona.com/">
+    <link rel="alternate" hreflang="de" href="https://salomonowona.com/de">
+    <link rel="alternate" hreflang="en" href="https://salomonowona.com/en">
+    <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr">
+    <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/">
+<link rel="alternate" hreflang="en" href="https://salomonowona.com/en">
+    <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr">
+    <link rel="alternate" hreflang="sw" href="https://salomonowona.com/sw">
+    <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        :root {
+            --bg-body: #0f1115;
+            --bg-surface: #1a1d23;
+            --bg-surface-hover: #252932;
+            --text-main: #e0e0e0;
+            --text-muted: #9ca3af;
+            --accent: #d4a373;
+            --accent-dim: rgba(212, 163, 115, 0.1);
+            --border: #333842;
+            --font-main: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
+        }
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3 { font-weight: 700; color: #fff; }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+        }
+        .container-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        /* HEADER & NAV */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 17, 21, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .logo {
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        /* AUDIO UI */
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            background: var(--bg-surface);
+            padding: 4px 12px;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            margin: 0 1rem;
+            max-width: 350px;
+            flex: 1;
+            overflow: hidden;
+        }
+        .play-btn {
+            background: var(--accent);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+        .play-btn:hover { transform: scale(1.1); }
+        .track-info {
+            font-size: 0.75rem;
+            margin-left: 10px;
+            white-space: nowrap;
+            color: var(--text-muted);
+        }
+        /* HAMBURGER */
+        .hamburger {
+            width: 32px;
+            height: 32px;
+            padding: 6px 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 1100;
+            background: none;
+            border: none;
+            color: inherit;
+        }
+        .hamburger span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: #fff;
+            transition: 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        /* SIDEBAR MENU */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--bg-surface);
+            z-index: 1050;
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            padding: 100px 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border);
+        }
+        .sidebar.active { right: 0; }
+        .sidebar-nav a {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s;
+        }
+        .sidebar-nav a:hover { color: var(--accent); }
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+        }
+        .overlay.active { opacity: 1; visibility: visible; }
+        /* SECTIONS */
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        /* HERO */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background-image: linear-gradient(rgba(15,17,21,0.5), rgba(15,17,21,0.5)), url('Salomon.png');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+        }
+        /* iOS/Android: fixed backgrounds often fail — use scroll on small viewports */
+        @media (max-width: 768px) {
+            #home {
+                background-attachment: scroll;
+                min-height: 100svh;
+            }
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+        /* TIMELINE */
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 25px;
+            bottom: -45px;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item:last-child::after { display: none; }
+        /* GRID */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: var(--bg-surface);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        /* LANG SWITCHER */
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .lang-btn.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        /* LAYOUT UTILITIES */
+        .container-shifted {
+            max-width: 900px;
+            margin-left: 15%; /* 30% nach links verschieben (15% vom linken Rand) */
+            margin-right: auto;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        .bio-text {
+            font-size: 1.1rem;
+            max-width: 700px;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 18px;
+            bottom: -30px;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-date {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .values-box {
+            background: var(--bg-surface);
+            padding: 3rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .values-lead {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-surface);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            background: var(--bg-surface-hover);
+        }
+
+        .project-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .project-card--communities {
+            grid-column: 1 / -1;
+        }
+
+        .community-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem 0.9rem;
+            margin-top: 1.1rem;
+        }
+
+        .community-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .community-links a:hover {
+            text-decoration: underline;
+        }
+
+        .community-links a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .contact-area {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .patreon-widget {
+            max-width: 400px;
+            width: 100%;
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover::before {
+            transform: scale(1.1);
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(212, 163, 115, 0.3);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-2px);
+        }
+
+        .social-text {
+            font-size: 1.2rem;
+            z-index: 1;
+            position: relative;
+        }
+
+        .social-icon {
+            color: #fff;
+        }
+
+        .social-icon:hover {
+            color: var(--accent);
+        }
+
+        /* MOBILE FIXES */
+        @media (max-width: 640px) {
+            .audio-controls {
+                max-width: 140px;
+                margin: 0 0.5rem;
+            }
+            .track-info {
+                display: none;
+            }
+            .logo { font-size: 0.65rem; }
+            section { padding: 60px 0; }
+
+            .container-shifted {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            .values-box {
+                padding: 1.5rem;
+                margin-top: 1rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-card {
+                padding: 1.5rem;
+            }
+
+            .timeline-item {
+                padding-left: 1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        .play-btn:focus-visible,
+        .hamburger:focus-visible,
+        .lang-btn:focus-visible,
+        .sidebar-nav a:focus-visible,
+        .contact-btn:focus-visible,
+        .social-icon:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-inner">
+            <a href="#home" class="logo">Salomon Owona</a>
+
+            <div class="audio-controls">
+                <button type="button" class="play-btn" onclick="toggleArchiveRadio()" id="playIcon" aria-label="Salomon Radio abspielen" aria-pressed="false" data-label-play="Salomon Radio abspielen" data-label-pause="Salomon Radio pausieren">▶</button>
+                <div class="track-info" id="trackName">Salomon Radio</div>
+            </div>
+            <button type="button" class="hamburger" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="sidebar" data-label-open="Menü öffnen" data-label-close="Menü schließen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+            <a href="#home">Home</a>
+            <a href="#about">Über mich</a>
+            <a href="#doing">Was ich tue</a>
+            <a href="#values">Werte</a>
+            <a href="#projects">Projekte</a>
+            <a href="#contact">Kontakt</a>
+            <div class="lang-switcher">
+                <button type="button" class="lang-btn" onclick="switchLanguage('sw')" aria-label="SW">SW</button>
+                <button type="button" class="lang-btn active" onclick="switchLanguage('de')" aria-label="DE" aria-current="true">DE</button>
+                <button type="button" class="lang-btn" onclick="switchLanguage('en')" aria-label="EN">EN</button>
+                <button type="button" class="lang-btn" onclick="switchLanguage('fr')" aria-label="FR">FR</button>
+            </div>
+        </nav>
+    </div>
+    <main>
+        <!-- 1. Startseite -->
+        <section id="home">
+            <div class="container hero-content">
+                <h1>Wo komm' ich her, wo geh ich hin...</h1>
+                <span class="hero-sub">Ich denke, lerne, baue, hinterfrage.<br>
+                Zwischen Kamerun und Deutschland.<br>
+                Zwischen Kunst, Technik, Geschichte und Zukunft.</span>
+
+                <div class="hero-meta">
+                    Diese Seite ist kein Portfolio.<br>
+                    Sie ist ein offenes Fenster in meine Welt.<br>
+                    Nicht perfekt, nicht poliert – authentisch.
+                </div>
+
+                <div style="margin-top: 4rem;">
+                    <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: var(--text-muted);">
+                        Ich glaube nicht an lineare Lebensläufe.<br>
+                        Meiner war immer Bewegung, immer Suche, immer Wachstum.<br>
+                        Wenn du hier liest, bleib einen Moment.<br>
+                        Vielleicht findest du dich irgendwo wieder –<br>
+                        in meinen Zweifeln, meinen Triumphen, meinen Fragen.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Über mich -->
+        <section id="about">
+            <div class="container-shifted">
+                <h2>Über mich</h2>
+                <div class="bio-text">
+                    <p>Ich heiße Salomon Firmin Owona und bin 1981 in Kamerun geboren.<br>
+                    Meine frühesten Erinnerungen sind an die sonnigen Tage in Yaoundé:<br>
+                    der Geschmack der roten Erde, wenn ich im Hof spielte,<br>
+                    der Stromschlag, als ich neugierig mit der Steckdose experimentierte,<br>
+                    meine Mama, die müde aber lächelnd von der Arbeit nach Hause kam,<br>
+                    meine Schwester, die sich stundenlang mit ihrer Freundin unterhielt.<br>
+                    Wir waren eine fröhliche Bande, immer auf der Suche nach<br>
+                    neuen Abenteuern.</p>
+
+                    <p>1989 bin ich mit meiner Mutter und meinen Geschwistern<br>
+                    nach Deutschland gekommen – zu meinem Vater und meiner<br>
+                    Schwester Patricia.<br>
+                    <br>
+                    Ich wollte eigentlich nicht weg aus Kamerun,<br>
+                    aber meine Schwester Ginette hat mich mit einem<br>
+                    Fahrrad gelockt und überzeugt.<br>
+                    Ich erinnere mich noch genau an diesen kalten<br>
+                    Wintermorgen in Erkrath-Hochdahl.<br>
+                    Alles war so steril, so fremd – keine Farben,<br>
+                    keine Wärme.<br>
+                    Alle schauten uns an, als seien wir nicht von<br>
+                    dieser Welt.<br>
+                    Meine Mama wurde am Flughafen nicht gut behandelt,<br>
+                    die Blicke der Beamten waren kalt und abweisend.<br>
+                    Es war sehr kalt, nicht nur das Wetter –<br>
+                    eine emotionale Kälte, die ich nie vergessen werde.<br>
+                    Trotzdem war da auch diese Aufregung – ein neues Leben beginnen.</p>
+
+                    <p>Ankommen war kein Ereignis.<br>
+                    Es war ein langer, manchmal schmerzhafter Prozess.<br>
+                    Ich habe gelernt, mich anzupassen, Brücken zu bauen<br>
+                    und gleichzeitig meine Wurzeln zu bewahren.</p>
+
+                    <p>Ich bin in Erkrath-Hochdahl aufgewachsen.<br>
+                    Grundschule Sandheide, wo ich meine ersten Freunde fand –<br>
+                    aber auch wo ich meinen ersten richtigen Kampf erlebte.<br>
+                    Ich kann mich an einen Schlag auf den Kopf erinnern,<br>
+                    nachdem ich darauf bestanden habe, dass ein Schreibuntensil mir gehört.<br>
+                    Das wurde wohl von jemandem nicht akzeptiert.<br>
+                    Ich war bewusstlos. Ich weiß nur nicht, wie lange.<br>
+                    Ich habe meinen Eltern nie davon erzählt.<br>
+                    Realschule Hochdahl – ein Ort voller Traumata.<br>
+                    Mein Geschichtslehrer hatte einen anderen Schüler,<br>
+                    paar Klassen über mir, Inder oder Pakistani (ich weiß es nicht mehr),<br>
+                    angewiesen, mich zu schlagen.<br>
+                    Ich war für mein Alter bereits stark und gut durchtrainiert.<br>
+                    Der Lehrer war anwesend. Ich habe einfach dagestanden.<br>
+                    Die Situation war sehr verstörend.<br>
+                    Derselbe Lehrer hatte im gleichen Schuljahr einen Jungen im Gang verprügelt.<br>
+                    Das waren die 90er auf der Realschule.<br>
+                    Trotzdem begann ich dort, Fragen zu stellen.<br>
+                    Später die Höhere Handelsschule in Hilden,<br>
+                    wo ich lernte, dass Wissen Macht ist.</p>
+
+                    <p>Die jährlichen Sommerferien als Kind waren vielseitig.<br>
+                    Ab und zu ging es in ein Freizeitlager,<br>
+                    oder ich bin einfach mit Freunden von Basketballkorb zu Basketballkorb gewandert.<br>
+                    Es wurde nie langweilig.<br>
+                    Geschichten von Flügen zu exotischen Inseln oder nach Gran Canaria<br>
+                    hatte ich wie andere Kinder nie zu erzählen.<br>
+                    Aber das war okay.<br>
+                    Nur merkwürdig, dass keiner von diesen gutbetuchten Mitschülern<br>
+                    den afrikanischen Kontinent kannte.<br>
+                    Was mich früh begleitet hat, war das Selberlernen.<br>
+                    Nicht als glamouröse Wahl, sondern als pure Notwendigkeit.<br>
+                    Wenn du anders aussiehst und anders sprichst,<br>
+                    musst du besser sein, um mitzuhalten.<br>
+                    Aus dieser Notwendigkeit wurde Leidenschaft –<br>
+                    die Freude am Entdecken, am Verstehen, am Wachsen.</p>
+
+                    <p>Ich beobachte, teste, verstehe.<br>
+                    Ob Musik, Technik, Handel oder Menschen –<br>
+                    alles ist ein großes Experiment für mich.<br>
+                    Warum machen Menschen das, was sie machen?<br>
+                    Was treibt sie an? Was hält sie zurück?<br>
+                    Diese Fragen beschäftigen mich seit Jahren.</p>
+
+                    <p>Ich jogge gern um den Badesee.<br>
+                    Nicht für die Fitness, sondern für die Klarheit.<br>
+                    Mit jedem Schritt sortiere ich Gedanken,<br>
+                    prüfe meine Werte auf der Sportuhr<br>
+                    und frage mich: Bin ich noch auf dem richtigen Weg?</p>
+
+                    <p>Ich bin Vater von drei Kindern:<br>
+                    <span class="highlight">Afidi, Otis und Salomon Jr.</span><br>
+                    Sie sind mein Anker in dieser unsteten Welt.<br>
+                    Wenn alles um mich herum sich verändert,<br>
+                    erinnern sie mich daran, was wirklich zählt:<br>
+                    Liebe, Lachen, bedingungslose Akzeptanz.<br>
+                    Sie erden mich mehr als jedes Konzept,<br>
+                    jede Philosophie, jeder Erfolg.</p>
+
+                    <p>Für meine Familie würde ich durch Feuer gehen,<br>
+                    weil ich weiß, dass sie das für mich auch tun würden.<br>
+                    Ich bin unbequem, weil ich der Jüngste unter den Geschwistern bin,<br>
+                    aber trotzdem laut – in afrikanischen Kulturen haben Jüngere nicht viel zu melden.<br>
+                    Trotzdem! Ich habe immer meine Stimme erhoben,<br>
+                    meine Meinung gesagt, meine Träume verfolgt.<br>
+                    Das hat mich geformt: respektvoll gegenüber Älteren,<br>
+                    aber niemals still gegenüber Ungerechtigkeit.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Was ich tue -->
+        <section id="doing">
+            <div class="container-shifted">
+                <h2>Was ich tue</h2>
+                <p>Ich habe nie nur eine Sache gemacht.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="timeline-date">Frühe Jahre bis ca. 30. Lebensjahr</span>
+                        <h3>Rap & Musik – Meine Stimme finden</h3>
+                        <p>In meinen frühen Jahren war es Rap – nicht nur Musik, sondern Therapie.<br>
+                        Texte über Identität, Zugehörigkeit, den Schmerz des Dazwischen-Seins.<br>
+                        Mein Künstlername war Mr. F.o.b.s. Meine Initialen.<br>
+                        Während der Ausbildung lernte ich den Pforzheimer Untergrund kennen.<br>
+                        Mit den Jungs aus Mühlacker drehte ich mein erstes Musikvideo "Fobsheim".<br>
+                        Ein Pforzheimer brachte mir die Idee – "Fobs' Heim", schönes Wortspiel.<br>
+                        Ich erinnere mich an diesen magischen Auftritt 2003 in Stuttgart Sillenbuch:<br>
+                        Ich bat darum, dass man mir das Mic zum Hinterausgang bringt.<br>
+                        Vom Off aus beginnend: "Mic-check 1-2, Stuttgart, seid Ihr am Start sag mal hoooh!!"<br>
+                        Sie wussten nicht, wer kommt. Rappend von ganz hinten auf dem Weg zur Bühne<br>
+                        hatte ich plötzlich eine Menge hinter mir im Rücken,<br>
+                        und eine noch größere Meute, die erpicht darauf war zu erfahren, wer ich bin.<br>
+                        Um die Ecke rappend über einen Basketballzug zum Korb –<br>
+                        sahen sie mich und fingen an zu jubeln. Das war magisch.<br>
+                        Später Musikproduktion: Beats bauen in meinem kleinen Zimmer,<br>
+                        Bühnen, Auftritte, das Adrenalin des Spotlights.<br>
+                        Ich war regelmäßig live unterwegs und lokal bekannt –<br>
+                        das erste Mal, dass ich wirklich gesehen wurde.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-date">2002 – 2005</span>
+                        <h3>Mediengestalter – Technik als Sprache</h3>
+                        <p>Ausbildung beim Evangelischen Rundfunkdienst Baden in Karlsruhe.<br>
+                        Hier lernte ich, Bilder zu erzählen, Töne zu formen.<br>
+                        Die Technik wurde mein Werkzeug, um Geschichten zu transportieren.<br>
+                        Zum ersten Mal fühlte ich mich wirklich kompetent im Berufsleben.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-date">2007</span>
+                        <h3>Live-Moderation – Der Entertainer</h3>
+                        <p>Für mehrere Monate Live-Moderator bei NRW TV.<br>
+                        Plötzlich stand ich vor Kameras, führte Interviews,<br>
+                        brachte Menschen zum Lachen, zum Nachdenken.<br>
+                        Eine Rolle, die mir lag – der Vermittler, der Brückenbauer.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-date">2018 – 2020</span>
+                        <h3>Handel & E-Commerce – Das Geschäft mit der Psychologie</h3>
+                        <p>Amazon FBA wurde meine Universität des Handels.<br>
+                        Topseller-Produkte, Import/Export, Amazon SEO, Listings.<br>
+                        Aber vor allem: Sales-Psychologie.<br>
+                        Warum kaufen Menschen? Was treibt Entscheidungen?<br>
+                        Ich lernte mehr über menschliche Natur als in jedem Studium.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-date">Seit 2017</span>
+                        <h3>Krypto & Dezentralität – Die Suche nach Freiheit</h3>
+                        <p>Krypto war nie Hype für mich – es war eine philosophische Frage.<br>
+                        Was passiert, wenn Geld nicht mehr von Institutionen kontrolliert wird?<br>
+                        Wenn Macht dezentralisiert wird?<br>
+                        Ich tauchte tief ein: Whitepaper lesen bei Nacht,<br>
+                        Communities aufbauen, philosophische Diskussionen führen.<br>
+                        Es war meine Suche nach einem faireren System.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-date">Seit 2024</span>
+                        <h3>Vibe Coding & SaaS – Die digitale Schmiede</h3>
+                        <p>Jetzt baue ich digitale Welten: SaaS-Produkte,<br>
+                        unter anderem <a href="https://whatsapp.owona.de" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">whatsapp.owona.de</a>.<br>
+                        Code als Kunstform, Produkte als Problemlösungen.<br>
+                        Jeden Tag die Freude, etwas vom Nichts zu erschaffen,<br>
+                        das anderen hilft, ihr Leben zu verbessern.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-date">Parallel seit Jahren</span>
+                        <h3><a href="https://ndasi.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">Ndasi.com</a> – Wurzeln und Zukunft</h3>
+                        <p>Leitung von <a href="https://ndasi.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">Ndasi.com</a> in Kamerun – mein Beitrag zu Hause.<br>
+                        Produktion, Import von Maschinen zur Ziegelherstellung.<br>
+                        Nicht Entwicklungshilfe, sondern Aufbau.<br>
+                        Arbeitsplätze schaffen, Wissen transferieren,<br>
+                        die nächste Generation empowern.<br>
+                        Weil ich weiß, wie es ist, von außen zu kommen.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Werte & Haltung -->
+        <section id="values">
+            <div class="container-shifted">
+                <h2>Werte & Haltung</h2>
+                <div class="values-box">
+                    <p class="values-lead">Ich bin aktiv gegen Rassismus.<br>
+                    Nicht aus Überzeugung allein – sondern weil ich ihn jeden Tag erlebt habe.<br>
+                    Seit meiner Jugend in Deutschland, wo "Ausländer" noch ein Schimpfwort war.</p>
+
+                    <p>Rassismus ist kein Randthema.<br>
+                    Er strukturiert Lebenswege, zerstört Träume, baut unsichtbare Mauern.<br>
+                    Er hat entschieden, welche Schulen ich besuchen durfte,<br>
+                    welche Jobs ich bekam, welche Türen sich öffneten.<br>
+                    Und er hat mich stärker gemacht – widerstandsfähiger, empathischer, entschlossener.</p>
+
+                    <p>Darum arbeite ich mit Freunden an weltweiten Online-Communities<br>
+                    wie dem Black Lives Memorial Heidelberg.<br>
+                    Wir machen Schwarze Geschichte sichtbar,<br>
+                    teilen Wissen, bauen Brücken zwischen Kulturen.<br>
+                    Weil Erinnerung der Schlüssel zur Veränderung ist.</p>
+
+                    <p>Ich glaube an Bildung als Waffe, Kontext als Verständnis,<br>
+                    Erinnerung als Fundament.<br>
+                    Und daran, dass Technik und Geschichte zusammen gedacht werden müssen –<br>
+                    weil Algorithmen die Vorurteile ihrer Schöpfer widerspiegeln,<br>
+                    und weil digitale Räume genauso gerecht sein müssen wie physische.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Projekte & Spuren -->
+        <section id="projects">
+            <div class="container-shifted">
+                <h2>Projekte & Spuren – Meine digitale & analoge Welt</h2>
+                <p>Einige meiner aktuellen und vergangenen Spuren.<br>
+                Nicht als vollständige Liste, sondern als Einblick in meine verschiedenen Welten:</p>
+
+                <div class="project-grid">
+                    <div class="project-card">
+                        <span class="project-icon">🎧</span>
+                        <div class="project-title">Musik & Beats</div>
+                        <div class="project-desc">Mein aktives Beatstars Producer Profil seit 2020. Produktionen und Instrumentals mit Roland MC-707 Sequenzer und AKAI MPC Sampler. Beats als Ausdruck von Seele – von traditionellen afrikanischen Rhythmen bis zu modernen Trap-Sounds. <a href="https://www.beatstars.com/afrodisiaque" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">Zum Profil →</a></div>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-icon">🎙️</span>
+                        <div class="project-title">Podcast über Liebe & Partnerschaft</div>
+                        <div class="project-desc">Authentische Gespräche über das, was wirklich zählt: Verbindungen zwischen Menschen. Keine oberflächlichen Ratschläge, sondern echte Erfahrungen aus dem Leben.</div>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-icon">💻</span>
+                        <div class="project-title">SaaS & Vibe Coding</div>
+                        <div class="project-desc">Digitale Produkte bauen, die Menschen helfen. Wie <a href="https://whatsapp.owona.de" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">whatsapp.owona.de</a> – weil ich glaube, dass Technik einfacher und menschlicher sein kann.</div>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-icon">🌍</span>
+                        <div class="project-title"><a href="https://ndasi.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">Ndasi.com</a> – Kamerun</div>
+                        <div class="project-desc">Mein Beitrag zu Hause. Ziegelherstellung, Maschinen-Import, Arbeitsplätze. Nicht als Heldengeschichte, sondern als Verantwortung gegenüber meinen Wurzeln.</div>
+                    </div>
+
+                    <div class="project-card project-card--communities">
+                        <span class="project-icon">🧠</span>
+                        <div class="project-title">Black History Communities</div>
+                        <div class="project-desc">Globale Online-Communities für Sichtbarkeit. Mit Freunden Geschichte aufarbeiten, Wissen teilen, die nächste Generation empowern. Weil Erinnerung heilt.</div>
+                        <div class="community-links" aria-label="Globale Communities">
+                            <a href="https://www.facebook.com/groups/stimulus.org" target="_blank" rel="noopener noreferrer">USA</a>
+                            <a href="https://www.facebook.com/groups/571569467130466" target="_blank" rel="noopener noreferrer">Ghana</a>
+                            <a href="https://www.facebook.com/groups/272801100463482" target="_blank" rel="noopener noreferrer">Pan-Afrika</a>
+                            <a href="https://www.facebook.com/groups/894011951076893" target="_blank" rel="noopener noreferrer">Simbabwe</a>
+                            <a href="https://www.facebook.com/groups/3109829012405027" target="_blank" rel="noopener noreferrer">Uganda</a>
+                            <a href="https://www.facebook.com/groups/191405025590469" target="_blank" rel="noopener noreferrer">Eritrea/Äthiopien</a>
+                            <a href="https://www.facebook.com/groups/938978236577313" target="_blank" rel="noopener noreferrer">Nigeria</a>
+                            <a href="https://www.facebook.com/groups/2051384058328975" target="_blank" rel="noopener noreferrer">Burkina Faso</a>
+                            <a href="https://www.facebook.com/groups/2705497166328348" target="_blank" rel="noopener noreferrer">Haiti</a>
+                            <a href="https://www.facebook.com/groups/953512955110232" target="_blank" rel="noopener noreferrer">Südafrika</a>
+                            <a href="https://www.facebook.com/groups/252080809391964" target="_blank" rel="noopener noreferrer">Q&A</a>
+                            <a href="https://www.facebook.com/groups/2718310158450544" target="_blank" rel="noopener noreferrer">African Professionals</a>
+                            <a href="https://www.facebook.com/groups/1245202659185482" target="_blank" rel="noopener noreferrer">Deutschland</a>
+                            <a href="https://www.facebook.com/groups/3592128290802681" target="_blank" rel="noopener noreferrer">UK</a>
+                            <a href="https://www.facebook.com/groups/899132967230552" target="_blank" rel="noopener noreferrer">Kenia</a>
+                            <a href="https://www.facebook.com/groups/968900510251748" target="_blank" rel="noopener noreferrer">Côte d’Ivoire</a>
+                            <a href="https://www.facebook.com/groups/712143386009318" target="_blank" rel="noopener noreferrer">Australien</a>
+                            <a href="https://www.facebook.com/groups/589325941779927" target="_blank" rel="noopener noreferrer">Gambia</a>
+                            <a href="https://www.facebook.com/groups/1017228235443868" target="_blank" rel="noopener noreferrer">Frankreich</a>
+                            <a href="https://www.facebook.com/groups/3130504287075847" target="_blank" rel="noopener noreferrer">Tansania</a>
+                            <a href="https://www.facebook.com/groups/135411788424637" target="_blank" rel="noopener noreferrer">Marokko</a>
+                            <a href="https://www.facebook.com/groups/3670938703023704" target="_blank" rel="noopener noreferrer">Indien</a>
+                            <a href="https://www.facebook.com/groups/446373116410981" target="_blank" rel="noopener noreferrer">Jamaika</a>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 2rem; font-size: 1rem; font-style: italic; color: var(--text-muted);">
+                    Nicht alles davon ist abgeschlossen. Manches ist Prozess. Manches bewusst roh.<br>
+                    Weil Leben nicht linear ist – und ich auch nicht.
+                </p>
+            </div>
+        </section>
+
+        <!-- 6. Kontakt -->
+        <section id="contact">
+            <div class="container-shifted contact-area">
+                <h2>Kontakt – Lass uns reden</h2>
+                <p>Ich mag keine steifen Kontaktformulare.<br>
+                Sie fühlen sich an wie Bewerbungsgespräche – unpersönlich und distanziert.</p>
+
+                <p>Wenn du schreiben willst, dann schreib.<br>
+                Ob ein Gedanke, der dich beschäftigt.<br>
+                Ein Projekt, das du starten möchtest.<br>
+                Eine Frage, die dich umtreibt.<br>
+                Oder einfach nur Resonanz – weil etwas von dem,<br>
+                was du hier gelesen hast, bei dir angekommen ist.</p>
+
+                <p>Ich antworte nicht immer sofort.<br>
+                Manchmal brauche ich Zeit zum Nachdenken.<br>
+                Aber ich antworte immer ehrlich.</p>
+
+                <!-- Hier E-Mail oder Social Link einfügen -->
+                <a href="mailto:salomon@owona.de" class="contact-btn">
+                    Nachricht schreiben
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container-shifted">
+            <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
+                <!-- Patreon Widget -->
+                <div class="patreon-widget">
+                    <iframe src="https://patreon.com/SalomonO" frameborder="0" width="100%" height="200" style="border-radius: 8px;"></iframe>
+                </div>
+
+                <!-- Social Media Icons -->
+                <div class="social-icons">
+                    <a href="https://www.tiktok.com/@salomon.rocks" class="social-icon tiktok" target="_blank" rel="noopener noreferrer" title="TikTok">
+                        <span class="social-text">📱</span>
+                    </a>
+                    <a href="https://www.facebook.com/share/19bWcdUGQK/" class="social-icon facebook" target="_blank" rel="noopener noreferrer" title="Facebook">
+                        <span class="social-text">📘</span>
+                    </a>
+                    <a href="https://www.instagram.com/salomon.rocks/" class="social-icon instagram" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <span class="social-text">📷</span>
+                    </a>
+                    <a href="https://www.youtube.com/@salomonowona" class="social-icon youtube" target="_blank" rel="noopener noreferrer" title="YouTube">
+                        <span class="social-text">📺</span>
+                    </a>
+                    <a href="https://www.amazon.de/s?i=stripbooks&rh=p_27%3ASalomon%2BOwona&s=relevancerank&text=Salomon+Owona&ref=dp_byline_sr_book_1" class="social-icon amazon" target="_blank" rel="noopener noreferrer" title="E-Books">
+                        <span class="social-text">📦</span>
+                    </a>
+                </div>
+
+                <p>&copy; 1981-2026 Salomon Firmin Owona. Zwischen Welten.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Live Icecast radio (shared position worldwide) -->
+    <audio id="liveRadioPlayer" preload="none" style="display: none;"></audio>
+    <script>
+        const LIVE_RADIO_URL = "https://radio.owonamedia.de/radio.mp3";
+        const RADIO_LABEL_IDLE = 'Salomon Radio';
+        const RADIO_LABEL_LIVE = 'Salomon Radio · Live';
+        const RADIO_LABEL_ERR = 'Stream nicht verfügbar – bitte später erneut versuchen';
+
+        let livePlayer = null;
+        let isLivePlaying = false;
+
+        function initLiveRadio() {
+            livePlayer = document.getElementById('liveRadioPlayer');
+            if (!livePlayer) return;
+            livePlayer.removeAttribute('src');
+            const titleElement = document.getElementById('trackName');
+            if (titleElement) titleElement.textContent = RADIO_LABEL_IDLE;
+
+            livePlayer.addEventListener('error', () => {
+                const titleElement = document.getElementById('trackName');
+                if (titleElement) titleElement.textContent = RADIO_LABEL_ERR;
+                isLivePlaying = false;
+                updatePlayButtonUI(false);
+            });
+        }
+
+        function updatePlayButtonUI(playing) {
+            const button = document.getElementById('playIcon');
+            if (!button) return;
+            button.textContent = playing ? '❚❚' : '▶';
+            button.setAttribute('aria-pressed', playing ? 'true' : 'false');
+            const label = playing ? button.dataset.labelPause : button.dataset.labelPlay;
+            if (label) button.setAttribute('aria-label', label);
+        }
+
+        function toggleArchiveRadio() {
+            if (!livePlayer) initLiveRadio();
+            const button = document.querySelector('.play-btn');
+            if (button) {
+                button.style.transform = 'scale(0.9)';
+                setTimeout(() => { button.style.transform = 'scale(1)'; }, 150);
+            }
+
+            if (isLivePlaying) {
+                livePlayer.pause();
+                livePlayer.removeAttribute('src');
+                livePlayer.load();
+                isLivePlaying = false;
+                updatePlayButtonUI(false);
+                const titleElement = document.getElementById('trackName');
+                if (titleElement) titleElement.textContent = RADIO_LABEL_IDLE;
+                return;
+            }
+
+            livePlayer.src = LIVE_RADIO_URL;
+            livePlayer.play().then(() => {
+                isLivePlaying = true;
+                updatePlayButtonUI(true);
+                const titleElement = document.getElementById('trackName');
+                if (titleElement) titleElement.textContent = RADIO_LABEL_LIVE;
+            }).catch(() => {
+                const titleElement = document.getElementById('trackName');
+                if (titleElement) titleElement.textContent = RADIO_LABEL_ERR;
+                isLivePlaying = false;
+                updatePlayButtonUI(false);
+            });
+        }
+
+        // Hamburger Menu Functions
+        function toggleMenu(forceClose) {
+            const hamburger = document.getElementById('navToggle');
+            const sidebarEl = document.getElementById('sidebar');
+            const overlayEl = document.getElementById('overlay');
+            const open = forceClose === true ? false : !sidebarEl.classList.contains('active');
+
+            hamburger.classList.toggle('active', open);
+            sidebarEl.classList.toggle('active', open);
+            overlayEl.classList.toggle('active', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+            hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+            const label = open ? hamburger.dataset.labelClose : hamburger.dataset.labelOpen;
+            if (label) hamburger.setAttribute('aria-label', label);
+        }
+
+        const navToggle = document.getElementById('navToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const links = document.querySelectorAll('.sidebar-nav a');
+
+        navToggle.addEventListener('click', () => toggleMenu());
+        overlay.addEventListener('click', () => toggleMenu(true));
+        links.forEach(link => link.addEventListener('click', () => toggleMenu(true)));
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                toggleMenu(true);
+            }
+        });
+
+        // Language switcher function
+        function switchLanguage(lang) {
+            const currentUrl = window.location.href;
+            const isLocalhost = currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1');
+            let newUrl;
+
+            if (isLocalhost) {
+                if (lang === 'sw') {
+                    newUrl = 'index.html';
+                } else {
+                    newUrl = lang + '.html';
+                }
+            } else {
+                const baseUrl = currentUrl.split('/').slice(0, 3).join('/');
+                if (lang === 'sw') {
+                    newUrl = baseUrl + '/';
+                } else {
+                    newUrl = baseUrl + '/' + lang;
+                }
+            }
+            window.location.href = newUrl;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initLiveRadio();
+        });
+    </script>
+</body>
+</html>

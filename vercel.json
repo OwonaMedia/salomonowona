@@ -1,5 +1,25 @@
 {
+  "redirects": [
+    {
+      "source": "/sw",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sw/",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/de",
+      "destination": "/de.html"
+    },
+    {
+      "source": "/de/",
+      "destination": "/de.html"
+    },
     {
       "source": "/en",
       "destination": "/en.html"
@@ -15,14 +35,6 @@
     {
       "source": "/fr/",
       "destination": "/fr.html"
-    },
-    {
-      "source": "/sw",
-      "destination": "/sw.html"
-    },
-    {
-      "source": "/sw/",
-      "destination": "/sw.html"
     }
   ]
 }
