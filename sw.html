@@ -562,8 +562,8 @@
             <a href="#home" class="logo">Salomon Owona</a>
 
             <div class="audio-controls">
-                <button type="button" class="play-btn" onclick="toggleArchiveRadio()" id="playIcon" aria-label="Cheza Archive Radio" aria-pressed="false" data-label-play="Cheza Archive Radio" data-label-pause="Simamisha Archive Radio">▶</button>
-                <div class="track-info" id="trackName">Archive Radio</div>
+                <button type="button" class="play-btn" onclick="toggleArchiveRadio()" id="playIcon" aria-label="Cheza Salomon Radio" aria-pressed="false" data-label-play="Cheza Salomon Radio" data-label-pause="Simamisha Salomon Radio">▶</button>
+                <div class="track-info" id="trackName">Salomon Radio</div>
             </div>
             <button type="button" class="hamburger" id="navToggle" aria-label="Fungua menyu" aria-expanded="false" aria-controls="sidebar" data-label-open="Fungua menyu" data-label-close="Funga menyu">
                 <span></span>
@@ -974,262 +974,30 @@
             </div>
         </div>
     </footer>
-    <!-- Verstecktes YouTube Player für kontinuierlichen Audio-Stream -->
-    <!-- Archive.org Radio Player -->
-    <audio id="archiveRadioPlayer" preload="none" style="display: none;">
-        <source id="audioSource" src="" type="audio/mpeg">
-    </audio>
+    <!-- Live Icecast radio (shared position worldwide) -->
+    <audio id="liveRadioPlayer" preload="none" style="display: none;"></audio>
     <script>
-        // Archive.org Radio Playlist für historische Reden
-        const archivePlaylist = [
-            "https://archive.org/download/malcolm-x-revolution/malcolm-x-revolution.mp3",
-            "https://archive.org/download/tenor-homme/tenor-homme.mp3",
-            "https://archive.org/download/nkrumah-unity/nkrumah-unity.mp3",
-            "https://archive.org/download/locko-margo/locko-margo.mp3",
-            "https://archive.org/download/diop-civilization/diop-civilization.mp3",
-            "https://archive.org/download/petit-pays-eboki/petit-pays-eboki.mp3",
-            "https://archive.org/download/king-dream/king-dream.mp3",
-            "https://archive.org/download/lady-ponce-leve-toi/lady-ponce-leve-toi.mp3",
-            "https://archive.org/download/stanley-enow/stanley-enow.mp3",
-            "https://archive.org/download/traore-sovereignty/traore-sovereignty.mp3",
-            "https://archive.org/download/daphne-jusqua-la-gare/daphne-jusqua-la-gare.mp3",
-            "https://archive.org/download/lumumba-independence/lumumba-independence.mp3",
-            "https://archive.org/download/sankara-revolution/sankara-revolution.mp3"
-        ];
+        const LIVE_RADIO_URL = "https://radio.owonamedia.de/radio.mp3";
+        const RADIO_LABEL_IDLE = 'Salomon Radio';
+        const RADIO_LABEL_LIVE = 'Salomon Radio · Live';
+        const RADIO_LABEL_ERR = 'Stream haipatikani — jaribu tena baadaye';
 
-        const trackTitles = [
-            "Malcolm X - Revolutionäre Botschaft",
-            "Tenor - L'Homme (Cameroun Makossa 2020)",
-            "Kwame Nkrumah - Afrikanische Einheit",
-            "Locko - MARGO (Cameroun Afrobeat 2019)",
-            "Cheikh Anta Diop - Afrikanische Zivilisation",
-            "Petit Pays - Eboki (Cameroun Makossa)",
-            "Martin Luther King - I Have a Dream",
-            "Lady Ponce - Lève Toi (Cameroun Rap 2017)",
-            "Stanley Enow - Hein Père (Cameroun Highlife 2021)",
-            "Ibrahim Traoré - Burkinische Souveränität",
-            "Daphne - Jusqu'à La Gare (Cameroun Pop 2023)",
-            "Patrice Lumumba - Kongolesische Unabhängigkeit",
-            "Thomas Sankara - Burkinische Revolution"
-        ];
+        let livePlayer = null;
+        let isLivePlaying = false;
 
-        let archivePlayer;
-        let audioSource;
-        let currentArchiveTrack = 0;
-        let isArchivePlaying = false;
+        function initLiveRadio() {
+            livePlayer = document.getElementById('liveRadioPlayer');
+            if (!livePlayer) return;
+            livePlayer.removeAttribute('src');
+            const titleElement = document.getElementById('trackName');
+            if (titleElement) titleElement.textContent = RADIO_LABEL_IDLE;
 
-        // Preloading System für schnellere Wiedergabe
-        let preloadBuffers = [];
-        let maxPreloadBuffers = 3; // Preload die nächsten 3 Tracks
-
-        function initArchiveRadio() {
-            console.log('🎵 Archive.org Radio initialisiert mit', archivePlaylist.length, 'Reden');
-
-            archivePlayer = document.getElementById('archiveRadioPlayer');
-            audioSource = document.getElementById('audioSource');
-
-            console.log('🎵 Player Elemente gefunden:', archivePlayer, audioSource);
-
-            if (!archivePlayer) {
-                console.error('❌ archiveRadioPlayer Element nicht gefunden!');
-                return;
-            }
-
-            if (!audioSource) {
-                console.error('❌ audioSource Element nicht gefunden!');
-                return;
-            }
-
-            archivePlayer.addEventListener('ended', () => {
-                console.log('🎵 Track beendet, nächster Track...');
-                playNextArchiveTrack();
-            });
-
-            archivePlayer.addEventListener('error', (e) => {
-                console.error('❌ Audio-Fehler:', e);
+            livePlayer.addEventListener('error', () => {
                 const titleElement = document.getElementById('trackName');
-                if (titleElement) {
-                    titleElement.textContent = 'Stream haipatikani — wimbo unaofuata…';
-                }
-                // Versuche nächsten Track nach Fehler
-                setTimeout(() => playNextArchiveTrack(), 2000);
+                if (titleElement) titleElement.textContent = RADIO_LABEL_ERR;
+                isLivePlaying = false;
+                updatePlayButtonUI(false);
             });
-
-            archivePlayer.addEventListener('canplay', () => {
-                console.log('✅ Audio kann abgespielt werden');
-                // Stoppe Ladeanimation und zeige vollen Balken
-                const titleContainer = document.querySelector('.current-title');
-                if (titleContainer) {
-                    titleContainer.classList.add('loaded');
-                }
-            });
-
-            archivePlayer.addEventListener('loadstart', () => {
-                console.log('⏳ Lade Audio-Datei...');
-                // Starte Ladeanimation
-                const titleContainer = document.querySelector('.current-title');
-                if (titleContainer) {
-                    titleContainer.classList.remove('loaded');
-                }
-            });
-
-            // Initialisiere Preloading
-            initPreloading();
-
-            // Initialen Titel setzen
-            updateArchiveTitle();
-            console.log('🎵 Archive.org Radio bereit!');
-        }
-
-        function initPreloading() {
-            console.log('🚀 Initialisiere Preloading-System...');
-
-            // Erstelle versteckte Audio-Elemente für Preloading
-            for (let i = 0; i < maxPreloadBuffers; i++) {
-                const buffer = new Audio();
-                buffer.preload = 'none'; // Start ohne Preloading
-                buffer.volume = 0; // Stumm für Preloading
-                preloadBuffers.push({
-                    audio: buffer,
-                    loaded: false,
-                    trackIndex: -1
-                });
-            }
-
-            console.log('✅ Preloading-System bereit mit', maxPreloadBuffers, 'Buffers');
-        }
-
-        function preloadNextTracks() {
-            console.log('🔄 Preloading nächste Tracks...');
-
-            for (let i = 0; i < maxPreloadBuffers; i++) {
-                const nextTrackIndex = (currentArchiveTrack + i + 1) % archivePlaylist.length;
-                const buffer = preloadBuffers[i];
-
-                // Überspringe wenn bereits geladen oder bereits dieser Track
-                if (buffer.loaded && buffer.trackIndex === nextTrackIndex) {
-                    continue;
-                }
-
-                // Setze neuen Track
-                buffer.audio.src = archivePlaylist[nextTrackIndex];
-                buffer.audio.preload = 'metadata'; // Lade nur Metadaten zuerst
-                buffer.trackIndex = nextTrackIndex;
-                buffer.loaded = false;
-
-                // Event-Listener für erfolgreiches Laden
-                buffer.audio.addEventListener('canplaythrough', () => {
-                    buffer.loaded = true;
-                    console.log('✅ Track', nextTrackIndex, 'gepreloaded');
-                }, { once: true });
-
-                // Starte Preloading
-                buffer.audio.load();
-            }
-        }
-
-        function getPreloadedTrack(trackIndex) {
-            // Suche nach bereits geladenem Track
-            for (const buffer of preloadBuffers) {
-                if (buffer.trackIndex === trackIndex && buffer.loaded) {
-                    console.log('🚀 Verwende geprelloadeten Track', trackIndex);
-                    return buffer.audio;
-                }
-            }
-            return null;
-        }
-
-        function toggleArchiveRadio() {
-            console.log('🎵 Toggle radio called');
-
-            if (!archivePlayer) {
-                console.log('🎵 Initializing player...');
-                initArchiveRadio();
-            }
-
-            const button = document.querySelector('.play-btn');
-
-            // Animation
-            button.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                button.style.transform = 'scale(1)';
-                // Toggle logic
-                if (isArchivePlaying) {
-                    console.log('🎵 Pausing...');
-                    archivePlayer.pause();
-                    isArchivePlaying = false;
-                    updatePlayButtonUI(false);
-                    const titleContainer = document.querySelector('.current-title');
-                    if (titleContainer) {
-                        titleContainer.classList.remove('playing');
-                    }
-                } else {
-                    console.log('🎵 Playing...');
-                    if (archivePlayer.src === '' || archivePlayer.src !== archivePlaylist[currentArchiveTrack]) {
-                        console.log('🎵 Loading track:', currentArchiveTrack);
-                        archivePlayer.src = archivePlaylist[currentArchiveTrack];
-                        archivePlayer.load();
-                    }
-                    updateArchiveTitle();
-                    archivePlayer.play().then(() => {
-                        isArchivePlaying = true;
-                        updatePlayButtonUI(true);
-                        const titleContainer = document.querySelector('.current-title');
-                        if (titleContainer) {
-                            titleContainer.classList.add('playing');
-                        }
-                        console.log('🎵 Successfully started playing');
-                    }).catch(error => {
-                        console.error('🎵 Play failed:', error);
-                        const titleElement = document.getElementById('trackName');
-                        if (titleElement) {
-                            titleElement.textContent = 'Stream haipatikani — wimbo unaofuata…';
-                        }
-                    });
-                }
-            }, 150);
-        }
-
-        function playNextArchiveTrack() {
-            console.log('🎵 Playing next track...');
-            currentArchiveTrack = (currentArchiveTrack + 1) % archivePlaylist.length;
-            console.log('🎵 Next track index:', currentArchiveTrack);
-
-            if (isArchivePlaying) {
-                console.log('🎵 Auto-playing next track');
-
-                // Prüfe ob Track bereits geprelloadet ist
-                const preloadedAudio = getPreloadedTrack(currentArchiveTrack);
-
-                if (preloadedAudio) {
-                    // Verwende geprelloadeten Track
-                    archivePlayer.src = preloadedAudio.src;
-                    archivePlayer.currentTime = 0;
-
-                    archivePlayer.play().then(() => {
-                        updateArchiveTitle();
-                        console.log('✅ Playing preloaded track:', trackTitles[currentArchiveTrack]);
-                        // Starte Preloading der nächsten Tracks
-                        setTimeout(() => preloadNextTracks(), 1000);
-                    }).catch(error => {
-                        console.error('🎵 Preloaded track failed:', error);
-                        // Fallback
-                        archivePlayer.src = archivePlaylist[currentArchiveTrack];
-                        archivePlayer.load();
-                        archivePlayer.play().catch(err => console.error('🎵 Fallback failed:', err));
-                    });
-                } else {
-                    // Normale Methode
-                    archivePlayer.src = archivePlaylist[currentArchiveTrack];
-                    archivePlayer.load();
-                    updateArchiveTitle();
-                    archivePlayer.play().catch(error => {
-                        console.error('🎵 Auto-play failed:', error);
-                    });
-                }
-            } else {
-                updateArchiveTitle();
-            }
         }
 
         function updatePlayButtonUI(playing) {
@@ -1241,27 +1009,37 @@
             if (label) button.setAttribute('aria-label', label);
         }
 
-        function updateArchiveTitle() {
-            const titleElement = document.getElementById('trackName');
-            if (titleElement && trackTitles[currentArchiveTrack]) {
-                titleElement.textContent = trackTitles[currentArchiveTrack];
-                console.log('🎵 Updated title to:', trackTitles[currentArchiveTrack]);
+        function toggleArchiveRadio() {
+            if (!livePlayer) initLiveRadio();
+            const button = document.querySelector('.play-btn');
+            if (button) {
+                button.style.transform = 'scale(0.9)';
+                setTimeout(() => { button.style.transform = 'scale(1)'; }, 150);
             }
-        }
 
-        function updateLoadingBar(progress) {
-            const titleContainer = document.querySelector('.current-title');
-            if (titleContainer) {
-                const loadingBar = titleContainer.querySelector('.loading-bar');
-                if (loadingBar) {
-                    loadingBar.style.width = `${progress}%`;
-                    if (progress > 0 && progress < 100) {
-                        titleContainer.classList.add('loading');
-                    } else {
-                        titleContainer.classList.remove('loading');
-                    }
-                }
+            if (isLivePlaying) {
+                livePlayer.pause();
+                livePlayer.removeAttribute('src');
+                livePlayer.load();
+                isLivePlaying = false;
+                updatePlayButtonUI(false);
+                const titleElement = document.getElementById('trackName');
+                if (titleElement) titleElement.textContent = RADIO_LABEL_IDLE;
+                return;
             }
+
+            livePlayer.src = LIVE_RADIO_URL;
+            livePlayer.play().then(() => {
+                isLivePlaying = true;
+                updatePlayButtonUI(true);
+                const titleElement = document.getElementById('trackName');
+                if (titleElement) titleElement.textContent = RADIO_LABEL_LIVE;
+            }).catch(() => {
+                const titleElement = document.getElementById('trackName');
+                if (titleElement) titleElement.textContent = RADIO_LABEL_ERR;
+                isLivePlaying = false;
+                updatePlayButtonUI(false);
+            });
         }
 
         // Hamburger Menu Functions
@@ -1318,10 +1096,8 @@
             window.location.href = newUrl;
         }
 
-        // Titel beim Laden initialisieren
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎵 Salomon Radio wird gestartet...');
-            initArchiveRadio();
+            initLiveRadio();
         });
     </script>
 </body>
