@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wo komm' ich her, wo geh ich hin... | Salomon Firmin Owona</title>
-    <meta name="description" content="v20260106 Internetpräsenz von Salomon Firmin Owona. Zwischen Kamerun und Deutschland. Kunst, Technik, Geschichte und Zukunft.">
+    <meta name="description" content="Internetpräsenz von Salomon Firmin Owona. Zwischen Kamerun und Deutschland. Kunst, Technik, Geschichte und Zukunft.">
+    <link rel="canonical" href="https://salomonowona.com/">
+    <link rel="alternate" hreflang="de" href="https://salomonowona.com/">
+    <link rel="alternate" hreflang="en" href="https://salomonowona.com/en">
+    <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr">
+    <link rel="alternate" hreflang="sw" href="https://salomonowona.com/sw">
+    <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         :root {
@@ -96,8 +102,8 @@
         .play-btn {
             background: var(--accent);
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -116,13 +122,17 @@
         }
         /* HAMBURGER */
         .hamburger {
-            width: 30px;
-            height: 20px;
+            width: 32px;
+            height: 32px;
+            padding: 6px 1px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
             z-index: 1100;
+            background: none;
+            border: none;
+            color: inherit;
         }
         .hamburger span {
             display: block;
@@ -237,8 +247,8 @@
         .lang-switcher {
             display: flex;
             gap: 0.5rem;
-            margin-top: auto;
-            padding-top: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
             border-top: 1px solid var(--border);
         }
         .lang-btn {
@@ -499,6 +509,24 @@
                 padding-left: 1rem;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        .play-btn:focus-visible,
+        .hamburger:focus-visible,
+        .lang-btn:focus-visible,
+        .sidebar-nav a:focus-visible,
+        .contact-btn:focus-visible,
+        .social-icon:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
     </style>
 </head>
 <body>
@@ -507,14 +535,14 @@
             <a href="#home" class="logo">Salomon Owona</a>
 
             <div class="audio-controls">
-                <button class="play-btn" onclick="toggleArchiveRadio()" id="playIcon">▶</button>
+                <button type="button" class="play-btn" onclick="toggleArchiveRadio()" id="playIcon" aria-label="Archive Radio abspielen" aria-pressed="false" data-label-play="Archive Radio abspielen" data-label-pause="Archive Radio pausieren">▶</button>
                 <div class="track-info" id="trackName">Archive Radio</div>
             </div>
-            <div class="hamburger" id="navToggle">
+            <button type="button" class="hamburger" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="sidebar" data-label-open="Menü öffnen" data-label-close="Menü schließen">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </header>
     <div class="overlay" id="overlay"></div>
@@ -526,13 +554,13 @@
             <a href="#values">Werte</a>
             <a href="#projects">Projekte</a>
             <a href="#contact">Kontakt</a>
+            <div class="lang-switcher">
+                <button type="button" class="lang-btn" onclick="switchLanguage('sw')" aria-label="SW">SW</button>
+                <button type="button" class="lang-btn active" onclick="switchLanguage('de')" aria-label="DE" aria-current="true">DE</button>
+                <button type="button" class="lang-btn" onclick="switchLanguage('en')" aria-label="EN">EN</button>
+                <button type="button" class="lang-btn" onclick="switchLanguage('fr')" aria-label="FR">FR</button>
+            </div>
         </nav>
-        <div class="lang-switcher">
-            <button class="lang-btn" onclick="switchLanguage('sw')">SW</button>
-            <button class="lang-btn" onclick="switchLanguage('de')" class="active">DE</button>
-            <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
-            <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
-        </div>
     </div>
     <main>
         <!-- 1. Startseite -->
@@ -743,7 +771,7 @@
                         <span class="timeline-date">Seit 2024</span>
                         <h3>Vibe Coding & SaaS – Die digitale Schmiede</h3>
                         <p>Jetzt baue ich digitale Welten: SaaS-Produkte,<br>
-                        unter anderem whatsapp.owona.de.<br>
+                        unter anderem <a href="https://whatsapp.owona.de" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">whatsapp.owona.de</a>.<br>
                         Code als Kunstform, Produkte als Problemlösungen.<br>
                         Jeden Tag die Freude, etwas vom Nichts zu erschaffen,<br>
                         das anderen hilft, ihr Leben zu verbessern.</p>
@@ -804,7 +832,7 @@
                     <div class="project-card">
                         <span class="project-icon">🎧</span>
                         <div class="project-title">Musik & Beats</div>
-                        <div class="project-desc">Mein Beatstars Producer Profil. Vergangenheit, die nachhallt – Texte über Identität, Beats als Ausdruck von Seele. Manchmal vermisse ich die Bühne, das direkte Feedback der Crowd.</div>
+                        <div class="project-desc">Mein aktives Beatstars Producer Profil seit 2020. Produktionen und Instrumentals mit Roland MC-707 Sequenzer und AKAI MPC Sampler. Beats als Ausdruck von Seele – von traditionellen afrikanischen Rhythmen bis zu modernen Trap-Sounds. <a href="https://www.beatstars.com/afrodisiaque" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">Zum Profil →</a></div>
                     </div>
 
                     <div class="project-card">
@@ -816,7 +844,7 @@
                     <div class="project-card">
                         <span class="project-icon">💻</span>
                         <div class="project-title">SaaS & Vibe Coding</div>
-                        <div class="project-desc">Digitale Produkte bauen, die Menschen helfen. Wie whatsapp.owona.de – weil ich glaube, dass Technik einfacher und menschlicher sein kann.</div>
+                        <div class="project-desc">Digitale Produkte bauen, die Menschen helfen. Wie <a href="https://whatsapp.owona.de" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">whatsapp.owona.de</a> – weil ich glaube, dass Technik einfacher und menschlicher sein kann.</div>
                     </div>
 
                     <div class="project-card">
@@ -882,9 +910,6 @@
                     </a>
                     <a href="https://www.youtube.com/@salomonowona" class="social-icon youtube" target="_blank" rel="noopener noreferrer" title="YouTube">
                         <span class="social-text">📺</span>
-                    </a>
-                    <a href="https://podcasts.apple.com/de/podcast/[dein-podcast]" class="social-icon apple" target="_blank" rel="noopener noreferrer" title="Apple Podcasts">
-                        <span class="social-text"></span>
                     </a>
                     <a href="https://www.amazon.de/s?k=salomon+owona" class="social-icon amazon" target="_blank" rel="noopener noreferrer" title="Amazon">
                         <span class="social-text">📦</span>
@@ -968,6 +993,10 @@
 
             archivePlayer.addEventListener('error', (e) => {
                 console.error('❌ Audio-Fehler:', e);
+                const titleElement = document.getElementById('trackName');
+                if (titleElement) {
+                    titleElement.textContent = 'Stream nicht verfügbar – nächster Titel…';
+                }
                 // Versuche nächsten Track nach Fehler
                 setTimeout(() => playNextArchiveTrack(), 2000);
             });
@@ -1075,6 +1104,7 @@
                     console.log('🎵 Pausing...');
                     archivePlayer.pause();
                     isArchivePlaying = false;
+                    updatePlayButtonUI(false);
                     const titleContainer = document.querySelector('.current-title');
                     if (titleContainer) {
                         titleContainer.classList.remove('playing');
@@ -1086,8 +1116,10 @@
                         archivePlayer.src = archivePlaylist[currentArchiveTrack];
                         archivePlayer.load();
                     }
+                    updateArchiveTitle();
                     archivePlayer.play().then(() => {
                         isArchivePlaying = true;
+                        updatePlayButtonUI(true);
                         const titleContainer = document.querySelector('.current-title');
                         if (titleContainer) {
                             titleContainer.classList.add('playing');
@@ -1095,6 +1127,10 @@
                         console.log('🎵 Successfully started playing');
                     }).catch(error => {
                         console.error('🎵 Play failed:', error);
+                        const titleElement = document.getElementById('trackName');
+                        if (titleElement) {
+                            titleElement.textContent = 'Stream nicht verfügbar – nächster Titel…';
+                        }
                     });
                 }
             }, 150);
@@ -1132,11 +1168,23 @@
                     // Normale Methode
                     archivePlayer.src = archivePlaylist[currentArchiveTrack];
                     archivePlayer.load();
+                    updateArchiveTitle();
                     archivePlayer.play().catch(error => {
                         console.error('🎵 Auto-play failed:', error);
                     });
                 }
+            } else {
+                updateArchiveTitle();
             }
+        }
+
+        function updatePlayButtonUI(playing) {
+            const button = document.getElementById('playIcon');
+            if (!button) return;
+            button.textContent = playing ? '❚❚' : '▶';
+            button.setAttribute('aria-pressed', playing ? 'true' : 'false');
+            const label = playing ? button.dataset.labelPause : button.dataset.labelPlay;
+            if (label) button.setAttribute('aria-label', label);
         }
 
         function updateArchiveTitle() {
@@ -1163,15 +1211,19 @@
         }
 
         // Hamburger Menu Functions
-        function toggleMenu() {
+        function toggleMenu(forceClose) {
             const hamburger = document.getElementById('navToggle');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
+            const sidebarEl = document.getElementById('sidebar');
+            const overlayEl = document.getElementById('overlay');
+            const open = forceClose === true ? false : !sidebarEl.classList.contains('active');
 
-            hamburger.classList.toggle('active');
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+            hamburger.classList.toggle('active', open);
+            sidebarEl.classList.toggle('active', open);
+            overlayEl.classList.toggle('active', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+            hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+            const label = open ? hamburger.dataset.labelClose : hamburger.dataset.labelOpen;
+            if (label) hamburger.setAttribute('aria-label', label);
         }
 
         const navToggle = document.getElementById('navToggle');
@@ -1179,9 +1231,14 @@
         const overlay = document.getElementById('overlay');
         const links = document.querySelectorAll('.sidebar-nav a');
 
-        navToggle.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', toggleMenu);
-        links.forEach(link => link.addEventListener('click', toggleMenu));
+        navToggle.addEventListener('click', () => toggleMenu());
+        overlay.addEventListener('click', () => toggleMenu(true));
+        links.forEach(link => link.addEventListener('click', () => toggleMenu(true)));
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                toggleMenu(true);
+            }
+        });
 
         // Language switcher function
         function switchLanguage(lang) {
