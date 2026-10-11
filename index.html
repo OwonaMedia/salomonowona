@@ -192,8 +192,19 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(15,17,21,0.5), rgba(15,17,21,0.5)), url('Salomon.png') center/cover no-repeat fixed;
+            background-image: linear-gradient(rgba(15,17,21,0.5), rgba(15,17,21,0.5)), url('Salomon.png');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             text-align: center;
+        }
+        /* iOS/Android: fixed backgrounds often fail — use scroll on small viewports */
+        @media (max-width: 768px) {
+            #home {
+                background-attachment: scroll;
+                min-height: 100svh;
+            }
         }
         .hero-title {
             font-size: clamp(2.5rem, 8vw, 4.5rem);
