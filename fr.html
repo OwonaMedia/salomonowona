@@ -12,7 +12,7 @@
     <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr">
     <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.3" integrity="sha384-aJ9rL4k6lF+91guGvUFVSkpIcge7Zd9EiI4TQDLoK9kFaFJgKHgjEXVvG/qA5COj" crossorigin="anonymous"></script>
-    <style>
+    <style id="page-style">
         :root {
             --bg-body: #0f1115;
             --bg-surface: #1a1d23;
@@ -568,6 +568,7 @@
     </style>
 </head>
 <body>
+<div id="site-root">
     <header>
         <div class="nav-inner">
             <a href="#home" class="logo">Salomon Owona</a>
@@ -989,130 +990,8 @@
             </div>
         </div>
     </footer>
-    <!-- Live Icecast radio (shared position worldwide) -->
-    <audio id="liveRadioPlayer" preload="none" style="display: none;"></audio>
-    <script>
-        const LIVE_RADIO_URL = "https://radio.owonamedia.de/radio.mp3";
-        const RADIO_LABEL_IDLE = 'Salomon Radio';
-        const RADIO_LABEL_LIVE = 'Salomon Radio · Live';
-        const RADIO_LABEL_ERR = 'Flux indisponible — réessayez plus tard';
-
-        let livePlayer = null;
-        let isLivePlaying = false;
-
-        function initLiveRadio() {
-            livePlayer = document.getElementById('liveRadioPlayer');
-            if (!livePlayer) return;
-            livePlayer.removeAttribute('src');
-            const titleElement = document.getElementById('trackName');
-            if (titleElement) titleElement.textContent = RADIO_LABEL_IDLE;
-
-            livePlayer.addEventListener('error', () => {
-                const titleElement = document.getElementById('trackName');
-                if (titleElement) titleElement.textContent = RADIO_LABEL_ERR;
-                isLivePlaying = false;
-                updatePlayButtonUI(false);
-            });
-        }
-
-        function updatePlayButtonUI(playing) {
-            const button = document.getElementById('playIcon');
-            if (!button) return;
-            button.textContent = playing ? '❚❚' : '▶';
-            button.setAttribute('aria-pressed', playing ? 'true' : 'false');
-            const label = playing ? button.dataset.labelPause : button.dataset.labelPlay;
-            if (label) button.setAttribute('aria-label', label);
-        }
-
-        function toggleArchiveRadio() {
-            if (!livePlayer) initLiveRadio();
-            const button = document.querySelector('.play-btn');
-            if (button) {
-                button.style.transform = 'scale(0.9)';
-                setTimeout(() => { button.style.transform = 'scale(1)'; }, 150);
-            }
-
-            if (isLivePlaying) {
-                livePlayer.pause();
-                livePlayer.removeAttribute('src');
-                livePlayer.load();
-                isLivePlaying = false;
-                updatePlayButtonUI(false);
-                const titleElement = document.getElementById('trackName');
-                if (titleElement) titleElement.textContent = RADIO_LABEL_IDLE;
-                return;
-            }
-
-            livePlayer.src = LIVE_RADIO_URL;
-            livePlayer.play().then(() => {
-                isLivePlaying = true;
-                updatePlayButtonUI(true);
-                const titleElement = document.getElementById('trackName');
-                if (titleElement) titleElement.textContent = RADIO_LABEL_LIVE;
-            }).catch(() => {
-                const titleElement = document.getElementById('trackName');
-                if (titleElement) titleElement.textContent = RADIO_LABEL_ERR;
-                isLivePlaying = false;
-                updatePlayButtonUI(false);
-            });
-        }
-
-        // Hamburger Menu Functions
-        function toggleMenu(forceClose) {
-            const hamburger = document.getElementById('navToggle');
-            const sidebarEl = document.getElementById('sidebar');
-            const overlayEl = document.getElementById('overlay');
-            const open = forceClose === true ? false : !sidebarEl.classList.contains('active');
-
-            hamburger.classList.toggle('active', open);
-            sidebarEl.classList.toggle('active', open);
-            overlayEl.classList.toggle('active', open);
-            document.body.style.overflow = open ? 'hidden' : '';
-            hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
-            const label = open ? hamburger.dataset.labelClose : hamburger.dataset.labelOpen;
-            if (label) hamburger.setAttribute('aria-label', label);
-        }
-
-        const navToggle = document.getElementById('navToggle');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const links = document.querySelectorAll('.sidebar-nav a');
-
-        navToggle.addEventListener('click', () => toggleMenu());
-        overlay.addEventListener('click', () => toggleMenu(true));
-        links.forEach(link => link.addEventListener('click', () => toggleMenu(true)));
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
-                toggleMenu(true);
-            }
-        });
-
-        // Language switcher function
-        function switchLanguage(lang) {
-            const currentUrl = window.location.href;
-            const isLocalhost = currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1');
-            let newUrl;
-
-            if (isLocalhost) {
-                if (lang === 'sw') {
-                    newUrl = 'index.html';
-                } else {
-                    newUrl = lang + '.html';
-                }
-            } else {
-                const baseUrl = currentUrl.split('/').slice(0, 3).join('/');
-                if (lang === 'sw') {
-                    newUrl = baseUrl + '/';
-                } else {
-                    newUrl = baseUrl + '/' + lang;
-                }
-            }
-            window.location.href = newUrl;
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            initLiveRadio();
-        });
-    </script>
+</div>
+    <audio id="liveRadioPlayer" preload="none" playsinline style="display: none;"></audio>
+    <script src="/radio-persist.js" defer></script>
 </body>
 </html>

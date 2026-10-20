@@ -12,7 +12,7 @@
     <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr/confidentialite">
     <link rel="alternate" hreflang="sw" href="https://salomonowona.com/faragha">
     <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/datenschutz">
-    <style>
+    <style id="page-style">
         :root { --bg-body:#0f1115; --bg-surface:#1a1d23; --text-main:#e0e0e0; --text-muted:#9ca3af; --accent:#d4a373; --border:#333842; }
         * { box-sizing: border-box; }
         body { margin:0; background:var(--bg-body); color:var(--text-main); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; line-height:1.7; -webkit-font-smoothing:antialiased; }
@@ -27,10 +27,27 @@
         .card { background:var(--bg-surface); border:1px solid var(--border); border-radius:8px; padding:1.25rem 1.5rem; margin-bottom:1.5rem; }
         footer { margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--border); font-size:0.9rem; color:var(--text-muted); }
         .legal-nav { display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:1rem; }
+
+        .radio-persist-bar {
+            display: flex; align-items: center; gap: 0.75rem;
+            max-width: 720px; margin: 0 auto 1.25rem; padding: 0.65rem 0.85rem;
+            background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px;
+        }
+        .radio-persist-bar .play-btn {
+            width: 36px; height: 36px; min-width: 36px; border-radius: 50%;
+            border: 1px solid var(--accent); background: transparent; color: var(--accent);
+            cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center;
+        }
+        .radio-persist-bar .track-info { color: var(--text-muted); font-size: 0.95rem; }
     </style>
 </head>
 <body>
+<div id="site-root">
     <main class="wrap">
+        <div class="radio-persist-bar" aria-label="Salomon Radio">
+            <button type="button" class="play-btn" onclick="toggleArchiveRadio()" id="playIcon" aria-label="Lire Salomon Radio" aria-pressed="false" data-label-play="Lire Salomon Radio" data-label-pause="Pause Salomon Radio">▶</button>
+            <div class="track-info" id="trackName">Salomon Radio</div>
+        </div>
         <nav><a href="/fr">← Retour à l’accueil</a></nav>
         <h1>Protection des données</h1>
         <p>Informations selon l’article 13 du RGPD. La version allemande (<a href="/datenschutz">Datenschutzhinweise</a>) fait foi.</p>
@@ -70,5 +87,8 @@
             <p>&copy; 1981–2026 Salomon Firmin Owona</p>
         </footer>
     </main>
+</div>
+    <audio id="liveRadioPlayer" preload="none" playsinline style="display: none;"></audio>
+    <script src="/radio-persist.js" defer></script>
 </body>
 </html>

@@ -6,6 +6,12 @@ Vor Arbeit beide Dateien lesen; jede eigene Änderung hier nachtragen (Was/Warum
 
 ---
 
+## 2026-10-20 (Radio Persist)
+- Soft-Navigation (`radio-persist.js`): Sprache und same-origin Seiten ohne Reload; `<audio>` bleibt außerhalb `#site-root`. Legal-Seiten mit Mini-Player. Status: Deploy folgt.
+
+## 2026-10-20 (Radio Interleave)
+- Contabo `/opt/salomon-radio`: lange Beiträge alle ~5 Min segmentiert; dazwischen rotierende Songs (6 Tracks, kein Direkt-Repeat). Rebuild: `scripts/rebuild-interleave-playlist.sh`. Status: live.
+
 ## 2026-10-20
 - **Offene Punkte aus GROKBOT/Audit geschlossen** (Auftrag: offene Ops-Quellen). Status: lokal umgesetzt, Deploy folgt per Push.
   - Impressum/Datenschutz (DE + EN/FR/SW), Footer-Links, Vercel-Rewrites.
