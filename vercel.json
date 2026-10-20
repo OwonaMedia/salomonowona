@@ -35,6 +35,97 @@
     {
       "source": "/fr/",
       "destination": "/fr.html"
+    },
+    {
+      "source": "/impressum",
+      "destination": "/impressum.html"
+    },
+    {
+      "source": "/impressum/",
+      "destination": "/impressum.html"
+    },
+    {
+      "source": "/datenschutz",
+      "destination": "/datenschutz.html"
+    },
+    {
+      "source": "/datenschutz/",
+      "destination": "/datenschutz.html"
+    },
+    {
+      "source": "/en/legal-notice",
+      "destination": "/legal-notice-en.html"
+    },
+    {
+      "source": "/en/legal-notice/",
+      "destination": "/legal-notice-en.html"
+    },
+    {
+      "source": "/en/privacy",
+      "destination": "/privacy-en.html"
+    },
+    {
+      "source": "/en/privacy/",
+      "destination": "/privacy-en.html"
+    },
+    {
+      "source": "/fr/mentions-legales",
+      "destination": "/mentions-legales-fr.html"
+    },
+    {
+      "source": "/fr/mentions-legales/",
+      "destination": "/mentions-legales-fr.html"
+    },
+    {
+      "source": "/fr/confidentialite",
+      "destination": "/confidentialite-fr.html"
+    },
+    {
+      "source": "/fr/confidentialite/",
+      "destination": "/confidentialite-fr.html"
+    },
+    {
+      "source": "/ilani-kisheria",
+      "destination": "/ilani-kisheria.html"
+    },
+    {
+      "source": "/ilani-kisheria/",
+      "destination": "/ilani-kisheria.html"
+    },
+    {
+      "source": "/faragha",
+      "destination": "/faragha.html"
+    },
+    {
+      "source": "/faragha/",
+      "destination": "/faragha.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' https://radio.owonamedia.de; connect-src 'self' https://radio.owonamedia.de; frame-src https://www.patreon.com https://patreon.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+        }
+      ]
     }
   ]
 }

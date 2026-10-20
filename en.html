@@ -11,11 +11,7 @@
     <link rel="alternate" hreflang="en" href="https://salomonowona.com/en">
     <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr">
     <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/">
-<link rel="alternate" hreflang="en" href="https://salomonowona.com/en">
-    <link rel="alternate" hreflang="fr" href="https://salomonowona.com/fr">
-    <link rel="alternate" hreflang="sw" href="https://salomonowona.com/sw">
-    <link rel="alternate" hreflang="x-default" href="https://salomonowona.com/">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.3" integrity="sha384-aJ9rL4k6lF+91guGvUFVSkpIcge7Zd9EiI4TQDLoK9kFaFJgKHgjEXVvG/qA5COj" crossorigin="anonymous"></script>
     <style>
         :root {
             --bg-body: #0f1115;
@@ -196,7 +192,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background-image: linear-gradient(rgba(15,17,21,0.5), rgba(15,17,21,0.5)), url('Salomon.png');
+            background-image: linear-gradient(rgba(15,17,21,0.5), rgba(15,17,21,0.5)), image-set(url('Salomon.webp') type('image/webp'), url('Salomon.png') type('image/png'));
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -985,6 +981,10 @@
                     </a>
                 </div>
 
+                <nav class="legal-links" aria-label="Legal" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1rem;font-size:0.9rem;">
+                    <a href="/en/legal-notice" style="color:var(--accent);">Legal notice</a>
+                    <a href="/en/privacy" style="color:var(--accent);">Privacy</a>
+                </nav>
                 <p>&copy; 1981-2026 Salomon Firmin Owona. Between Worlds.</p>
             </div>
         </div>
