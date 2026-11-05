@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/links",
+      "destination": "/links/",
+      "permanent": true
+    },
+    {
       "source": "/sw",
       "destination": "/",
       "permanent": true
