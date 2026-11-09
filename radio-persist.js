@@ -12,7 +12,7 @@
     sw: {
       idle: 'Salomon Radio',
       live: 'Salomon Radio · Live',
-      err: 'Stream haipatikani — jaribu tena baadaye'
+      err: 'Matangazo ya redio hayapatikani kwa sasa — tafadhali jaribu tena baadaye.'
     },
     de: {
       idle: 'Salomon Radio',
