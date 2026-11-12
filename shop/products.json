@@ -88,7 +88,7 @@
       "language": "de",
       "languageNote": null,
       "category": "vibe-coding",
-      "priceCents": 999,
+      "priceCents": 1499,
       "currency": "EUR",
       "blurb": "Stellen Sie sich vor, Sie könnten Software einfach durch natürliche Sprache erstellen – ohne jahrelange Programmiererfahrung. Genau das ermöglicht Vibe Coding mit KI-Assistenten. Dieses Buch führt Sie praxisnah von der ersten Idee bis zum fertigen SaaS-Produkt. Sie lernen, wie Sie Anforderungen formulieren, mit der KI iterieren, den Code prüfen und testen, Sicherheit und Datenschutz (DSGVO) gewährleisten und Ihr Produkt erfolgreich deployen und betreiben. Auch die Vermarktung kommt nicht zu kurz: Bezahlmodelle, Kundenakquise und Skalierung werden konkret behandelt. Salomon Owona zeigt Ihnen die Werkzeuge, die Grenzen des Ansatzes und Strategien, um mit KI eigene SaaS-Produkte zu bauen – effizient und ohne Umwege. Ein unverzichtbarer Leitfaden für Gründer, Entwickler und alle, die die Softwareentwicklung der Zukunft nutzen wollen.",
       "chapters": [
@@ -142,7 +142,7 @@
       "lektorat": false,
       "sellable": false,
       "badge": "Lektorat ausstehend",
-      "note": "Manuskript abgeschlossen, Lektorat steht noch aus.",
+      "note": "Manuskript abgeschlossen, Lektorat steht noch aus. Preis bereits hinterlegt: 14,99 €.",
       "format": "EPUB"
     },
     {
@@ -157,7 +157,7 @@
       "language": "de",
       "languageNote": null,
       "category": "e-commerce",
-      "priceCents": 999,
+      "priceCents": 1499,
       "currency": "EUR",
       "blurb": "Warum klicken Kunden auf „Kaufen“ – und warum brechen sie ab? Dieses Buch zeigt Ihnen, wie Sie die Psychologie des Online-Kaufs gezielt für Ihren E-Commerce-Shop nutzen. Von der Gestaltung überzeugender Produktseiten über faire Preisstrategien bis hin zur Reduzierung von Kaufabbrüchen im Checkout: Sie lernen, wie Sie Vertrauen aufbauen, Social Proof einsetzen und Kunden langfristig binden. Ein besonderer Fokus liegt auf dem Verkauf in Afrika und an die Diaspora – mit Mobile Money, kulturellem Vertrauensaufbau und logistischen Besonderheiten. Dabei bleiben rechtliche Vorgaben in Deutschland und ethische Grenzen nicht außen vor: Dark Patterns werden entlarvt, damit Sie nachhaltig und verantwortungsvoll verkaufen. Dieses Buch richtet sich an Online-Händler, Marketingverantwortliche und Gründer, die ihre Conversion-Rate steigern und gleichzeitig das Vertrauen ihrer Kunden gewinnen wollen. Mit klaren Handlungsempfehlungen und praxisnahen Beispielen – ohne erfundene Studien oder Zahlen. Ihr Weg zu einem kundenorientierten und erfolgreichen Online-Shop beginnt hier.",
       "chapters": [
@@ -211,7 +211,7 @@
       "lektorat": false,
       "sellable": false,
       "badge": "Lektorat ausstehend",
-      "note": "Manuskript abgeschlossen, Lektorat steht noch aus. KDP-Metadaten nannten 2,99 € – Shoppreis 9,99 €, bitte bestätigen.",
+      "note": "Manuskript abgeschlossen, Lektorat steht noch aus. Preis bereits hinterlegt: 14,99 € (KDP-Metadaten nannten 2,99 €).",
       "format": "EPUB"
     },
     {
@@ -549,14 +549,14 @@
       "sku": "so-netzwerke-des-neokolonialismus",
       "type": "ebook",
       "fulfillment": "own",
-      "title": "Die Netzwerke des Neokolonialismus",
+      "title": "Networks of Neocolonialism",
       "author": "Salomon Owona",
-      "language": "de",
-      "languageNote": "Der Fließtext und die Kapitelüberschriften dieser Lektoratsfassung sind englisch, der Titel ist deutsch. Vor dem Verkauf prüfen.",
+      "language": "en",
+      "languageNote": "This book is in English. / Dieses Buch ist auf Englisch.",
       "category": "geschichte-rassismus",
       "priceCents": 499,
       "currency": "EUR",
-      "blurb": "In 1960, fourteen African nations raised their flags over empty parliament buildings. The French tricolor came down. The colonial administrators boarded planes for Paris. But the systems that had governed them for a century did not leave. They simply changed form. In this explosive exposé, Salomon Owona reveals how neocolonialism has evolved from gunboats and resource extraction to a sophisticated digital empire run by algorithms. Drawing on three powerful chapters—'The Empire That Never Left,' 'The Algorithmic Governor,' and 'Breaking the Algorithmic Chain'—Owona shows how machine learning and data control now dictate the fate of entire nations, from credit scores to election outcomes. Yet resistance is rising. Across Africa, a new generation of digital activists, coders, and thinkers is fighting back, building pathways to sovereignty in the age of AI. This is a must-read for anyone who wants to understand the true architecture of power in the 21st century—and how to dismantle it.",
+      "blurb": "In 1960, fourteen French colonies in Africa raised their own flags. The tricolor came down, and the administrators flew home. Much of what they had built stayed in place: a currency guaranteed by France, defense agreements, and mining arrangements.\n\nThis short essay follows that thread from Paris to Ouagadougou and Niamey. It asks how influence that once rested on garrisons and treaties now travels through credit models, data, and code, and who gets to build and own those tools. The argument is the author's own, set against a documented record: the CFA franc and its 2019 reform, the withdrawal of French troops from Burkina Faso and Niger in 2023, and Niger's moves against the uranium company Orano.\n\nThe essay also looks at the other side: African researchers, activists, and economists working on digital sovereignty, from language technology to data protection laws, and the limits of what they have achieved so far.\n\nConcise and openly argued, it offers a starting point for readers who want to understand how power works after independence.",
       "chapters": [
         {
           "title": "1. The Empire That Never Left: From Gunboats to Algorithms",
@@ -578,10 +578,11 @@
       "coverLgJpg": "/shop/covers/205-lg.jpg",
       "aiNotice": "Mit Hilfe von KI erstellt",
       "lektorat": true,
-      "sellable": false,
-      "badge": "Prüfung nötig",
-      "note": "Der Fließtext und die Kapitelüberschriften dieser Lektoratsfassung sind englisch, der Titel ist deutsch. Vor dem Verkauf prüfen.",
-      "format": "EPUB"
+      "sellable": true,
+      "badge": "Englisch",
+      "note": "Englischsprachiges Buch (Essay). Der frühere deutsche Titel lautete „Die Netzwerke des Neokolonialismus“.",
+      "format": "EPUB",
+      "subtitle": "From Gunboats to Algorithms: France, the Sahel and the Fight for Digital Sovereignty"
     },
     {
       "id": "amazon-horus",
@@ -854,31 +855,6 @@
       "amazonAsin": "B0GTFPY8D3",
       "shortlink": "https://go.owona.de/ala1",
       "format": "E-Book bei Amazon"
-    },
-    {
-      "id": "amazon-weitere-mythologie",
-      "ebookId": null,
-      "slug": "amazon-weitere-mythologie",
-      "sku": null,
-      "type": "collection",
-      "fulfillment": "amazon",
-      "title": "Weitere Mythologie-Titel bei Amazon",
-      "author": "Salomon Owona",
-      "language": "de",
-      "category": "afro-mythologie",
-      "priceCents": null,
-      "currency": "EUR",
-      "blurb": "Vier Mythologie-Titel sind über gesicherte Kurzlinks (go.owona.de) Amazon-Listings: Horus, Ra, Eshus Algorithmus und Ala. Ein fünftes Listing konnte ohne Ihre Bestätigung nicht eindeutig zugeordnet werden (ein weiterer Kurzlink „Traoré: Unser Held“ führt derzeit auf owona.de, nicht zu Amazon). Diese Karte verweist auf die Autorenseite, bis der fünfte Titel feststeht.",
-      "chapters": [],
-      "wordCount": 0,
-      "cover": null,
-      "aiNotice": "Mit Hilfe von KI erstellt",
-      "lektorat": false,
-      "sellable": false,
-      "badge": "Bei Amazon",
-      "note": "Sammelverweis, kein eigenes Buch.",
-      "amazonUrl": "https://www.amazon.de/s?i=stripbooks&rh=p_27%3ASalomon%2BOwona",
-      "format": "Amazon-Autorenseite"
     }
   ]
 }

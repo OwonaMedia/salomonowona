@@ -184,7 +184,10 @@
     }
 
     // Live path (unused until flags are on). Prices come from the server, never from this form.
-    const items = cart.map((i) => ({ id: i.id, quantity: i.qty, ebook_lang: "de" }));
+    const items = cart.map((i) => {
+      const p = byId(i.id);
+      return { id: i.id, quantity: i.qty, ebook_lang: (p && p.language) || "de" };
+    });
     const payload = {
       shop: SHOP_ID,
       items,

@@ -14,10 +14,10 @@ Stand: 12. November 2026. Der Shop liegt in diesem Branch, ist **nicht** auf Pro
 Acht Kategorien: Herkunft & Migration, Musik & Beats, Liebe & Familie, E-Commerce, Krypto, Vibe Coding & KI, Geschichte & Rassismus, Afro-Mythologie.
 
 - Eigene Dateien: 235, 236, 197–205. **Nicht** enthalten: OM-Shop 230–234, CSEB, zurückgezogenes 169, sensible 211/212.
-- 197–204: lektorierte deutsche Fassungen, Shoppreis **4,99 €** (KDP-Metadaten nannten 2,99 €).
-- 235 und 236: Manuskript fertig, **Lektorat ausstehend**, deshalb nicht kaufbar. Preisvorschlag 9,99 € (236 in den KDP-Daten 2,99 €).
-- 205: Lektoratsfassung, aber Fließtext und Kapitelüberschriften sind englisch — nicht kaufbar, bis das geprüft ist.
-- Afro-Mythologie bei Amazon (keine eigene Datei, Link zu Amazon): Horus (B0GSSFG63W), Ra (B0GSWT8YYT), Eshus Algorithmus (B0GHQ3L38Y), Ala (B0GTFPY8D3). Ein fünftes Listing war über die Kurzlinks nicht eindeutig zu bestätigen.
+- 197–204: lektorierte deutsche Fassungen, Shoppreis **4,99 €** (3.268 XAF bei Kurs 655, gerundet wie im OM-Shop).
+- 235 und 236: Manuskript fertig, **Lektorat ausstehend**, sichtbar, nicht kaufbar. Preis bereits hinterlegt: **14,99 €** (9.818 XAF).
+- 205: als englisches Buch verkauft, Titel **Networks of Neocolonialism**, Sprache `en`, Preis **4,99 €** (3.268 XAF), im Testmodus kaufbar. Der frühere deutsche Titel war „Die Netzwerke des Neokolonialismus“. In der Generator-Datenbank steht der Titel noch deutsch; vor dem echten Verkauf muss die EPUB-Metadatenzeile angepasst werden, sonst greift die Titelprüfung der Erfüllung nicht.
+- Afro-Mythologie bei Amazon (keine eigene Datei, Link zu Amazon): genau vier Titel — Horus (B0GSSFG63W), Ra (B0GSWT8YYT), Eshus Algorithmus (B0GHQ3L38Y), Ala (B0GTFPY8D3).
 
 ## Rechtstexte
 
@@ -25,4 +25,4 @@ AGB und Widerruf unter `/shop/agb` und `/shop/widerruf` sowie ein Abschnitt zu S
 
 ## Freigabe (noch nicht erteilt)
 
-Vor dem Verkauf braucht es Firmins Go und: rechtliche Prüfung, Lektorat 235/236, Klärung 205, Preise, das fünfte Amazon-Titel, Ausrollen des OM-API-PR, `SO_SHOP_ENABLED=1` (Env, nur mit ausdrücklichem OK), CORS greift dann per Code für salomonowona.com, SKU-Zuordnung in der Shop-Bridge (Datenbank, nur mit OK), Stripe- und NotchPay-Webhooks bzw. Erfolgs-URLs für diese Marke, E-Mail-Absendertext.
+Vor dem Verkauf braucht es Firmins Go und: rechtliche Prüfung, Lektorat 235/236, Anpassung der EPUB-Titelmetadaten von 205, Ausrollen des OM-API-PR, `SO_SHOP_ENABLED=1` (Env, nur mit ausdrücklichem OK), CORS greift dann per Code für salomonowona.com, SKU-Zuordnung in der Shop-Bridge (Datenbank, nur mit OK), Stripe- und NotchPay-Webhooks bzw. Erfolgs-URLs für diese Marke, E-Mail-Absendertext.

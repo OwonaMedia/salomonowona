@@ -28,6 +28,18 @@ def euro(cents) -> str:
         return ""
     return f"{cents/100:.2f}".replace(".", ",") + " €"
 
+LANG_LABELS = {"de": "Deutsch", "en": "Englisch", "fr": "Französisch", "es": "Spanisch", "pt": "Portugiesisch", "sw": "Swahili"}
+
+
+def book_lang(p) -> str:
+    return str(p.get("language") or "de").lower()[:2]
+
+
+def lang_label(p) -> str:
+    code = book_lang(p)
+    return LANG_LABELS.get(code, code)
+
+
 def cat_by_id(cid):
     return next(c for c in CATEGORIES if c["id"] == cid)
 
@@ -56,6 +68,7 @@ SHOP_JSON = json.dumps(
                 "priceCents": p.get("priceCents"),
                 "fulfillment": p["fulfillment"],
                 "sellable": p.get("sellable"),
+                "language": p.get("language") or "de",
             }
             for p in PRODUCTS
         ],
@@ -322,7 +335,7 @@ def schema_product(p):
         "@id": url + "#book",
         "name": p["title"],
         "author": {"@type": "Person", "name": AUTHOR, "@id": f"{BASE}/#person"},
-        "inLanguage": "de",
+        "inLanguage": book_lang(p),
         "bookFormat": "https://schema.org/EBook",
         "image": img,
         "description": p.get("blurb") or "",
@@ -448,9 +461,8 @@ def page_category(c):
     extra = ""
     if c["id"] == "afro-mythologie":
         extra = (
-            '<p class="shop-muted" style="margin-top:1.5rem">Vier Amazon-Listings sind über gesicherte Kurzlinks bestätigt '
-            "(Horus, Ra, Eshus Algorithmus, Ala). Ein fünftes Amazon-Mythologie-Listing konnte ohne Bestätigung nicht eindeutig "
-            "zugeordnet werden. Weitere Titel: "
+            '<p class="shop-muted" style="margin-top:1.5rem">Vier Mythologie-Titel sind über Amazon erhältlich: '
+            "Horus, Ra, Eshus Algorithmus und Ala. Weitere Bücher auf der "
             '<a href="https://www.amazon.de/s?i=stripbooks&amp;rh=p_27%3ASalomon%2BOwona" rel="noopener noreferrer" target="_blank" style="color: var(--accent);">Autorenseite bei Amazon</a>.</p>'
         )
     desc = c["desc"]
@@ -520,7 +532,7 @@ def page_product(p):
             wc = f' ca. {p["wordCount"]:,} Wörter.'.replace(",", ".")
         price = (
             f'<p class="shop-price" style="font-size:1.3rem;margin:1rem 0 0.4rem">{euro(p["priceCents"])}</p>'
-            f'<p class="shop-muted">E-Book (EPUB), Deutsch. Lieferung per E-Mail nach Zahlung.{wc}</p>'
+            f'<p class="shop-muted">E-Book (EPUB), {lang_label(p)}. Lieferung per E-Mail nach Zahlung.{wc}</p>'
         )
         if p.get("sellable"):
             action = (
@@ -560,6 +572,11 @@ def page_product(p):
             + "                        <div>\n"
             + f'                            <p class="shop-muted">{esc(cat_by_id(p["category"])["name"])}</p>\n'
             + f"                            <h1>{esc(p['title'])}</h1>\n"
+            + (
+                f'                            <p class="shop-muted" style="font-size:1.05rem;margin-top:-0.3rem">{esc(p["subtitle"])}</p>\n'
+                if p.get("subtitle")
+                else ""
+            )
             + f'                            <p>Von {AUTHOR}. {esc(words_meta)}</p>\n'
             + '                            <span class="shop-ai">Mit Hilfe von KI erstellt</span>\n'
             + f"                            {price}\n"
@@ -568,9 +585,9 @@ def page_product(p):
             + "                        </div>\n"
             + "                    </div>\n"
             + "                    <h2>Über dieses Buch</h2>\n"
-            + f'                    <p class="bio-text">{esc(p.get("blurb") or "")}</p>\n'
+            + "                    " + "".join(f'<p class="bio-text">{esc(para)}</p>\n' for para in (p.get("blurb") or "").split("\n\n") if para.strip()) + "\n"
             + f"                    {toc}\n"
-            + '                    <p class="shop-muted">Sprache: Deutsch. Weitere Sprachen erscheinen erst, wenn eine lektorierte Datei vorliegt.</p>\n'
+            + f'                    <p class="shop-muted">Sprache: {lang_label(p)}. Weitere Sprachen erscheinen erst, wenn eine lektorierte Datei vorliegt.</p>\n'
             + "                </article>"
         )
         + footer()
