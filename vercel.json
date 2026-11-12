@@ -1,6 +1,28 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.salomonowona.com"
+        }
+      ],
+      "destination": "https://salomonowona.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.salomonowona.com"
+        }
+      ],
+      "destination": "https://salomonowona.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/links",
       "destination": "/links/",
       "permanent": true

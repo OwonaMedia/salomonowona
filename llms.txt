@@ -1,0 +1,21 @@
+# Salomon Owona
+
+> Persönliche Internetpräsenz von Salomon Firmin Owona, zwischen Kamerun und Deutschland. Kunst, Technik, Geschichte und Zukunft.
+
+Die Website liegt in Swahili (Startseite), Deutsch, Englisch und Französisch vor.
+
+## Seiten
+
+- [Start (Swahili)](https://salomonowona.com/): Ninatoka wapi, naenda wapi...
+- [Deutsch](https://salomonowona.com/de): Wo komm' ich her, wo geh ich hin...
+- [English](https://salomonowona.com/en): Where do I come from, where am I going...
+- [Français](https://salomonowona.com/fr): D'où viens-je, où vais-je...
+- [Impressum](https://salomonowona.com/impressum)
+- [Datenschutz](https://salomonowona.com/datenschutz)
+
+## Verwandte Projekte
+
+- [Owona Media](https://owona.de/)
+- [Owona Media (Überblick)](https://owonamedia.de/)
+- [NDASI](https://ndasi.com/)
+- [cmrec](https://cmrec.ndasi.com/)
