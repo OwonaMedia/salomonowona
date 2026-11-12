@@ -126,6 +126,238 @@
     {
       "source": "/faragha/",
       "destination": "/faragha.html"
+    },
+    {
+      "source": "/shop",
+      "destination": "/shop/index.html"
+    },
+    {
+      "source": "/shop/",
+      "destination": "/shop/index.html"
+    },
+    {
+      "source": "/shop/warenkorb",
+      "destination": "/shop/warenkorb.html"
+    },
+    {
+      "source": "/shop/warenkorb/",
+      "destination": "/shop/warenkorb.html"
+    },
+    {
+      "source": "/shop/kasse",
+      "destination": "/shop/kasse.html"
+    },
+    {
+      "source": "/shop/kasse/",
+      "destination": "/shop/kasse.html"
+    },
+    {
+      "source": "/shop/danke",
+      "destination": "/shop/danke.html"
+    },
+    {
+      "source": "/shop/danke/",
+      "destination": "/shop/danke.html"
+    },
+    {
+      "source": "/shop/agb",
+      "destination": "/shop/agb.html"
+    },
+    {
+      "source": "/shop/agb/",
+      "destination": "/shop/agb.html"
+    },
+    {
+      "source": "/shop/widerruf",
+      "destination": "/shop/widerruf.html"
+    },
+    {
+      "source": "/shop/widerruf/",
+      "destination": "/shop/widerruf.html"
+    },
+    {
+      "source": "/shop/kategorie/herkunft-migration",
+      "destination": "/shop/kategorie/herkunft-migration.html"
+    },
+    {
+      "source": "/shop/kategorie/herkunft-migration/",
+      "destination": "/shop/kategorie/herkunft-migration.html"
+    },
+    {
+      "source": "/shop/kategorie/musik-beats",
+      "destination": "/shop/kategorie/musik-beats.html"
+    },
+    {
+      "source": "/shop/kategorie/musik-beats/",
+      "destination": "/shop/kategorie/musik-beats.html"
+    },
+    {
+      "source": "/shop/kategorie/liebe-familie",
+      "destination": "/shop/kategorie/liebe-familie.html"
+    },
+    {
+      "source": "/shop/kategorie/liebe-familie/",
+      "destination": "/shop/kategorie/liebe-familie.html"
+    },
+    {
+      "source": "/shop/kategorie/e-commerce",
+      "destination": "/shop/kategorie/e-commerce.html"
+    },
+    {
+      "source": "/shop/kategorie/e-commerce/",
+      "destination": "/shop/kategorie/e-commerce.html"
+    },
+    {
+      "source": "/shop/kategorie/krypto",
+      "destination": "/shop/kategorie/krypto.html"
+    },
+    {
+      "source": "/shop/kategorie/krypto/",
+      "destination": "/shop/kategorie/krypto.html"
+    },
+    {
+      "source": "/shop/kategorie/vibe-coding",
+      "destination": "/shop/kategorie/vibe-coding.html"
+    },
+    {
+      "source": "/shop/kategorie/vibe-coding/",
+      "destination": "/shop/kategorie/vibe-coding.html"
+    },
+    {
+      "source": "/shop/kategorie/geschichte-rassismus",
+      "destination": "/shop/kategorie/geschichte-rassismus.html"
+    },
+    {
+      "source": "/shop/kategorie/geschichte-rassismus/",
+      "destination": "/shop/kategorie/geschichte-rassismus.html"
+    },
+    {
+      "source": "/shop/kategorie/afro-mythologie",
+      "destination": "/shop/kategorie/afro-mythologie.html"
+    },
+    {
+      "source": "/shop/kategorie/afro-mythologie/",
+      "destination": "/shop/kategorie/afro-mythologie.html"
+    },
+    {
+      "source": "/shop/vibe-coding-saas",
+      "destination": "/shop/vibe-coding-saas.html"
+    },
+    {
+      "source": "/shop/vibe-coding-saas/",
+      "destination": "/shop/vibe-coding-saas.html"
+    },
+    {
+      "source": "/shop/psychologie-e-commerce",
+      "destination": "/shop/psychologie-e-commerce.html"
+    },
+    {
+      "source": "/shop/psychologie-e-commerce/",
+      "destination": "/shop/psychologie-e-commerce.html"
+    },
+    {
+      "source": "/shop/erziehung-im-wandel",
+      "destination": "/shop/erziehung-im-wandel.html"
+    },
+    {
+      "source": "/shop/erziehung-im-wandel/",
+      "destination": "/shop/erziehung-im-wandel.html"
+    },
+    {
+      "source": "/shop/entmachtete-denker",
+      "destination": "/shop/entmachtete-denker.html"
+    },
+    {
+      "source": "/shop/entmachtete-denker/",
+      "destination": "/shop/entmachtete-denker.html"
+    },
+    {
+      "source": "/shop/rassismuserfahrungen-schwarzer-frauen",
+      "destination": "/shop/rassismuserfahrungen-schwarzer-frauen.html"
+    },
+    {
+      "source": "/shop/rassismuserfahrungen-schwarzer-frauen/",
+      "destination": "/shop/rassismuserfahrungen-schwarzer-frauen.html"
+    },
+    {
+      "source": "/shop/binaere-spiritualitaet-westafrika",
+      "destination": "/shop/binaere-spiritualitaet-westafrika.html"
+    },
+    {
+      "source": "/shop/binaere-spiritualitaet-westafrika/",
+      "destination": "/shop/binaere-spiritualitaet-westafrika.html"
+    },
+    {
+      "source": "/shop/algorithmus-falle",
+      "destination": "/shop/algorithmus-falle.html"
+    },
+    {
+      "source": "/shop/algorithmus-falle/",
+      "destination": "/shop/algorithmus-falle.html"
+    },
+    {
+      "source": "/shop/schwarze-persoenlichkeiten",
+      "destination": "/shop/schwarze-persoenlichkeiten.html"
+    },
+    {
+      "source": "/shop/schwarze-persoenlichkeiten/",
+      "destination": "/shop/schwarze-persoenlichkeiten.html"
+    },
+    {
+      "source": "/shop/afrikas-weg-in-die-freiheit",
+      "destination": "/shop/afrikas-weg-in-die-freiheit.html"
+    },
+    {
+      "source": "/shop/afrikas-weg-in-die-freiheit/",
+      "destination": "/shop/afrikas-weg-in-die-freiheit.html"
+    },
+    {
+      "source": "/shop/westafrika-falle",
+      "destination": "/shop/westafrika-falle.html"
+    },
+    {
+      "source": "/shop/westafrika-falle/",
+      "destination": "/shop/westafrika-falle.html"
+    },
+    {
+      "source": "/shop/netzwerke-des-neokolonialismus",
+      "destination": "/shop/netzwerke-des-neokolonialismus.html"
+    },
+    {
+      "source": "/shop/netzwerke-des-neokolonialismus/",
+      "destination": "/shop/netzwerke-des-neokolonialismus.html"
+    },
+    {
+      "source": "/shop/amazon-horus",
+      "destination": "/shop/amazon-horus.html"
+    },
+    {
+      "source": "/shop/amazon-horus/",
+      "destination": "/shop/amazon-horus.html"
+    },
+    {
+      "source": "/shop/amazon-ra",
+      "destination": "/shop/amazon-ra.html"
+    },
+    {
+      "source": "/shop/amazon-ra/",
+      "destination": "/shop/amazon-ra.html"
+    },
+    {
+      "source": "/shop/amazon-eshus",
+      "destination": "/shop/amazon-eshus.html"
+    },
+    {
+      "source": "/shop/amazon-eshus/",
+      "destination": "/shop/amazon-eshus.html"
+    },
+    {
+      "source": "/shop/amazon-ala",
+      "destination": "/shop/amazon-ala.html"
+    },
+    {
+      "source": "/shop/amazon-ala/",
+      "destination": "/shop/amazon-ala.html"
     }
   ],
   "headers": [
@@ -150,7 +382,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://stats.owona.de 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' https://radio.owonamedia.de; connect-src 'self' https://radio.owonamedia.de https://stats.owona.de; frame-src https://www.patreon.com https://patreon.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://stats.owona.de 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; media-src 'self' https://radio.owonamedia.de; connect-src 'self' https://radio.owonamedia.de https://stats.owona.de https://api.owonamedia.de https://owona.de; frame-src https://www.patreon.com https://patreon.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
         }
       ]
     }

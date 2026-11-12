@@ -1,0 +1,232 @@
+/* Shop extras only. Chrome, tokens, type, cards and buttons come from
+   de.html <style id="page-style"> — no separate shop theme. */
+
+/* Page titles match section h2 (gold underline). */
+main h1 {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+    color: #fff;
+}
+main h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--accent);
+}
+
+.sidebar-nav a[aria-current="page"] {
+    color: var(--accent);
+}
+
+/* Book covers sit inside project-card, replacing the emoji icon. */
+.shop-cover {
+    width: 120px;
+    height: auto;
+    display: block;
+    margin-bottom: 1.25rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+.shop-cover-lg {
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+.shop-muted { color: var(--text-muted); }
+.shop-price { color: var(--accent); font-weight: 600; }
+.shop-ai {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin: 0.5rem 0 1rem;
+}
+
+/* Product layout: cover + text, stacks on small screens. */
+.shop-pdp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+    margin: 1rem 0 2rem;
+}
+.shop-pdp > div { flex: 1; min-width: 240px; }
+
+/* Contents list — plain, like the timeline rhythm. */
+.shop-toc {
+    list-style: decimal;
+    padding-left: 1.4rem;
+    color: var(--text-main);
+    margin: 0 0 2rem;
+}
+.shop-toc li { margin: 0.35rem 0; }
+.shop-toc .w { color: var(--text-muted); font-size: 0.9rem; margin-left: 0.6rem; }
+
+/* Category links: text, not a chip bar. */
+.shop-cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin: 1.5rem 0 2rem;
+    font-size: 1rem;
+}
+.shop-cats a { color: var(--accent); text-decoration: none; }
+.shop-cats a:hover { text-decoration: underline; }
+.shop-cats a[aria-current="page"] { font-weight: 700; }
+
+button.contact-btn {
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    background: transparent;
+}
+button.contact-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+button.contact-btn + .contact-btn,
+a.contact-btn + a.contact-btn,
+button.contact-btn + a.contact-btn,
+a.contact-btn + button.contact-btn {
+    margin-left: 1rem;
+}
+
+/* Quiet text actions (Entfernen, Leeren) — same as accent inline links. */
+.shop-text-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    text-decoration: none;
+}
+.shop-text-btn:hover { text-decoration: underline; }
+
+/* Forms: site tokens only. */
+.shop-form { margin: 1.5rem 0 0; }
+.shop-form label,
+.shop-form legend {
+    display: block;
+    margin: 0 0 0.4rem;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+.shop-form input[type="text"],
+.shop-form input[type="email"],
+.shop-form input[type="tel"],
+.shop-form input[type="number"],
+.shop-form select,
+.shop-form textarea {
+    width: 100%;
+    max-width: 100%;
+    background: var(--bg-surface);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.7rem 0.85rem;
+    font-family: inherit;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+.shop-form input:focus,
+.shop-form select:focus,
+.shop-form textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-color: var(--accent);
+}
+.shop-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+@media (max-width: 640px) {
+    .shop-form-row { grid-template-columns: 1fr; }
+}
+
+.shop-checks { display: grid; gap: 0.75rem; margin: 1.25rem 0; }
+.shop-checks label {
+    color: var(--text-main);
+    font-size: 0.95rem;
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    margin: 0;
+}
+.shop-checks a { color: var(--accent); }
+
+.shop-pay { border: 0; padding: 0; margin: 1.25rem 0; }
+.shop-pay legend { margin-bottom: 0.75rem; font-weight: 700; color: #fff; }
+.shop-pay-opt {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.15rem;
+    margin-bottom: 0.65rem;
+    cursor: pointer;
+    color: var(--text-main);
+}
+.shop-pay-opt:hover { border-color: var(--accent); }
+.shop-pay-opt:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+}
+
+.shop-err { color: #e07a5f; font-size: 0.95rem; min-height: 1.2em; }
+.shop-actions { margin-top: 0.5rem; }
+
+/* Cart table uses surface/border tokens. */
+.shop-cart {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+}
+.shop-cart th,
+.shop-cart td {
+    text-align: left;
+    padding: 0.85rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+.shop-cart th { color: var(--text-muted); font-weight: 500; font-size: 0.9rem; }
+.shop-cart a { color: var(--accent); text-decoration: none; }
+.shop-cart a:hover { text-decoration: underline; }
+.shop-cart input[type="number"] {
+    width: 4rem;
+    background: var(--bg-surface);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.4rem 0.45rem;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.shop-crumbs {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+.shop-crumbs a { color: var(--text-muted); text-decoration: none; }
+.shop-crumbs a:hover { color: var(--accent); }
+
+/* Legal draft notice reuses values-box, slightly tighter. */
+.values-box.shop-draft { padding: 1.5rem 1.75rem; margin: 1.5rem 0 2rem; }
+
+.shop-summary { margin: 0 0 1.5rem; padding: 0; list-style: none; }
+.shop-summary li { margin: 0.35rem 0; color: var(--text-main); }
