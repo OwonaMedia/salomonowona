@@ -22,11 +22,11 @@ Die Website liegt in Swahili (Startseite), Deutsch, Englisch und Französisch vo
 
 ## Shop
 
-E-Book-Shop von Salomon Owona auf Deutsch (Testmodus, Verkauf erst nach Freigabe). Zahlung geplant wie im Shop von Owona Media: Stripe (Euro) und NotchPay / MTN / Orange Money (XAF). Die fünf Titel des Owona-Media-Shops (230–234) und CSEB-Titel sind hier nicht enthalten.
+E-Book-Shop von Salomon Owona. Zahlung wie im Shop von Owona Media: Stripe (Euro) und NotchPay / MTN / Orange Money (XAF). Kaufbar sind derzeit die lektorierten Titel 197–204. 205, 235 und 236 sind sichtbar, aber noch nicht kaufbar. Die fünf Titel des Owona-Media-Shops (230–234) und CSEB-Titel sind hier nicht enthalten.
 
 - [Shop](https://salomonowona.com/shop/)
-- [AGB (Entwurf)](https://salomonowona.com/shop/agb)
-- [Widerruf (Entwurf)](https://salomonowona.com/shop/widerruf)
+- [AGB](https://salomonowona.com/shop/agb)
+- [Widerruf](https://salomonowona.com/shop/widerruf)
 - [Herkunft & Migration](https://salomonowona.com/shop/kategorie/herkunft-migration)
 - [Musik & Beats](https://salomonowona.com/shop/kategorie/musik-beats)
 - [Liebe & Familie](https://salomonowona.com/shop/kategorie/liebe-familie)

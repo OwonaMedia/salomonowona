@@ -1,6 +1,6 @@
 {
   "shopId": "salomonowona",
-  "shopLive": false,
+  "shopLive": true,
   "apiBase": "https://owona.de",
   "publicName": "Salomon Owona",
   "legalName": "Salomon Firmin Owona",
@@ -578,8 +578,8 @@
       "coverLgJpg": "/shop/covers/205-lg.jpg",
       "aiNotice": "Mit Hilfe von KI erstellt",
       "lektorat": true,
-      "sellable": true,
-      "badge": "Englisch",
+      "sellable": false,
+      "badge": "Englisch · Coming soon",
       "note": "Englischsprachiges Buch (Essay). Der frühere deutsche Titel lautete „Die Netzwerke des Neokolonialismus“.",
       "format": "EPUB",
       "subtitle": "From Gunboats to Algorithms: France, the Sahel and the Fight for Digital Sovereignty"

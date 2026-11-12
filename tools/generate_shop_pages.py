@@ -223,6 +223,8 @@ def footer():
 
 
 def test_banner():
+    if is_live():
+        return ""
     return """<div class="values-box shop-draft" role="status">
                     <p class="values-lead">Testmodus.</p>
                     <p>Der Shop ist angelegt, verkauft aber noch nicht. Es wird nichts berechnet, und es geht keine Bestellung hinaus. Der Verkauf startet erst, wenn Salomon Owona den Shop ausdrücklich freigibt.</p>
@@ -262,6 +264,10 @@ def cover_html(p, lg=False, cls="shop-cover"):
             f'                    </picture>'
         )
     return '<span class="project-icon" aria-hidden="true">📖</span>'
+
+
+def is_live():
+    return bool(CAT.get("shopLive"))
 
 
 def badge(p):
@@ -312,7 +318,10 @@ def schema_product(p):
         return ""
     url = f"{BASE}/shop/{p['slug']}"
     img = f"{BASE}{p['coverLg']}" if p.get("coverLg") else f"{BASE}/Salomon.webp"
-    avail = "https://schema.org/PreOrder"  # honest: shop not live
+    if is_live() and p.get("sellable"):
+        avail = "https://schema.org/InStock"
+    else:
+        avail = "https://schema.org/PreOrder"
     offer = None
     if p.get("fulfillment") == "amazon" and p.get("amazonUrl"):
         offer = {
@@ -535,13 +544,26 @@ def page_product(p):
             f'<p class="shop-muted">E-Book (EPUB), {lang_label(p)}. Lieferung per E-Mail nach Zahlung.{wc}</p>'
         )
         if p.get("sellable"):
+            note = (
+                ""
+                if is_live()
+                else '<p class="shop-muted">Im Testmodus wird nichts berechnet.</p>'
+            )
             action = (
                 f'<button type="button" class="contact-btn" data-add="{esc(p["id"])}">In den Warenkorb</button>'
                 '<a class="contact-btn" id="after-add" hidden href="/shop/warenkorb">Zum Warenkorb</a>'
-                '<p class="shop-muted">Im Testmodus wird nichts berechnet.</p>'
+                + note
             )
         else:
-            action = '<button type="button" class="contact-btn" disabled>Derzeit nicht kaufbar</button>'
+            coming = (
+                f'<p class="shop-muted">{esc(p["badge"])}</p>'
+                if p.get("badge")
+                else '<p class="shop-muted">Coming soon</p>'
+            )
+            action = (
+                '<button type="button" class="contact-btn" disabled>Derzeit nicht kaufbar</button>'
+                + coming
+            )
     else:
         action = ""
         price = ""
@@ -614,7 +636,11 @@ def page_checkout():
     html = (
         head(
             "Kasse | Shop | Salomon Owona",
-            "Kasse im Shop von Salomon Owona. Testmodus: keine echte Zahlung.",
+            (
+                "Kasse im Shop von Salomon Owona. Zahlung mit Stripe (Euro) oder NotchPay (XAF)."
+                if is_live()
+                else "Kasse im Shop von Salomon Owona. Testmodus: keine echte Zahlung."
+            ),
             f"{BASE}/shop/kasse",
         )
         + header("cart")
@@ -622,7 +648,11 @@ def page_checkout():
             test_banner()
             + '\n                <p class="shop-crumbs"><a href="/shop/">Shop</a> · <a href="/shop/warenkorb">Warenkorb</a> · Kasse</p>\n'
             + "                <h1>Kasse</h1>\n"
-            + '                <p class="bio-text">Zahlung wie im Shop von Owona Media: Karte über Stripe in Euro oder MTN Mobile Money / Orange Money über NotchPay in CFA-Franc (XAF). Im Testmodus wird der Ablauf nur simuliert.</p>\n'
+            + (
+                '                <p class="bio-text">Zahlung: Karte über Stripe in Euro oder MTN Mobile Money / Orange Money über NotchPay in CFA-Franc (XAF).</p>\n'
+                if is_live()
+                else '                <p class="bio-text">Zahlung wie im Shop von Owona Media: Karte über Stripe in Euro oder MTN Mobile Money / Orange Money über NotchPay in CFA-Franc (XAF). Im Testmodus wird der Ablauf nur simuliert.</p>\n'
+            )
             + '                <div id="checkout-summary"></div>\n'
             + '                <form id="checkout-form" class="shop-form" novalidate>\n'
             + '                    <div class="shop-form-row">\n'
@@ -645,13 +675,21 @@ def page_checkout():
             + "                        </div>\n"
             + "                    </fieldset>\n"
             + '                    <div class="shop-checks">\n'
-            + '                        <label><input type="checkbox" name="agb" required> Ich habe die <a href="/shop/agb" target="_blank">AGB</a> gelesen und erkenne sie an. (Entwurf)</label>\n'
+            + (
+                '                        <label><input type="checkbox" name="agb" required> Ich habe die <a href="/shop/agb" target="_blank">AGB</a> gelesen und erkenne sie an.</label>\n'
+                if is_live()
+                else '                        <label><input type="checkbox" name="agb" required> Ich habe die <a href="/shop/agb" target="_blank">AGB</a> gelesen und erkenne sie an. (Entwurf)</label>\n'
+            )
             + '                        <label><input type="checkbox" name="privacy" required> Ich habe die <a href="/datenschutz" target="_blank">Datenschutzhinweise</a> gelesen.</label>\n'
             + '                        <label><input type="checkbox" name="widerruf" required> Ich stimme zu, dass mit der Erfüllung (Bereitstellung des E-Books) vor Ablauf der Widerrufsfrist begonnen wird, und mir ist bewusst, dass ich mein Widerrufsrecht mit Beginn der Erfüllung verliere. Hinweise: <a href="/shop/widerruf" target="_blank">Widerrufsbelehrung</a>.</label>\n'
             + "                    </div>\n"
             + '                    <p class="shop-err" data-error></p>\n'
-            + '                    <button class="contact-btn" type="submit">Testkauf simulieren</button>\n'
-            + '                    <p class="shop-muted">Es wird keine Zahlung ausgeführt. Der echte Verkauf bleibt ausgeschaltet, bis der Shop freigegeben ist und die Zahlungswege auf dem Server für diese Marke eingerichtet sind.</p>\n'
+            + (
+                '                    <button class="contact-btn" type="submit">Zahlungspflichtig bestellen</button>\n'
+                if is_live()
+                else '                    <button class="contact-btn" type="submit">Testkauf simulieren</button>\n'
+                  + '                    <p class="shop-muted">Es wird keine Zahlung ausgeführt. Der echte Verkauf bleibt ausgeschaltet, bis der Shop freigegeben ist und die Zahlungswege auf dem Server für diese Marke eingerichtet sind.</p>\n'
+            )
             + "                </form>"
         )
         + footer()
@@ -661,13 +699,22 @@ def page_checkout():
 
 def page_thanks():
     html = (
-        head("Danke | Shop | Salomon Owona", "Testbestellung im Shop von Salomon Owona.", f"{BASE}/shop/danke")
+        head(
+            "Danke | Shop | Salomon Owona",
+            "Bestellung im Shop von Salomon Owona." if is_live() else "Testbestellung im Shop von Salomon Owona.",
+            f"{BASE}/shop/danke",
+        )
         + header("shop")
         + section(
             test_banner()
-            + "\n                <h1>Testkauf abgeschlossen</h1>\n"
-            + "                <p>Es wurde <strong>nichts berechnet</strong> und kein E-Book versendet. Der Ablauf der Kasse ist geprüft: Angaben, Einwilligungen und Warenkorb greifen.</p>\n"
-            + "                <p>Sobald der Shop freigegeben ist, kommt nach einer echten Zahlung der Download-Link per E-Mail, so wie im Shop von Owona Media.</p>\n"
+            + (
+                "\n                <h1>Danke für deine Bestellung</h1>\n"
+                + "                <p>Wenn die Zahlung bestätigt ist, erhältst du den Download-Link per E-Mail an die angegebene Adresse.</p>\n"
+                if is_live()
+                else "\n                <h1>Testkauf abgeschlossen</h1>\n"
+                + "                <p>Es wurde <strong>nichts berechnet</strong> und kein E-Book versendet. Der Ablauf der Kasse ist geprüft: Angaben, Einwilligungen und Warenkorb greifen.</p>\n"
+                + "                <p>Sobald der Shop freigegeben ist, kommt nach einer echten Zahlung der Download-Link per E-Mail, so wie im Shop von Owona Media.</p>\n"
+            )
             + '                <div class="shop-actions"><a class="contact-btn" href="/shop/">Zurück zum Shop</a></div>'
         )
         + footer()
@@ -676,12 +723,12 @@ def page_thanks():
 
 
 AGB = r'''<h1>Allgemeine Geschäftsbedingungen</h1>
-<div class="draft-banner"><strong>Entwurf – rechtliche Prüfung nötig.</strong> Dieser Text ist ein Arbeitsentwurf nach dem Vorbild der Texte auf owona.de. Er ist kein Rechtsrat und nicht zur Verwendung im echten Verkauf bestimmt, solange er nicht geprüft und freigegeben ist.</div>
-<p>Stand des Entwurfs: 12. November 2026. Anbieter im rechtlichen Sinn (nur in diesem Rechtstext): Salomon Firmin Owona, Ahornstrasse 52, 68542 Heddesheim, Deutschland, E-Mail: salomon@owona.de (öffentlich: Salomon Owona). Der Shop auf salomonowona.com verkauft digitale E-Books.</p>
+<div class="draft-banner">Stand: 12. November 2026. Text nach dem Vorbild der Texte auf owona.de, vom Anbieter zur Verwendung im Shop freigegeben. Kein Rechtsrat.</div>
+<p>Stand: 12. November 2026. Anbieter im rechtlichen Sinn (nur in diesem Rechtstext): Salomon Firmin Owona, Ahornstrasse 52, 68542 Heddesheim, Deutschland, E-Mail: salomon@owona.de (öffentlich: Salomon Owona). Der Shop auf salomonowona.com verkauft digitale E-Books.</p>
 <h2>1. Geltungsbereich</h2>
 <p>Diese AGB gelten für den Erwerb digitaler Inhalte (E-Books im Format EPUB) über den Shop unter salomonowona.com. Abweichende Bedingungen des Kunden gelten nicht.</p>
 <h2>2. Vertragsschluss</h2>
-<p>Die Darstellung der Titel ist unverbindlich. Mit dem Absenden der Bestellung gibt der Kunde ein Angebot ab. Der Vertrag kommt zustande, wenn die Zahlung erfolgreich bestätigt ist und der Kunde eine Bestätigung per E-Mail erhält. Im Testmodus kommt kein Vertrag zustande.</p>
+<p>Die Darstellung der Titel ist unverbindlich. Mit dem Absenden der Bestellung gibt der Kunde ein Angebot ab. Der Vertrag kommt zustande, wenn die Zahlung erfolgreich bestätigt ist und der Kunde eine Bestätigung per E-Mail erhält.</p>
 <h2>3. Preise und Zahlung</h2>
 <p>Preise verstehen sich in Euro inklusive der gesetzlichen Umsatzsteuer, soweit diese anfällt, und werden an der Kasse ausgewiesen. Zusätzlich kann per NotchPay mit MTN Mobile Money oder Orange Money in CFA-Franc (XAF) gezahlt werden; der Umrechnungskurs entspricht dem im Shop von Owona Media verwendeten Kurs und wird an der Kasse als Schätzung angezeigt. Karten- und ähnliche Zahlungen laufen über Stripe. Es gelten die Bedingungen der jeweiligen Zahlungsanbieter.</p>
 <h2>4. Lieferung digitaler Inhalte</h2>
@@ -699,8 +746,8 @@ AGB = r'''<h1>Allgemeine Geschäftsbedingungen</h1>
 '''
 
 WIDERRUF = r'''<h1>Widerrufsbelehrung</h1>
-<div class="draft-banner"><strong>Entwurf – rechtliche Prüfung nötig.</strong> Arbeitsentwurf für digitale Inhalte nach dem Vorbild der Texte auf owona.de. Nicht zur Verwendung im echten Verkauf, solange er nicht geprüft und freigegeben ist.</div>
-<p>Stand des Entwurfs: 12. November 2026. Unternehmer: Salomon Firmin Owona, Ahornstrasse 52, 68542 Heddesheim, Deutschland, salomon@owona.de.</p>
+<div class="draft-banner">Stand: 12. November 2026. Text nach dem Vorbild der Texte auf owona.de, vom Anbieter zur Verwendung im Shop freigegeben. Kein Rechtsrat.</div>
+<p>Stand: 12. November 2026. Unternehmer: Salomon Firmin Owona, Ahornstrasse 52, 68542 Heddesheim, Deutschland, salomon@owona.de.</p>
 <h2>Widerrufsrecht</h2>
 <p>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsschlusses.</p>
 <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (Salomon Firmin Owona, Ahornstrasse 52, 68542 Heddesheim, salomon@owona.de) mittels einer eindeutigen Erklärung (z. B. ein Brief oder eine E-Mail) über Ihren Entschluss informieren, diesen Vertrag zu widerrufen. Zur Wahrung der Frist reicht die rechtzeitige Absendung.</p>
@@ -919,18 +966,17 @@ def patch_site():
     if "Stripe" not in t:
         section = """
         <div class="draft-banner" style="border:1px dashed #e07a5f;background:rgba(224,122,95,0.08);color:#f0c8bc;padding:0.85rem 1rem;border-radius:8px;margin:1rem 0;">
-            <strong>Entwurf – rechtliche Prüfung nötig.</strong> Der folgende Abschnitt betrifft den geplanten Shop und gilt für echte Bestellungen erst nach Freigabe und Prüfung.
+            Abschnitt zum Shop auf salomonowona.com, Stand 12. November 2026.
         </div>
-        <h2>7a. Shop, Stripe und NotchPay (Entwurf)</h2>
+        <h2>7a. Shop, Stripe und NotchPay</h2>
         <p>Wenn Sie im Shop ein E-Book bestellen, verarbeiten wir die von Ihnen angegebenen Daten (Name, E-Mail, gegebenenfalls Telefonnummer und Anschrift) zur Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO), zur Lieferung des Download-Links und zur gesetzlichen Aufbewahrung von Rechnungen (Art. 6 Abs. 1 lit. c DSGVO).</p>
         <ul>
             <li><strong style="color:var(--text-main)">Stripe</strong> – Zahlungen mit Karte in Euro. Stripe ist ein Zahlungsdienstleister (Stripe Payments Europe, soweit anwendbar, mit möglichen Übermittlungen in die USA auf Grundlage geeigneter Garantien, etwa Standardvertragsklauseln bzw. EU-US Data Privacy Framework). Es gelten die Hinweise von <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer">Stripe</a>.</li>
             <li><strong style="color:var(--text-main)">NotchPay</strong> – Zahlungen mit MTN Mobile Money und Orange Money in CFA-Franc (XAF). Dabei werden Zahlungs- und Kontaktdaten an NotchPay übermittelt. Es gelten die Hinweise des Anbieters.</li>
         </ul>
-        <p>Im Testmodus des Shops werden keine Zahlungen ausgeführt und keine Bestellungen erfüllt. Eine Speicherung von Testdaten erfolgt allenfalls vorübergehend in Ihrem Browser (Warenkorb).</p>
 """
         t = t.replace("<h2>7. Ihre Rechte</h2>", section + "\n        <h2>7. Ihre Rechte</h2>", 1)
-        t = t.replace("Stand dieser Hinweise: 20. Oktober 2026.", "Stand dieser Hinweise: 12. November 2026 (Entwurf Shop-Abschnitt).", 1)
+        t = t.replace("Stand dieser Hinweise: 20. Oktober 2026.", "Stand dieser Hinweise: 12. November 2026.", 1)
         ds.write_text(t, encoding="utf-8")
 
     # sitemap
@@ -961,11 +1007,11 @@ def patch_site():
         t += """
 ## Shop
 
-E-Book-Shop von Salomon Owona auf Deutsch (Testmodus, Verkauf erst nach Freigabe). Zahlung geplant wie im Shop von Owona Media: Stripe (Euro) und NotchPay / MTN / Orange Money (XAF). Die fünf Titel des Owona-Media-Shops (230–234) und CSEB-Titel sind hier nicht enthalten.
+E-Book-Shop von Salomon Owona. Zahlung wie im Shop von Owona Media: Stripe (Euro) und NotchPay / MTN / Orange Money (XAF). Kaufbar sind derzeit die lektorierten Titel 197–204. 205, 235 und 236 sind sichtbar, aber noch nicht kaufbar. Die fünf Titel des Owona-Media-Shops (230–234) und CSEB-Titel sind hier nicht enthalten.
 
 - [Shop](https://salomonowona.com/shop/)
-- [AGB (Entwurf)](https://salomonowona.com/shop/agb)
-- [Widerruf (Entwurf)](https://salomonowona.com/shop/widerruf)
+- [AGB](https://salomonowona.com/shop/agb)
+- [Widerruf](https://salomonowona.com/shop/widerruf)
 """
         for c in CATEGORIES:
             t += f"- [{c['name']}](https://salomonowona.com/shop/kategorie/{c['id']})\n"
@@ -1030,8 +1076,8 @@ def main():
     page_cart()
     page_checkout()
     page_thanks()
-    legal_page("agb", "AGB", AGB, "Allgemeine Geschäftsbedingungen (Entwurf) des Shops von Salomon Owona.")
-    legal_page("widerruf", "Widerrufsbelehrung", WIDERRUF, "Widerrufsbelehrung (Entwurf) für digitale Inhalte im Shop von Salomon Owona.")
+    legal_page("agb", "AGB", AGB, "Allgemeine Geschäftsbedingungen des Shops von Salomon Owona.")
+    legal_page("widerruf", "Widerrufsbelehrung", WIDERRUF, "Widerrufsbelehrung für digitale Inhalte im Shop von Salomon Owona.")
     patch_site()
     print("generated shop pages ok")
 
