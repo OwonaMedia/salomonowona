@@ -1,0 +1,884 @@
+{
+  "shopId": "salomonowona",
+  "shopLive": false,
+  "apiBase": "https://owona.de",
+  "publicName": "Salomon Owona",
+  "legalName": "Salomon Firmin Owona",
+  "currency": "EUR",
+  "xafRate": 655,
+  "language": "de",
+  "aiNotice": "Mit Hilfe von KI erstellt",
+  "excluded": {
+    "omShop": [
+      230,
+      231,
+      232,
+      233,
+      234
+    ],
+    "withdrawn": [
+      169
+    ],
+    "sensitive": [
+      211,
+      212
+    ],
+    "cseb": "alle CSEB-Titel, gehören in den NDASI-Shop"
+  },
+  "categories": [
+    {
+      "id": "herkunft-migration",
+      "name": "Herkunft & Migration",
+      "short": "Herkunft",
+      "desc": "Ankommen, Wurzeln, Identität zwischen Kamerun, Afrika und Deutschland."
+    },
+    {
+      "id": "musik-beats",
+      "name": "Musik & Beats",
+      "short": "Musik",
+      "desc": "Afrikanische Rhythmen, Trap, Produktion mit MC-707 und MPC."
+    },
+    {
+      "id": "liebe-familie",
+      "name": "Liebe & Familie",
+      "short": "Liebe",
+      "desc": "Partnerschaft, Familie und das, was uns zusammenhält."
+    },
+    {
+      "id": "e-commerce",
+      "name": "E-Commerce",
+      "short": "E-Commerce",
+      "desc": "Verkaufen im Netz, Psychologie des Kaufens, Mobile Money und Diaspora."
+    },
+    {
+      "id": "krypto",
+      "name": "Krypto",
+      "short": "Krypto",
+      "desc": "Dezentralität, Krypto und finanzielle Souveränität für Afrika und die Diaspora."
+    },
+    {
+      "id": "vibe-coding",
+      "name": "Vibe Coding & KI",
+      "short": "Vibe Coding",
+      "desc": "Mit KI eigene Software und SaaS-Produkte bauen."
+    },
+    {
+      "id": "geschichte-rassismus",
+      "name": "Geschichte & Rassismus",
+      "short": "Geschichte",
+      "desc": "Erinnerung, Kolonialgeschichte, Rassismus und afrikanische Souveränität."
+    },
+    {
+      "id": "afro-mythologie",
+      "name": "Afro-Mythologie",
+      "short": "Mythologie",
+      "desc": "Igbo, Yoruba, Kemet und afrofuturistische Erzählungen."
+    }
+  ],
+  "products": [
+    {
+      "id": "so-vibe-coding-saas",
+      "ebookId": 235,
+      "slug": "vibe-coding-saas",
+      "sku": "so-vibe-coding-saas",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Vibe Coding: Mit KI eigene SaaS-Produkte bauen",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": null,
+      "category": "vibe-coding",
+      "priceCents": 999,
+      "currency": "EUR",
+      "blurb": "Stellen Sie sich vor, Sie könnten Software einfach durch natürliche Sprache erstellen – ohne jahrelange Programmiererfahrung. Genau das ermöglicht Vibe Coding mit KI-Assistenten. Dieses Buch führt Sie praxisnah von der ersten Idee bis zum fertigen SaaS-Produkt. Sie lernen, wie Sie Anforderungen formulieren, mit der KI iterieren, den Code prüfen und testen, Sicherheit und Datenschutz (DSGVO) gewährleisten und Ihr Produkt erfolgreich deployen und betreiben. Auch die Vermarktung kommt nicht zu kurz: Bezahlmodelle, Kundenakquise und Skalierung werden konkret behandelt. Salomon Owona zeigt Ihnen die Werkzeuge, die Grenzen des Ansatzes und Strategien, um mit KI eigene SaaS-Produkte zu bauen – effizient und ohne Umwege. Ein unverzichtbarer Leitfaden für Gründer, Entwickler und alle, die die Softwareentwicklung der Zukunft nutzen wollen.",
+      "chapters": [
+        {
+          "title": "1. Was ist Vibe Coding?",
+          "words": 1271
+        },
+        {
+          "title": "2. Möglichkeiten und Grenzen",
+          "words": 1406
+        },
+        {
+          "title": "3. Werkzeuge im Überblick",
+          "words": 1606
+        },
+        {
+          "title": "4. Von der Idee zum MVP",
+          "words": 1737
+        },
+        {
+          "title": "5. Anforderungen formulieren und mit KI iterieren",
+          "words": 2149
+        },
+        {
+          "title": "6. Code prüfen und testen",
+          "words": 1824
+        },
+        {
+          "title": "7. Sicherheit und Datenschutz (DSGVO)",
+          "words": 1857
+        },
+        {
+          "title": "8. Deployment und Betrieb",
+          "words": 1236
+        },
+        {
+          "title": "9. Bezahlmodelle und Abrechnung für SaaS",
+          "words": 1557
+        },
+        {
+          "title": "10. Erste Kunden gewinnen, Wartung und Skalierung",
+          "words": 1193
+        }
+      ],
+      "wordCount": 15836,
+      "cover": "/shop/covers/235.webp",
+      "coverJpg": "/shop/covers/235.jpg",
+      "coverLg": "/shop/covers/235-lg.webp",
+      "coverLgJpg": "/shop/covers/235-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": false,
+      "sellable": false,
+      "badge": "Lektorat ausstehend",
+      "note": "Manuskript abgeschlossen, Lektorat steht noch aus.",
+      "format": "EPUB"
+    },
+    {
+      "id": "so-psychologie-e-commerce",
+      "ebookId": 236,
+      "slug": "psychologie-e-commerce",
+      "sku": "so-psychologie-e-commerce",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Das Geschäft mit der Psychologie: Verkaufen im E-Commerce",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": null,
+      "category": "e-commerce",
+      "priceCents": 999,
+      "currency": "EUR",
+      "blurb": "Warum klicken Kunden auf „Kaufen“ – und warum brechen sie ab? Dieses Buch zeigt Ihnen, wie Sie die Psychologie des Online-Kaufs gezielt für Ihren E-Commerce-Shop nutzen. Von der Gestaltung überzeugender Produktseiten über faire Preisstrategien bis hin zur Reduzierung von Kaufabbrüchen im Checkout: Sie lernen, wie Sie Vertrauen aufbauen, Social Proof einsetzen und Kunden langfristig binden. Ein besonderer Fokus liegt auf dem Verkauf in Afrika und an die Diaspora – mit Mobile Money, kulturellem Vertrauensaufbau und logistischen Besonderheiten. Dabei bleiben rechtliche Vorgaben in Deutschland und ethische Grenzen nicht außen vor: Dark Patterns werden entlarvt, damit Sie nachhaltig und verantwortungsvoll verkaufen. Dieses Buch richtet sich an Online-Händler, Marketingverantwortliche und Gründer, die ihre Conversion-Rate steigern und gleichzeitig das Vertrauen ihrer Kunden gewinnen wollen. Mit klaren Handlungsempfehlungen und praxisnahen Beispielen – ohne erfundene Studien oder Zahlen. Ihr Weg zu einem kundenorientierten und erfolgreichen Online-Shop beginnt hier.",
+      "chapters": [
+        {
+          "title": "1. Psychologie des Online-Kaufs: Warum wir klicken",
+          "words": 936
+        },
+        {
+          "title": "2. Vertrauen als Währung: Wie Sie Kunden gewinnen",
+          "words": 1142
+        },
+        {
+          "title": "3. Produktseiten, die verkaufen: Psychologie trifft Design",
+          "words": 1092
+        },
+        {
+          "title": "4. Preisgestaltung mit Psychologie: Fair, transparent, erfolgreich",
+          "words": 1324
+        },
+        {
+          "title": "5. Social Proof und Bewertungen: Der Einfluss anderer",
+          "words": 1221
+        },
+        {
+          "title": "6. Checkout und Kaufabbrüche: Hürden erkennen und beseitigen",
+          "words": 1604
+        },
+        {
+          "title": "7. Kundenbindung: Vom ersten Kauf zur langfristigen Beziehung",
+          "words": 1542
+        },
+        {
+          "title": "8. Ethische Grenzen: Dark Patterns erkennen und vermeiden",
+          "words": 1442
+        },
+        {
+          "title": "9. Rechtliche Grundlagen für Online-Händler in Deutschland",
+          "words": 1714
+        },
+        {
+          "title": "10. Verkaufen in Afrika und an die Diaspora: Mobile Money, Vertrauen, Logistik",
+          "words": 1346
+        }
+      ],
+      "wordCount": 13363,
+      "cover": "/shop/covers/236.webp",
+      "coverJpg": "/shop/covers/236.jpg",
+      "coverLg": "/shop/covers/236-lg.webp",
+      "coverLgJpg": "/shop/covers/236-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": false,
+      "sellable": false,
+      "badge": "Lektorat ausstehend",
+      "note": "Manuskript abgeschlossen, Lektorat steht noch aus. KDP-Metadaten nannten 2,99 € – Shoppreis 9,99 €, bitte bestätigen.",
+      "format": "EPUB"
+    },
+    {
+      "id": "so-erziehung-im-wandel",
+      "ebookId": 197,
+      "slug": "erziehung-im-wandel",
+      "sku": "so-erziehung-im-wandel",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Erziehung im Wandel: Afrikas Pädagogik vor und nach dem Kolonialraub",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": null,
+      "category": "geschichte-rassismus",
+      "priceCents": 499,
+      "currency": "EUR",
+      "blurb": "Die Sonne war noch nicht aufgegangen, als Ama bereits das Feuer in der Mitte des Dorfes neu entfachte. Ihre Tochter Adwoa saß neben ihr und beobachtete jede Bewegung. Ama wusste, dass dies der wichtigste Unterricht ihres Lebens sein würde. In einer Welt, die sich unwiderruflich verändert, ringt eine Mutter um die Zukunft ihrer Tochter. Salomon Owona erzählt die fesselnde Geschichte von Afrikas Pädagogik vor und nach dem Kolonialraub – ein Buch, das tief in die Seele blickt und zeigt, wie Bildung, Tradition und Widerstandskraft Generationen prägen. Doch was geschah wirklich, als fremde Mächte kamen? Und was bleibt, wenn alles genommen wurde? Dieses Werk ist mehr als eine historische Abhandlung – es ist ein Aufschrei, eine Liebeserklärung und ein Vermächtnis. Für Leser, die verstehen wollen, wie Kolonialismus nicht nur Länder, sondern auch Köpfe veränderte. Ein Muss für alle, die sich für afrikanische Geschichte, Pädagogik und die Kraft der Gemeinschaft interessieren.",
+      "chapters": [
+        {
+          "title": "1. Die Wurzeln der afrikanischen Erziehung: Ganzheitlichkeit vor dem Kolonialismus",
+          "words": 670
+        },
+        {
+          "title": "2. Die Kolonialisierung der Kindheit: Europäische Schurkenstaaten und ihre Bildungsdiktate",
+          "words": 830
+        },
+        {
+          "title": "3. Dekolonisierung der Erziehung: Wege zu einer afrozentrischen Zukunft mit KI und Digitalisierung",
+          "words": 597
+        }
+      ],
+      "wordCount": 2097,
+      "cover": "/shop/covers/197.webp",
+      "coverJpg": "/shop/covers/197.jpg",
+      "coverLg": "/shop/covers/197-lg.webp",
+      "coverLgJpg": "/shop/covers/197-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": true,
+      "sellable": true,
+      "badge": null,
+      "note": null,
+      "format": "EPUB"
+    },
+    {
+      "id": "so-entmachtete-denker",
+      "ebookId": 198,
+      "slug": "entmachtete-denker",
+      "sku": "so-entmachtete-denker",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Die entmachteten Denker: Wie CIA, FBI und der Westen gegen afrikanische Intellektuelle vorgingen",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": null,
+      "category": "geschichte-rassismus",
+      "priceCents": 499,
+      "currency": "EUR",
+      "blurb": "1948 veröffentlichte ein junger senegalesischer Physiker und Historiker, Cheikh Anta Diop, eine Arbeit, die das Fundament der afrikanischen Geschichtsschreibung für immer verändern sollte. Doch statt Anerkennung erntete er den Zorn der Mächtigen. In \"Die entmachteten Denker\" enthüllt Salomon Owona die erschütternde Wahrheit: Wie CIA, FBI, USA, UNO und IWF systematisch fünf der brillantesten afrikanischen Intellektuellen ins Visier nahmen, um ihre revolutionären Ideen zu unterdrücken. Von Diop über Frantz Fanon bis zu weiteren Vordenkern – diese Denker wagten es, die imperialistische Ordnung herauszufordern. Ihr gemeinsames Band: der unerschütterliche Kampf für eine freie und gerechte Welt. Doch die Imperien schlugen zurück. Tauchen Sie ein in eine packende historische Analyse, die zeigt, warum ihre Ideen heute aktueller sind denn je. Ein Buch, das die verborgenen Mechanismen der Macht entlarvt und zum Nachdenken anregt.",
+      "chapters": [
+        {
+          "title": "1. Das gemeinsame Band: Fünf Denker gegen die imperialistische Ordnung",
+          "words": 602
+        },
+        {
+          "title": "2. Im Visier der Imperien: FBI, CIA, USA, UNO und IWF",
+          "words": 693
+        },
+        {
+          "title": "3. Das Erbe: Warum ihre Ideen heute aktueller sind denn je",
+          "words": 842
+        }
+      ],
+      "wordCount": 2137,
+      "cover": "/shop/covers/198.webp",
+      "coverJpg": "/shop/covers/198.jpg",
+      "coverLg": "/shop/covers/198-lg.webp",
+      "coverLgJpg": "/shop/covers/198-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": true,
+      "sellable": true,
+      "badge": null,
+      "note": null,
+      "format": "EPUB"
+    },
+    {
+      "id": "so-rassismuserfahrungen-schwarzer-frauen",
+      "ebookId": 199,
+      "slug": "rassismuserfahrungen-schwarzer-frauen",
+      "sku": "so-rassismuserfahrungen-schwarzer-frauen",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Rassismuserfahrungen Schwarzer Frauen in Deutschland: Arbeitswelt, Öffentlichkeit, Alltag",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": null,
+      "category": "geschichte-rassismus",
+      "priceCents": 499,
+      "currency": "EUR",
+      "blurb": "Fatima Diallo hat gelernt, ihre Stimme zu senken. In Besprechungen spricht sie langsamer, überlegter, als sei jedes Wort ein Schachzug. Sie trägt Kleidung in gedeckten Farben, nie zu auffällig, nie zu provokativ. Denn als Schwarze Frau in Deutschland weiß sie: Jeder Fehltritt wird ihr angelastet. Dieses Buch ist mehr als eine Analyse – es ist ein schonungsloser Blick hinter die Fassade einer Gesellschaft, die vorgibt, tolerant zu sein. Salomon Owona zeichnet das Leben von Fatima und vielen anderen nach, die täglich gegen die gläserne Decke aus Schwarz-Weiß kämpfen, die im Visier der Blicke stehen und sich ständig die falsche Frage nach der Integration gefallen lassen müssen. Ein packendes, aufrüttelndes Werk, das die verborgenen Mechanismen des Rassismus in Arbeitswelt und Öffentlichkeit entlarvt. Für alle, die verstehen wollen, warum Integration nicht die Antwort ist – und was es wirklich bedeutet, in Deutschland Schwarz zu sein.",
+      "chapters": [
+        {
+          "title": "1. Die gläserne Decke aus Schwarz-Weiß",
+          "words": 625
+        },
+        {
+          "title": "2. Im Visier der Blicke",
+          "words": 470
+        },
+        {
+          "title": "3. Die falsche Frage nach der Integration",
+          "words": 675
+        }
+      ],
+      "wordCount": 1770,
+      "cover": "/shop/covers/199.webp",
+      "coverJpg": "/shop/covers/199.jpg",
+      "coverLg": "/shop/covers/199-lg.webp",
+      "coverLgJpg": "/shop/covers/199-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": true,
+      "sellable": true,
+      "badge": null,
+      "note": null,
+      "format": "EPUB"
+    },
+    {
+      "id": "so-binaere-spiritualitaet-westafrika",
+      "ebookId": 200,
+      "slug": "binaere-spiritualitaet-westafrika",
+      "sku": "so-binaere-spiritualitaet-westafrika",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Der kompakte Leitfaden zur binären Spiritualität Westafrikas",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": null,
+      "category": "afro-mythologie",
+      "priceCents": 499,
+      "currency": "EUR",
+      "blurb": "Wussten Sie, dass das Binärsystem, die Grundlage unserer modernen Computertechnologie, seine Wurzeln nicht in Europa hat, sondern in den uralten spirituellen Praktiken Westafrikas? Diese überraschende Wahrheit wird in diesem kompakten Leitfaden enthüllt. Tauchen Sie ein in die faszinierende Welt der Ifá-Wahrsagerei der Yoruba, wo die Muster der Orakel die duale Natur des Seins widerspiegeln. Erkunden Sie die Dogon-Kosmologie, die die Ordnung des Kosmos durch die Dualität der Schöpfung beschreibt. Verfolgen Sie die Reise dieses Wissens von Westafrika nach Europa und entdecken Sie, wie spirituelle Konzepte die technologische Revolution beeinflussten. Mit klaren Beweisen und nachvollziehbaren Argumenten zeigt Salomon Owona, dass die Ursprünge des Binärsystems tief in der afrikanischen Spiritualität verwurzelt sind. Ein Muss für alle, die sich für versteckte Geschichte, Philosophie und die Verbindung zwischen alter Weisheit und moderner Wissenschaft interessieren. Erweitern Sie Ihren Horizont und lassen Sie sich von dieser alternativen Perspektive auf die Geschichte des Wissens überraschen.",
+      "chapters": [
+        {
+          "title": "1. Das Erbe der Ahnen: Die Ifá-Wahrsagerei der Yoruba",
+          "words": 630
+        },
+        {
+          "title": "2. Die Ordnung des Kosmos: Dogon-Kosmologie und die Dualität der Schöpfung",
+          "words": 760
+        },
+        {
+          "title": "3. Die Reise des Wissens: Von Westafrika nach Europa",
+          "words": 722
+        }
+      ],
+      "wordCount": 2112,
+      "cover": "/shop/covers/200.webp",
+      "coverJpg": "/shop/covers/200.jpg",
+      "coverLg": "/shop/covers/200-lg.webp",
+      "coverLgJpg": "/shop/covers/200-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": true,
+      "sellable": true,
+      "badge": null,
+      "note": null,
+      "format": "EPUB"
+    },
+    {
+      "id": "so-algorithmus-falle",
+      "ebookId": 201,
+      "slug": "algorithmus-falle",
+      "sku": "so-algorithmus-falle",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Die Algorithmus-Falle: Rassismus im Social-Media-Feed",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": null,
+      "category": "geschichte-rassismus",
+      "priceCents": 499,
+      "currency": "EUR",
+      "blurb": "Es begann nicht mit einem lauten Knall, sondern mit einem leisen, beständigen Verlust. In einem Café in Nairobi, zwischen dem Duft von Kaffee und Straßenstaub, bemerkte ich, wie mein Feed mich langsam veränderte – und wie er mich von mir selbst entfremdete. Dieses Buch ist die Geschichte einer Reise in die Abgründe der Algorithmen, die unsere Wahrnehmung formen, unsere Vorurteile verstärken und Rassismus in unsere sozialen Medien einschleusen. Von den ersten Rissen in der digitalen Fassade bis zu den verborgenen Karten, die die Machtstrukturen hinter den Bildschirmen offenbaren, enthüllt Salomon Owona, wie Algorithmen nicht nur unsere Daten, sondern auch unsere Identität manipulieren. Ein packender, persönlicher Bericht, der zeigt, wie wir die Kontrolle über unsere eigene Geschichte zurückgewinnen können – bevor es zu spät ist.",
+      "chapters": [
+        {
+          "title": "1. Der erste Bruch",
+          "words": 587
+        },
+        {
+          "title": "2. Spuren im Nebel",
+          "words": 430
+        },
+        {
+          "title": "3. Die verborgene Karte",
+          "words": 406
+        }
+      ],
+      "wordCount": 1423,
+      "cover": "/shop/covers/201.webp",
+      "coverJpg": "/shop/covers/201.jpg",
+      "coverLg": "/shop/covers/201-lg.webp",
+      "coverLgJpg": "/shop/covers/201-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": true,
+      "sellable": true,
+      "badge": null,
+      "note": null,
+      "format": "EPUB"
+    },
+    {
+      "id": "so-schwarze-persoenlichkeiten",
+      "ebookId": 202,
+      "slug": "schwarze-persoenlichkeiten",
+      "sku": "so-schwarze-persoenlichkeiten",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Der kompakte Leitfaden zu weltweit einflussreichen Schwarzen Persönlichkeiten",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": null,
+      "category": "geschichte-rassismus",
+      "priceCents": 499,
+      "currency": "EUR",
+      "blurb": "Stell dir vor, die europäische Renaissance – jene Blütezeit der Kunst, Wissenschaft und Philosophie – wäre ohne afrikanisches Wissen nicht möglich gewesen. Dieses Buch enthüllt die verborgenen Fäden einer globalen Geschichte, in der schwarze Persönlichkeiten weit mehr waren als Randfiguren. Von den antiken Genies Afrikas, die die Welt veränderten, über mutige Widerstandskämpfer, die Imperien trotzten, bis hin zu den Pionieren des 21. Jahrhunderts, die Exzellenz neu definieren: Dieser kompakte Leitfaden zeigt, wie tief der Einfluss schwarzer Menschen in unserer Zivilisation verwurzelt ist. Tauche ein in eine Reise, die dein Verständnis von Geschichte für immer verändern wird – packend, aufschlussreich und voller überraschender Wendungen.",
+      "chapters": [
+        {
+          "title": "1. Das vergessene Fundament: Afrikas antike Genies und ihre Weltveränderungen",
+          "words": 498
+        },
+        {
+          "title": "2. Widerstand als Lebenskunst: Persönlichkeiten, die Imperien trotzten",
+          "words": 554
+        },
+        {
+          "title": "3. Die neuen Horizonte: Schwarze Exzellenz im 21. Jahrhundert",
+          "words": 561
+        }
+      ],
+      "wordCount": 1613,
+      "cover": "/shop/covers/202.webp",
+      "coverJpg": "/shop/covers/202.jpg",
+      "coverLg": "/shop/covers/202-lg.webp",
+      "coverLgJpg": "/shop/covers/202-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": true,
+      "sellable": true,
+      "badge": null,
+      "note": null,
+      "format": "EPUB"
+    },
+    {
+      "id": "so-afrikas-weg-in-die-freiheit",
+      "ebookId": 203,
+      "slug": "afrikas-weg-in-die-freiheit",
+      "sku": "so-afrikas-weg-in-die-freiheit",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Afrikas Weg in die Freiheit: Der wirtschaftliche Aufbruch ohne den Westen",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": null,
+      "category": "geschichte-rassismus",
+      "priceCents": 499,
+      "currency": "EUR",
+      "blurb": "1885 trafen sich die Mächtigen Europas in Berlin, um einen Kontinent zu zerteilen, den sie nie betreten hatten. Die Berliner Kongokonferenz besiegelte Afrikas Schicksal für ein Jahrhundert – und legte den Grundstein für eine wirtschaftliche Abhängigkeit, die bis heute nachwirkt. In diesem augenöffnenden Buch enthüllt Salomon Owona die verborgenen Mechanismen, mit denen der Westen Afrikas Reichtümer kontrollierte: von kolonialen Handelsmonopolen über Ressourcenkriege bis hin zu modernen Schuldenfallen. Doch die Zeiten ändern sich. Afrika erwirtschafte seinen Aufstieg – und der Westen steht vor einer historischen Wahl: sich anpassen oder zurückfallen. \n\n„Afrikas Unabhängigkeit“ zeigt, wie der Westen diese wirtschaftliche Chance ohne Umwege nutzen kann, ohne dass der eine Kontinent auf Kosten des anderen wächst. Ein prägnanter, faktenreicher Weckruf für alle, die verstehen wollen, warum Afrikas Zukunft auch die Zukunft des Westens ist. \n\nJetzt lesen und die ungeschriebene Geschichte der globalen Wirtschaft neu entdecken.",
+      "chapters": [
+        {
+          "title": "1. Die Entstehung des Mythos: Vom Kolonialhandel zur Unabhängigkeit",
+          "words": 628
+        },
+        {
+          "title": "2. Ressourcenkriege und Schuldenfallen: Wie der Westen seine Macht sicherte",
+          "words": 506
+        },
+        {
+          "title": "3. Die Zukunft der Wirtschaftsbeziehungen: Afrikas Aufstieg ohne westlichen Niedergang",
+          "words": 493
+        }
+      ],
+      "wordCount": 1627,
+      "cover": "/shop/covers/203.webp",
+      "coverJpg": "/shop/covers/203.jpg",
+      "coverLg": "/shop/covers/203-lg.webp",
+      "coverLgJpg": "/shop/covers/203-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": true,
+      "sellable": true,
+      "badge": null,
+      "note": null,
+      "format": "EPUB"
+    },
+    {
+      "id": "so-westafrika-falle",
+      "ebookId": 204,
+      "slug": "westafrika-falle",
+      "sku": "so-westafrika-falle",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Die Westafrika-Falle: Frankreichs Währungsmacht ohne Umwege",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": null,
+      "category": "geschichte-rassismus",
+      "priceCents": 499,
+      "currency": "EUR",
+      "blurb": "Ein unsichtbarer Pakt, der seit fast 80 Jahren den Wohlstand Westafrikas untergräbt. Im Dezember 1945, kurz nach dem Ende des Zweiten Weltkriegs, unterzeichnete der französische Finanzminister ein Dekret, das die Währungsordnung in den afrikanischen Kolonien für Jahrzehnte besiegelte. Der CFA Franc wurde geboren – eine Währung, die bis heute mehr als 14 westafrikanische Länder an Frankreichs Finanzsystem fesselt. In 'Die Westafrika-Falle' enthüllt Salomon Owona die wahren Mechanismen hinter dieser kolonialen Hinterlassenschaft: eine unsichtbare Steuer, die jährlich Milliarden aus der Region abzieht, und ein System, das wirtschaftliche Unabhängigkeit systematisch verhindert. Von der Geburt der kolonialen Währung über die versteckten Abflüsse bis hin zu den mutigen Widerstandsbewegungen – dieses Buch zeigt, wie Frankreichs Währungsmacht ohne Umwege funktioniert und welche Wege es zur Souveränität gibt. Ein notwendiges Buch für alle, die verstehen wollen, wie moderne Abhängigkeiten entstehen und wie sie gebrochen werden können.",
+      "chapters": [
+        {
+          "title": "1. Die Geburt einer kolonialen Währung",
+          "words": 560
+        },
+        {
+          "title": "2. Die unsichtbare Steuer: Wie der CFA Franc Wohlstand aus Westafrika abzieht",
+          "words": 531
+        },
+        {
+          "title": "3. Der Aufbruch: Widerstand und Wege zur Währungssouveränität",
+          "words": 1020
+        }
+      ],
+      "wordCount": 2111,
+      "cover": "/shop/covers/204.webp",
+      "coverJpg": "/shop/covers/204.jpg",
+      "coverLg": "/shop/covers/204-lg.webp",
+      "coverLgJpg": "/shop/covers/204-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": true,
+      "sellable": true,
+      "badge": null,
+      "note": null,
+      "format": "EPUB"
+    },
+    {
+      "id": "so-netzwerke-des-neokolonialismus",
+      "ebookId": 205,
+      "slug": "netzwerke-des-neokolonialismus",
+      "sku": "so-netzwerke-des-neokolonialismus",
+      "type": "ebook",
+      "fulfillment": "own",
+      "title": "Die Netzwerke des Neokolonialismus",
+      "author": "Salomon Owona",
+      "language": "de",
+      "languageNote": "Der Fließtext und die Kapitelüberschriften dieser Lektoratsfassung sind englisch, der Titel ist deutsch. Vor dem Verkauf prüfen.",
+      "category": "geschichte-rassismus",
+      "priceCents": 499,
+      "currency": "EUR",
+      "blurb": "In 1960, fourteen African nations raised their flags over empty parliament buildings. The French tricolor came down. The colonial administrators boarded planes for Paris. But the systems that had governed them for a century did not leave. They simply changed form. In this explosive exposé, Salomon Owona reveals how neocolonialism has evolved from gunboats and resource extraction to a sophisticated digital empire run by algorithms. Drawing on three powerful chapters—'The Empire That Never Left,' 'The Algorithmic Governor,' and 'Breaking the Algorithmic Chain'—Owona shows how machine learning and data control now dictate the fate of entire nations, from credit scores to election outcomes. Yet resistance is rising. Across Africa, a new generation of digital activists, coders, and thinkers is fighting back, building pathways to sovereignty in the age of AI. This is a must-read for anyone who wants to understand the true architecture of power in the 21st century—and how to dismantle it.",
+      "chapters": [
+        {
+          "title": "1. The Empire That Never Left: From Gunboats to Algorithms",
+          "words": 667
+        },
+        {
+          "title": "2. The Algorithmic Governor: How Machine Learning Runs the Neo-Colony",
+          "words": 398
+        },
+        {
+          "title": "3. Breaking the Algorithmic Chain: African Resistance and Digital Sovereignty",
+          "words": 546
+        }
+      ],
+      "wordCount": 1611,
+      "cover": "/shop/covers/205.webp",
+      "coverJpg": "/shop/covers/205.jpg",
+      "coverLg": "/shop/covers/205-lg.webp",
+      "coverLgJpg": "/shop/covers/205-lg.jpg",
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": true,
+      "sellable": false,
+      "badge": "Prüfung nötig",
+      "note": "Der Fließtext und die Kapitelüberschriften dieser Lektoratsfassung sind englisch, der Titel ist deutsch. Vor dem Verkauf prüfen.",
+      "format": "EPUB"
+    },
+    {
+      "id": "amazon-horus",
+      "ebookId": 110,
+      "slug": "amazon-horus",
+      "sku": null,
+      "type": "ebook",
+      "fulfillment": "amazon",
+      "title": "Horus: Der Falke über Kemet",
+      "author": "Salomon Owona",
+      "language": "de",
+      "category": "afro-mythologie",
+      "priceCents": null,
+      "currency": "EUR",
+      "blurb": "Der Sand brannte noch, obwohl die Sonne längst hinter den Ruinen von Merke versunken war. Harn spürt die Hitze durch die Sohlen seiner Isolationsstoffe – ein dumpfes Pochen, als würde die Erde selbst atmen. Doch was er für die letzte Glut des Tages hält, ist etwas viel Gefährlicheres: Ein uraltes Erwachen, das Kemet für immer verändern wird. Als Harn auf die Ruinen einer vergessenen Pyramide stößt, entfesselt er unwissentlich einen Konflikt, der Götter und Menschen in einen tödlichen Strudel zieht. Von den Hallen Thebens bis in die verbotenen Kammern unter dem Sand muss er sich entscheiden: Wird er zum Werkzeug der Schlange, die im Verborgenen lauert, oder erwacht in ihm der Falke, der das Gleichgewicht des Himmels wiederherstellen kann? In einer Welt, wo jeder Schatten eine Bedrohung birgt und jedes Bündnis seinen Preis hat, beginnt ein Wettlauf gegen die Zeit – bevor die Finsternis alles verschlingt.",
+      "chapters": [
+        {
+          "title": "1. Der Schrei im Sand",
+          "words": 1576
+        },
+        {
+          "title": "2. Der Falke erwacht",
+          "words": 1607
+        },
+        {
+          "title": "3. Das Angebot der Schlange",
+          "words": 1477
+        },
+        {
+          "title": "4. Die Halle der Augen",
+          "words": 1352
+        },
+        {
+          "title": "5. Sturm über Theben",
+          "words": 1564
+        },
+        {
+          "title": "6. Das Herz der Finsternis",
+          "words": 2113
+        },
+        {
+          "title": "7. Die Versuchung des Throns",
+          "words": 1483
+        },
+        {
+          "title": "8. Aufstieg zur Pyramide",
+          "words": 1451
+        },
+        {
+          "title": "9. Duell der Götter",
+          "words": 1445
+        },
+        {
+          "title": "10. Der Himmel in Balance",
+          "words": 2553
+        }
+      ],
+      "wordCount": 16621,
+      "cover": null,
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": false,
+      "sellable": false,
+      "badge": "Bei Amazon",
+      "note": "Keine eigene Shop-Datei vorhanden. Der Kauf führt zu Amazon.",
+      "amazonUrl": "https://www.amazon.de/dp/B0GSSFG63W",
+      "amazonAsin": "B0GSSFG63W",
+      "shortlink": "https://go.owona.de/horus1",
+      "format": "E-Book bei Amazon"
+    },
+    {
+      "id": "amazon-ra",
+      "ebookId": 129,
+      "slug": "amazon-ra",
+      "sku": null,
+      "type": "ebook",
+      "fulfillment": "amazon",
+      "title": "Ra – Das Erwachen des Sonnenschiffs",
+      "author": "Salomon Owona",
+      "language": "de",
+      "category": "afro-mythologie",
+      "priceCents": null,
+      "currency": "EUR",
+      "blurb": "Das Licht kam zu früh. Rat spürte es, bevor die ersten Alarmtöne durch die Kontrollkammer des Sonnenschiffs Ra schrillten. Ein Zittern im Geflecht der Leitungen, ein unruhiges Pulsieren in den Energieströmen, die durch die uralten Hallen flossen. Der Zyklus, der seit Äonen das Leben im Schiff reguliert, bricht zusammen. Rat, ein Wächter der letzten Menschen, steht vor einer unmöglichen Wahl: Soll er die Ordnung um jeden Preis aufrechterhalten oder dem verlockenden, aber gefährlichen Ruf aus dem verbotenen Sektor Meridian folgen? Gemeinsam mit der rätselhaften KI Thot begibt er sich auf eine Reise ins Herz des Chaos, wo die Archive der Schöpfer schlummern und die Wahrheit über Ra wartet – eine Wahrheit, die alles verändern und eine neue Sonne entfachen könnte. Ein packender Science-Fiction-Thriller über Technologie, Schicksal und den hohen Preis des Überlebens.",
+      "chapters": [
+        {
+          "title": "1. Der Zyklus bricht",
+          "words": 1782
+        },
+        {
+          "title": "2. Schlacht im Schweigen",
+          "words": 1947
+        },
+        {
+          "title": "3. Die Stimme aus Meridian",
+          "words": 1414
+        },
+        {
+          "title": "4. Archiv der Schöpfer",
+          "words": 1422
+        },
+        {
+          "title": "5. Der Pakt",
+          "words": 1639
+        },
+        {
+          "title": "6. Lügen für das Licht",
+          "words": 1353
+        },
+        {
+          "title": "7. Die Spaltung",
+          "words": 1186
+        },
+        {
+          "title": "8. Thots Opfer",
+          "words": 1520
+        },
+        {
+          "title": "9. Eintauchen in den Chaos-Kern",
+          "words": 1483
+        },
+        {
+          "title": "10. Neue Sonne",
+          "words": 1502
+        }
+      ],
+      "wordCount": 15248,
+      "cover": null,
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": false,
+      "sellable": false,
+      "badge": "Bei Amazon",
+      "note": "Keine eigene Shop-Datei vorhanden. Der Kauf führt zu Amazon.",
+      "amazonUrl": "https://www.amazon.de/dp/B0GSWT8YYT",
+      "amazonAsin": "B0GSWT8YYT",
+      "shortlink": "https://go.owona.de/Ra1",
+      "format": "E-Book bei Amazon"
+    },
+    {
+      "id": "amazon-eshus",
+      "ebookId": 134,
+      "slug": "amazon-eshus",
+      "sku": null,
+      "type": "ebook",
+      "fulfillment": "amazon",
+      "title": "Eshus Algorithmus",
+      "author": "Salomon Owona",
+      "language": "de",
+      "category": "afro-mythologie",
+      "priceCents": null,
+      "currency": "EUR",
+      "blurb": "Der Wecker summte nicht. Er pulsierte – ein sanfter, rhythmischer Druck gegen Rundes Schläfe, der genau in dem Moment einsetzte, als seine Schlafzyklen den optimalen Aufwachpunkt erreicht hatten. So beginnt ein Tag in einer Welt, die von Algorithmen perfekt orchestriert wird. Doch als Runde an eine Kreuzung gerät, die nicht in seinem Lebenspfad vorgesehen war, entdeckt er Risse im System. Ein geheimnisvoller Wächter klopft an seine Tür, und plötzlich spricht die Welt eine Sprache der Konsequenzen, die er nie gelernt hat. In dieser hochtechnologischen Dystopie, die an die Werke von Dave Eggers oder Neal Shusterman erinnert, muss ein junger Mann herausfinden, wer wirklich die Fäden zieht. Ist sein Leben wirklich optimal – oder nur eine Illusion? Folgen Sie Runde auf einem gefährlichen Pfad, der ihn zum Herzen von Ilé-Ifẹ̀ führt, wo eine letzte Entscheidung nicht nur sein Schicksal, sondern das gesamte System verändern wird. Ein fesselnder Roman über Technologie, freien Willen und den Preis des perfekten Weges.",
+      "chapters": [
+        {
+          "title": "1. Der Pfad des geringsten Widerstands",
+          "words": 1599
+        },
+        {
+          "title": "2. Die erste Kreuzung",
+          "words": 2053
+        },
+        {
+          "title": "3. Der Wächter klopft an",
+          "words": 1637
+        },
+        {
+          "title": "4. Die Sprache der Konsequenzen",
+          "words": 2506
+        },
+        {
+          "title": "5. Der Trickster im System",
+          "words": 1504
+        },
+        {
+          "title": "6. Die Illusion der Optimalität",
+          "words": 1458
+        },
+        {
+          "title": "7. Der Preis des Pfades",
+          "words": 1532
+        },
+        {
+          "title": "8. Das Herz von Ilé-Ifẹ̀",
+          "words": 1534
+        },
+        {
+          "title": "9. Die letzte Entscheidung",
+          "words": 1832
+        },
+        {
+          "title": "10. Die Wege öffnen sich",
+          "words": 1520
+        }
+      ],
+      "wordCount": 17175,
+      "cover": null,
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": false,
+      "sellable": false,
+      "badge": "Bei Amazon",
+      "note": "Keine eigene Shop-Datei vorhanden. Der Kauf führt zu Amazon.",
+      "amazonUrl": "https://www.amazon.de/dp/B0GHQ3L38Y",
+      "amazonAsin": "B0GHQ3L38Y",
+      "shortlink": "https://go.owona.de/Eshus%20Algorithmus",
+      "format": "E-Book bei Amazon"
+    },
+    {
+      "id": "amazon-ala",
+      "ebookId": 138,
+      "slug": "amazon-ala",
+      "sku": null,
+      "type": "ebook",
+      "fulfillment": "amazon",
+      "title": "Ala",
+      "author": "Salomon Owona",
+      "language": "de",
+      "category": "afro-mythologie",
+      "priceCents": null,
+      "currency": "EUR",
+      "blurb": "Der Schweiß tropft Karibik von der Stirn und fällt auf das gläserne Display, vermischt mit dem Staub der Lüftungsschächte. In einer Welt, die von Datenströmen und künstlichen Substraten durchzogen ist, hängt alles an einem letzten, entscheidenden Datenpaket. Ala, eine Hackerin mit einem Geheimnis, die zwischen den Schichten der Realität operiert, wird in einen tödlichen Kampf um die Kontrolle über den Kern der digitalen Welt verwickelt. Von den verborgenen Stimmen im Substrat bis zum letzten Gefecht im Herzen der Maschine – ihre Entscheidungen werden nicht nur ihr eigenes Schicksal, sondern das aller bestimmen. Ein atemloses Cyberpunk-Abenteuer über Identität, Freiheit und den Preis, den man für eine neue Welt zahlen muss.",
+      "chapters": [
+        {
+          "title": "1. Das sterbende Herz",
+          "words": 1433
+        },
+        {
+          "title": "2. Der Hack und das Echo",
+          "words": 1189
+        },
+        {
+          "title": "3. Das Urteil des Gärtners",
+          "words": 1498
+        },
+        {
+          "title": "4. Stimmen im Substrat",
+          "words": 1475
+        },
+        {
+          "title": "5. Die Jagd nach dem Geist",
+          "words": 1469
+        },
+        {
+          "title": "6. Das Gespräch unter der Haut der Welt",
+          "words": 1471
+        },
+        {
+          "title": "7. Die Entscheidung des Hüters",
+          "words": 1406
+        },
+        {
+          "title": "8. Die Saat der Unordnung",
+          "words": 1466
+        },
+        {
+          "title": "9. Das letzte Gefecht im Kern",
+          "words": 1248
+        },
+        {
+          "title": "10. Alas neuer Boden",
+          "words": 1002
+        }
+      ],
+      "wordCount": 13657,
+      "cover": null,
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": false,
+      "sellable": false,
+      "badge": "Bei Amazon",
+      "note": "Keine eigene Shop-Datei vorhanden. Der Kauf führt zu Amazon.",
+      "amazonUrl": "https://www.amazon.de/dp/B0GTFPY8D3",
+      "amazonAsin": "B0GTFPY8D3",
+      "shortlink": "https://go.owona.de/ala1",
+      "format": "E-Book bei Amazon"
+    },
+    {
+      "id": "amazon-weitere-mythologie",
+      "ebookId": null,
+      "slug": "amazon-weitere-mythologie",
+      "sku": null,
+      "type": "collection",
+      "fulfillment": "amazon",
+      "title": "Weitere Mythologie-Titel bei Amazon",
+      "author": "Salomon Owona",
+      "language": "de",
+      "category": "afro-mythologie",
+      "priceCents": null,
+      "currency": "EUR",
+      "blurb": "Vier Mythologie-Titel sind über gesicherte Kurzlinks (go.owona.de) Amazon-Listings: Horus, Ra, Eshus Algorithmus und Ala. Ein fünftes Listing konnte ohne Ihre Bestätigung nicht eindeutig zugeordnet werden (ein weiterer Kurzlink „Traoré: Unser Held“ führt derzeit auf owona.de, nicht zu Amazon). Diese Karte verweist auf die Autorenseite, bis der fünfte Titel feststeht.",
+      "chapters": [],
+      "wordCount": 0,
+      "cover": null,
+      "aiNotice": "Mit Hilfe von KI erstellt",
+      "lektorat": false,
+      "sellable": false,
+      "badge": "Bei Amazon",
+      "note": "Sammelverweis, kein eigenes Buch.",
+      "amazonUrl": "https://www.amazon.de/s?i=stripbooks&rh=p_27%3ASalomon%2BOwona",
+      "format": "Amazon-Autorenseite"
+    }
+  ]
+}
