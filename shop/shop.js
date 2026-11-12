@@ -72,7 +72,7 @@
     if (!root) return;
     const cart = load();
     if (!cart.length) {
-      root.innerHTML = '<p class="muted">Dein Warenkorb ist leer. <a href="/shop/">Zum Shop</a></p>';
+      root.innerHTML = '<p class="shop-muted">Dein Warenkorb ist leer. <a href="/shop/" style="color:var(--accent)">Zum Shop →</a></p>';
       return;
     }
     let rows = "";
@@ -81,23 +81,23 @@
       if (!p) continue;
       rows += `<tr>
         <td><a href="/shop/${p.slug}">${escapeHtml(p.title)}</a></td>
-        <td class="price">${euro(p.priceCents)}</td>
-        <td><input class="qty" type="number" min="0" max="9" value="${item.qty}" data-qty="${p.id}" aria-label="Menge"></td>
-        <td class="price">${euro(p.priceCents * item.qty)}</td>
-        <td><button type="button" class="btn btn-ghost" data-remove="${p.id}">Entfernen</button></td>
+        <td class="shop-price">${euro(p.priceCents)}</td>
+        <td><input type="number" min="0" max="9" value="${item.qty}" data-qty="${p.id}" aria-label="Menge"></td>
+        <td class="shop-price">${euro(p.priceCents * item.qty)}</td>
+        <td><button type="button" class="shop-text-btn" data-remove="${p.id}">Entfernen</button></td>
       </tr>`;
     }
     const t = totalCents(cart);
     root.innerHTML = `
-      <table class="cart">
+      <table class="shop-cart">
         <thead><tr><th>Titel</th><th>Preis</th><th>Menge</th><th>Summe</th><th></th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
-      <p><strong>Gesamt: <span class="price">${euro(t)}</span></strong>
-        <span class="muted"> · ca. ${xaf(t)} bei Zahlung mit Mobile Money</span></p>
-      <div class="actions">
-        <a class="btn" href="/shop/kasse">Zur Kasse</a>
-        <button type="button" class="btn btn-ghost" data-clear>Warenkorb leeren</button>
+      <p><strong>Gesamt: <span class="shop-price">${euro(t)}</span></strong>
+        <span class="shop-muted"> · ca. ${xaf(t)} bei Zahlung mit Mobile Money</span></p>
+      <div class="shop-actions">
+        <a class="contact-btn" href="/shop/kasse">Zur Kasse</a>
+        <button type="button" class="shop-text-btn" data-clear>Warenkorb leeren</button>
       </div>`;
     root.querySelectorAll("[data-qty]").forEach((el) => {
       el.addEventListener("change", () => {
@@ -234,7 +234,7 @@
     if (!el) return;
     const cart = load();
     if (!cart.length) {
-      el.innerHTML = '<p class="muted">Kein Artikel im Warenkorb. <a href="/shop/">Zum Shop</a></p>';
+      el.innerHTML = '<p class="shop-muted">Kein Artikel im Warenkorb. <a href="/shop/" style="color:var(--accent)">Zum Shop →</a></p>';
       const form = document.getElementById("checkout-form");
       if (form) form.hidden = true;
       return;
@@ -244,12 +244,12 @@
       .map((i) => {
         const p = byId(i.id);
         if (!p) return "";
-        return `<li>${escapeHtml(p.title)} × ${i.qty} — <span class="price">${euro(p.priceCents * i.qty)}</span></li>`;
+        return `<li>${escapeHtml(p.title)} × ${i.qty} — <span class="shop-price">${euro(p.priceCents * i.qty)}</span></li>`;
       })
       .join("");
-    el.innerHTML = `<ul class="toc">${lines}</ul>
-      <p><strong>Gesamt: <span class="price">${euro(t)}</span></strong>
-      <span class="muted"> · ca. ${xaf(t)} bei Mobile Money (Kurs ${XAF} XAF/EUR, wie im OM-Shop)</span></p>`;
+    el.innerHTML = `<ul class="shop-summary">${lines}</ul>
+      <p><strong>Gesamt: <span class="shop-price">${euro(t)}</span></strong>
+      <span class="shop-muted"> · ca. ${xaf(t)} bei Mobile Money (Kurs ${XAF} XAF/EUR, wie im Shop von Owona Media)</span></p>`;
   }
 
   document.addEventListener("DOMContentLoaded", () => {

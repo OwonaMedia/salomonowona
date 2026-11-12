@@ -65,6 +65,19 @@ SHOP_JSON = json.dumps(
 )
 
 
+def site_chrome_assets():
+    """Reuse the exact Tailwind include and #page-style from de.html."""
+    de = (ROOT / "de.html").read_text(encoding="utf-8")
+    tw = re.search(
+        r'<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4\.3\.3"[^>]*></script>',
+        de,
+    )
+    style = re.search(r'<style id="page-style">[\s\S]*?</style>', de)
+    if not tw or not style:
+        raise RuntimeError("de.html is missing Tailwind or #page-style — shop must reuse them")
+    return tw.group(0) + "\n    " + style.group(0)
+
+
 def head(title, desc, canonical, *, og_type="website", image=None, schema=None, extra=""):
     img = image or f"{BASE}/Salomon.webp"
     return f"""<!DOCTYPE html>
@@ -88,6 +101,7 @@ def head(title, desc, canonical, *, og_type="website", image=None, schema=None, 
     <meta name="twitter:description" content="{esc(desc)}">
     <meta name="author" content="{AUTHOR}">
     <link rel="describedby" href="{BASE}/llms.txt">
+    {site_chrome_assets()}
     <link rel="stylesheet" href="/shop/shop.css">
     <script>window.SO_SHOP={SHOP_JSON};</script>
     {schema or ""}
@@ -100,35 +114,95 @@ def header(current="shop"):
     def cur(name):
         return ' aria-current="page"' if current == name else ""
 
+    # Exact same header, sidebar, language switcher and radio as de.html.
+    # Section links point at /de#… so the shop stays inside the same site.
     return f"""<body>
-<header class="shop-header">
-  <div class="nav-inner">
-    <a class="logo" href="/">Salomon Owona</a>
-    <nav class="nav-links" aria-label="Shop-Navigation">
-      <a href="/de">Website</a>
-      <a href="/shop/"{cur("shop")}>Shop</a>
-      <a class="cart-link" href="/shop/warenkorb"{cur("cart")}>Warenkorb <span class="cart-badge" data-cart-count>0</span></a>
-    </nav>
-  </div>
-</header>
+<div id="site-root">
+    <header>
+        <div class="nav-inner">
+            <a href="/de#home" class="logo">Salomon Owona</a>
+
+            <div class="audio-controls">
+                <button type="button" class="play-btn" onclick="toggleArchiveRadio()" id="playIcon" aria-label="Salomon Radio abspielen" aria-pressed="false" data-label-play="Salomon Radio abspielen" data-label-pause="Salomon Radio pausieren">▶</button>
+                <div class="track-info" id="trackName">Salomon Radio</div>
+            </div>
+            <button type="button" class="hamburger" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="sidebar" data-label-open="Menü öffnen" data-label-close="Menü schließen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+            <a href="/de#home">Home</a>
+            <a href="/de#about">Über mich</a>
+            <a href="/de#doing">Was ich tue</a>
+            <a href="/de#values">Werte</a>
+            <a href="/de#projects">Projekte</a>
+            <a href="/de#buecher">Bücher</a>
+            <a href="/de#contact">Kontakt</a>
+            <a href="/shop/"{cur("shop")}>Shop</a>
+            <a href="/shop/warenkorb"{cur("cart")}>Warenkorb (<span data-cart-count>0</span>)</a>
+            <div class="lang-switcher">
+                <button type="button" class="lang-btn" onclick="switchLanguage('sw')" aria-label="SW">SW</button>
+                <button type="button" class="lang-btn active" onclick="switchLanguage('de')" aria-label="DE" aria-current="true">DE</button>
+                <button type="button" class="lang-btn" onclick="switchLanguage('en')" aria-label="EN">EN</button>
+                <button type="button" class="lang-btn" onclick="switchLanguage('fr')" aria-label="FR">FR</button>
+            </div>
+        </nav>
+    </div>
+    <main>
 """
 
 
 def footer():
-    return f"""<footer class="shop-footer">
-  <div class="wrap">
-    <nav class="legal-links" aria-label="Rechtliches">
-      <a href="/shop/">Shop</a>
-      <a href="/impressum">Impressum</a>
-      <a href="/datenschutz">Datenschutz</a>
-      <a href="/shop/agb">AGB</a>
-      <a href="/shop/widerruf">Widerruf</a>
-    </nav>
-    <p>Öffentlicher Name: Salomon Owona. Der Shop ist auf Deutsch. Weitere Sprachen erst, wenn eine lektorierte Datei vorliegt.</p>
-    <p>&copy; 1981–2026 Salomon Owona. Zwischen Welten.</p>
-  </div>
-</footer>
-<script src="/shop/shop.js" defer></script>
+    # Exact de.html footer (Patreon, social, legal), plus AGB/Widerruf for the shop,
+    # then the same radio player, radio-persist.js and GoatCounter.
+    return f"""    </main>
+    <footer>
+        <div class="container-shifted">
+            <div style="display: flex; flex-direction: column; gap: 2rem; align-items: center;">
+                <!-- Patreon Widget -->
+                <div class="patreon-widget">
+                    <iframe src="https://patreon.com/SalomonO" frameborder="0" width="100%" height="200" style="border-radius: 8px;"></iframe>
+                </div>
+
+                <!-- Social Media Icons -->
+                <div class="social-icons">
+                    <a href="https://www.tiktok.com/@salomon.rocks" class="social-icon tiktok" target="_blank" rel="noopener noreferrer" title="TikTok">
+                        <span class="social-text">📱</span>
+                    </a>
+                    <a href="https://www.facebook.com/share/19bWcdUGQK/" class="social-icon facebook" target="_blank" rel="noopener noreferrer" title="Facebook">
+                        <span class="social-text">📘</span>
+                    </a>
+                    <a href="https://www.instagram.com/salomon.rocks/" class="social-icon instagram" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <span class="social-text">📷</span>
+                    </a>
+                    <a href="https://www.youtube.com/@salomonowona" class="social-icon youtube" target="_blank" rel="noopener noreferrer" title="YouTube">
+                        <span class="social-text">📺</span>
+                    </a>
+                    <a href="https://www.amazon.de/s?i=stripbooks&rh=p_27%3ASalomon%2BOwona&s=relevancerank&text=Salomon+Owona&ref=dp_byline_sr_book_1" class="social-icon amazon" target="_blank" rel="noopener noreferrer" title="E-Books">
+                        <span class="social-text">📦</span>
+                    </a>
+                </div>
+
+                <nav class="legal-links" aria-label="Rechtliches" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1rem;font-size:0.9rem;">
+                    <a href="/shop/" style="color:var(--accent);">Shop</a>
+                    <a href="/impressum" style="color:var(--accent);">Impressum</a>
+                    <a href="/datenschutz" style="color:var(--accent);">Datenschutz</a>
+                    <a href="/shop/agb" style="color:var(--accent);">AGB</a>
+                    <a href="/shop/widerruf" style="color:var(--accent);">Widerruf</a>
+                </nav>
+                <p>&copy; 1981-2026 Salomon Firmin Owona. Zwischen Welten.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+    <audio id="liveRadioPlayer" preload="none" playsinline style="display: none;"></audio>
+    <script src="/radio-persist.js" defer></script>
+    <script src="/shop/shop.js" defer></script>
 {GOAT}
 </body>
 </html>
@@ -136,57 +210,88 @@ def footer():
 
 
 def test_banner():
-    return """<div class="banner" role="status">
-  <strong>Testmodus.</strong>
-  Der Shop ist angelegt, verkauft aber noch nicht. Es wird nichts berechnet, und es geht keine Bestellung hinaus.
-  Der Verkauf startet erst, wenn Salomon Owona den Shop ausdrücklich freigibt.
-</div>"""
+    return """<div class="values-box shop-draft" role="status">
+                    <p class="values-lead">Testmodus.</p>
+                    <p>Der Shop ist angelegt, verkauft aber noch nicht. Es wird nichts berechnet, und es geht keine Bestellung hinaus. Der Verkauf startet erst, wenn Salomon Owona den Shop ausdrücklich freigibt.</p>
+                </div>"""
 
 
 def chips(active=None):
-    bits = ['<a class="chip%s" href="/shop/"%s>Alle</a>' % (" is-active" if not active else "", ' aria-current="page"' if not active else "")]
+    bits = []
+    ac = ' aria-current="page"' if not active else ""
+    bits.append('<a href="/shop/"' + ac + ">Alle</a>")
     for c in CATEGORIES:
         is_a = active == c["id"]
+        ac = ' aria-current="page"' if is_a else ""
         bits.append(
-            f'<a class="chip{" is-active" if is_a else ""}" href="/shop/kategorie/{c["id"]}"'
-            f'{" aria-current=\"page\"" if is_a else ""}>{esc(c["short"])}</a>'
+            '<a href="/shop/kategorie/' + c["id"] + '"' + ac + ">" + esc(c["short"]) + "</a>"
         )
-    return '<nav class="chips" aria-label="Kategorien">' + "".join(bits) + "</nav>"
+    return '<nav class="shop-cats" aria-label="Kategorien">' + "".join(bits) + "</nav>"
 
 
-def cover_html(p, lg=False, cls="card-cover"):
+def cover_html(p, lg=False, cls="shop-cover"):
     title = esc(p["title"])
+    img_cls = "shop-cover-lg" if lg else "shop-cover"
     if p.get("cover"):
         src = p["coverLg"] if lg and p.get("coverLg") else p["cover"]
         jpg = p.get("coverLgJpg") if lg and p.get("coverLgJpg") else p.get("coverJpg")
-        return f'''<div class="{cls}">
-          {badge(p)}
-          <picture>
-            <source type="image/webp" srcset="{esc(src)}">
-            <img src="{esc(jpg or src)}" alt="Cover: {title}" width="400" height="640">
-          </picture>
-        </div>'''
-    return f'<div class="{cls}">{badge(p)}<div class="placeholder">{title}</div></div>'
+        style = (
+            "width:220px;max-width:100%;height:auto;display:block;margin-bottom:1.5rem;"
+            "border-radius:4px;border:1px solid var(--border);"
+            if lg else
+            "width:120px;height:auto;display:block;margin-bottom:1.25rem;"
+            "border-radius:4px;border:1px solid var(--border);"
+        )
+        return (
+            f'<picture>\n'
+            f'                        <source type="image/webp" srcset="{esc(src)}">\n'
+            f'                        <img class="{img_cls}" src="{esc(jpg or src)}" alt="Cover: {title}" width="400" height="640" style="{style}">\n'
+            f'                    </picture>'
+        )
+    return '<span class="project-icon" aria-hidden="true">📖</span>'
 
 
 def badge(p):
     if p.get("badge"):
-        return f'<span class="badge">{esc(p["badge"])}</span>'
+        return f'<span class="shop-muted">{esc(p["badge"])}</span>'
     return ""
 
 
 def card(p):
-    price = f'<span class="price">{euro(p["priceCents"])}</span>' if p.get("priceCents") else '<span class="muted">Bei Amazon</span>'
-    words = f' · ca. {p["wordCount"]:,} Wörter'.replace(",", ".") if p.get("wordCount") else ""
+    price = (
+        f'<span class="shop-price" style="color:var(--accent);font-weight:600">{euro(p["priceCents"])}</span>'
+        if p.get("priceCents")
+        else '<span class="shop-muted" style="color:var(--text-muted)">Bei Amazon</span>'
+    )
+    words = (
+        f' · ca. {p["wordCount"]:,} Wörter'.replace(",", ".")
+        if p.get("wordCount")
+        else ""
+    )
     cat = cat_by_id(p["category"])["short"]
-    return f'''<a class="card" href="/shop/{esc(p["slug"])}">
-      {cover_html(p)}
-      <div class="card-body">
-        <div class="card-cat">{esc(cat)}</div>
-        <h3 class="card-title">{esc(p["title"])}</h3>
-        <div class="card-meta">{price}{words}</div>
-      </div>
-    </a>'''
+    blurb = (p.get("blurb") or "")[:160]
+    if p.get("blurb") and len(p["blurb"]) > 160:
+        blurb = blurb.rsplit(" ", 1)[0] + "…"
+    desc = esc(blurb) if blurb else esc(cat)
+    return (
+        f'<div class="project-card">\n'
+        f'                        {cover_html(p)}\n'
+        f'                        <div class="project-title">{esc(p["title"])}</div>\n'
+        f'                        <div class="project-desc">{desc}<br>{price}{words}<br>\n'
+        f'                        <a href="/shop/{esc(p["slug"])}" style="color: var(--accent);">Zum Buch →</a></div>\n'
+        f'                    </div>'
+    )
+
+
+def section(inner, sid=""):
+    id_attr = f' id="{sid}"' if sid else ""
+    return (
+        f'        <section{id_attr}>\n'
+        f'            <div class="container-shifted">\n'
+        f'                {inner}\n'
+        f'            </div>\n'
+        f'        </section>\n'
+    )
 
 
 def schema_product(p):
@@ -247,6 +352,7 @@ def schema_product(p):
     return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + "</script>"
 
 
+
 # ---------- pages ----------
 
 def page_index():
@@ -255,16 +361,17 @@ def page_index():
         n = len(products_in(c["id"]))
         label = f"{n} Titel" if n else "Weitere Titel in Vorbereitung"
         tiles.append(
-            f'''<a class="cat-tile" href="/shop/kategorie/{c["id"]}">
-              <h3>{esc(c["name"])}</h3>
-              <p>{esc(c["desc"])}</p>
-              <div class="n">{esc(label)}</div>
-            </a>'''
+            '<div class="project-card">\n'
+            '                        <div class="project-title">' + esc(c["name"]) + '</div>\n'
+            '                        <div class="project-desc">' + esc(c["desc"]) + '<br>\n'
+            '                        <span class="shop-muted">' + esc(label) + '</span><br>\n'
+            '                        <a href="/shop/kategorie/' + c["id"] + '" style="color: var(--accent);">Zur Kategorie →</a></div>\n'
+            '                    </div>'
         )
     own = [p for p in PRODUCTS if p["fulfillment"] == "own"]
-    cards = "\n".join(card(p) for p in own)
+    cards = "\n                    ".join(card(p) for p in own)
     amazon = [p for p in PRODUCTS if p["fulfillment"] == "amazon" and p.get("type") != "collection"]
-    acards = "\n".join(card(p) for p in amazon)
+    acards = "\n                    ".join(card(p) for p in amazon)
     desc = "E-Books von Salomon Owona: Herkunft, Musik, Liebe, E-Commerce, Krypto, Vibe Coding, Geschichte und Afro-Mythologie. Zahlung per Karte (EUR) oder Mobile Money (XAF) – Verkauf startet nach Freigabe."
     schema = {
         "@context": "https://schema.org",
@@ -277,26 +384,45 @@ def page_index():
         "inLanguage": "de",
     }
     html = (
-        head("Shop | Salomon Owona", desc, f"{BASE}/shop/", schema='<script type="application/ld+json">' + json.dumps(schema, ensure_ascii=False) + "</script>")
+        head(
+            "Shop | Salomon Owona",
+            desc,
+            f"{BASE}/shop/",
+            schema='<script type="application/ld+json">'
+            + json.dumps(schema, ensure_ascii=False)
+            + "</script>",
+        )
         + header("shop")
-        + f"""<main>
-  <div class="wrap">
-    {test_banner()}
-    <p class="breadcrumbs"><a href="/de">Start</a> · Shop</p>
-    <h1>Shop</h1>
-    <p class="muted">E-Books von {AUTHOR}. Nur Deutsch, nur wo eine geprüfte Datei vorliegt. Digitale Lieferungen per E-Mail, Zahlung wie im Shop von Owona Media: Karte über Stripe in Euro oder MTN/Orange Money über NotchPay in CFA-Franc.</p>
-    <p class="ai-notice">Alle eigenen Titel: Mit Hilfe von KI erstellt.</p>
-    {chips()}
-    <h2>Kategorien</h2>
-    <div class="cats-overview">{''.join(tiles)}</div>
-    <h2>Eigene Titel</h2>
-    <div class="grid">{cards}</div>
-    <h2>Afro-Mythologie bei Amazon</h2>
-    <p class="muted">Diese Titel haben keine eigene Shop-Datei; der Kauf erfolgt über Amazon.</p>
-    <div class="grid">{acards}</div>
-  </div>
-</main>
-"""
+        + section(
+            test_banner()
+            + '\n                <p class="shop-crumbs"><a href="/de">Start</a> · Shop</p>\n'
+            + "                <h1>Shop</h1>\n"
+            + '                <p class="bio-text">E-Books von '
+            + AUTHOR
+            + ". Nur Deutsch, nur wo eine geprüfte Datei vorliegt. Digitale Lieferungen per E-Mail, Zahlung wie im Shop von Owona Media: Karte über Stripe in Euro oder MTN/Orange Money über NotchPay in CFA-Franc.</p>\n"
+            + '                <p class="shop-ai">Alle eigenen Titel: Mit Hilfe von KI erstellt.</p>\n'
+            + "                "
+            + chips()
+        )
+        + section(
+            "                <h2>Kategorien</h2>\n"
+            '                <div class="project-grid">\n                    '
+            + "\n                    ".join(tiles)
+            + "\n                </div>"
+        )
+        + section(
+            "                <h2>Eigene Titel</h2>\n"
+            '                <div class="project-grid">\n                    '
+            + cards
+            + "\n                </div>"
+        )
+        + section(
+            "                <h2>Afro-Mythologie bei Amazon</h2>\n"
+            '                <p class="shop-muted">Diese Titel haben keine eigene Shop-Datei; der Kauf erfolgt über Amazon.</p>\n'
+            '                <div class="project-grid">\n                    '
+            + acards
+            + "\n                </div>"
+        )
         + footer()
     )
     (SHOP / "index.html").write_text(html, encoding="utf-8")
@@ -305,37 +431,51 @@ def page_index():
 def page_category(c):
     items = products_in(c["id"])
     if items:
-        body = '<div class="grid">' + "\n".join(card(p) for p in items) + "</div>"
+        body = (
+            '<div class="project-grid">\n                    '
+            + "\n                    ".join(card(p) for p in items)
+            + "\n                </div>"
+        )
     else:
         body = (
-            f'<div class="empty"><p>In <strong>{esc(c["name"])}</strong> sind noch keine eigenen Titel im Katalog. '
-            "Weitere Bücher sind in Vorbereitung und erscheinen hier, sobald eine lektorierte deutsche Fassung vorliegt.</p></div>"
+            '<div class="values-box">\n'
+            "                    <p>In <strong>"
+            + esc(c["name"])
+            + "</strong> sind noch keine eigenen Titel im Katalog. "
+            "Weitere Bücher sind in Vorbereitung und erscheinen hier, sobald eine lektorierte deutsche Fassung vorliegt.</p>\n"
+            "                </div>"
         )
     extra = ""
     if c["id"] == "afro-mythologie":
         extra = (
-            '<p class="muted" style="margin-top:1.5rem">Vier Amazon-Listings sind über gesicherte Kurzlinks bestätigt '
+            '<p class="shop-muted" style="margin-top:1.5rem">Vier Amazon-Listings sind über gesicherte Kurzlinks bestätigt '
             "(Horus, Ra, Eshus Algorithmus, Ala). Ein fünftes Amazon-Mythologie-Listing konnte ohne Bestätigung nicht eindeutig "
             "zugeordnet werden. Weitere Titel: "
-            '<a href="https://www.amazon.de/s?i=stripbooks&amp;rh=p_27%3ASalomon%2BOwona" rel="noopener noreferrer" target="_blank">Autorenseite bei Amazon</a>.</p>'
+            '<a href="https://www.amazon.de/s?i=stripbooks&amp;rh=p_27%3ASalomon%2BOwona" rel="noopener noreferrer" target="_blank" style="color: var(--accent);">Autorenseite bei Amazon</a>.</p>'
         )
     desc = c["desc"]
     url = f"{BASE}/shop/kategorie/{c['id']}"
     html = (
         head(f"{c['name']} | Shop | Salomon Owona", desc, url)
         + header("shop")
-        + f"""<main>
-  <div class="wrap">
-    {test_banner()}
-    <p class="breadcrumbs"><a href="/de">Start</a> · <a href="/shop/">Shop</a> · {esc(c["name"])}</p>
-    <h1>{esc(c["name"])}</h1>
-    <p class="muted">{esc(c["desc"])}</p>
-    {chips(c["id"])}
-    {body}
-    {extra}
-  </div>
-</main>
-"""
+        + section(
+            test_banner()
+            + '\n                <p class="shop-crumbs"><a href="/de">Start</a> · <a href="/shop/">Shop</a> · '
+            + esc(c["name"])
+            + "</p>\n"
+            + "                <h1>"
+            + esc(c["name"])
+            + "</h1>\n"
+            + '                <p class="bio-text">'
+            + esc(c["desc"])
+            + "</p>\n"
+            + "                "
+            + chips(c["id"])
+            + "\n                "
+            + body
+            + "\n                "
+            + extra
+        )
         + footer()
     )
     dest = SHOP / "kategorie" / f"{c['id']}.html"
@@ -353,29 +493,51 @@ def page_product(p):
     if p.get("chapters"):
         lis = []
         for ch in p["chapters"]:
-            w = f'<span class="w">{ch["words"]:,} Wörter</span>'.replace(",", ".") if ch.get("words") else ""
-            lis.append(f'<li><span>{esc(ch["title"])}</span>{w}</li>')
-        toc = "<h2>Inhalt</h2><ol class=\"toc\">" + "".join(lis) + "</ol>"
+            w = ""
+            if ch.get("words"):
+                w = (
+                    f'<span class="w">{ch["words"]:,} Wörter</span>'.replace(",", ".")
+                )
+            lis.append(f"<li><span>{esc(ch['title'])}</span>{w}</li>")
+        toc = (
+            "<h2>Inhalt</h2>\n                <ol class=\"shop-toc\">"
+            + "".join(lis)
+            + "</ol>"
+        )
     notes = []
     if p.get("note"):
-        notes.append(f'<div class="banner banner-warn">{esc(p["note"])}</div>')
+        notes.append(
+            '<div class="values-box shop-draft"><p>' + esc(p["note"]) + "</p></div>"
+        )
     if p.get("fulfillment") == "amazon":
-        action = f'<a class="btn" href="{esc(p["amazonUrl"])}" rel="noopener noreferrer" target="_blank">Bei Amazon ansehen</a>'
-        price = "<p class=\"muted\">Preis und Lieferung bei Amazon.</p>"
+        action = (
+            f'<a class="contact-btn" href="{esc(p["amazonUrl"])}" rel="noopener noreferrer" target="_blank">Bei Amazon ansehen</a>'
+        )
+        price = '<p class="shop-muted">Preis und Lieferung bei Amazon.</p>'
     elif p.get("priceCents"):
-        price = f'<p class="price" style="font-size:1.4rem">{euro(p["priceCents"])}</p><p class="muted">E-Book (EPUB), Deutsch. Lieferung per E-Mail nach Zahlung. ca. {p["wordCount"]:,} Wörter.</p>'.replace(",", ".")
+        wc = ""
+        if p.get("wordCount"):
+            wc = f' ca. {p["wordCount"]:,} Wörter.'.replace(",", ".")
+        price = (
+            f'<p class="shop-price" style="font-size:1.3rem;margin:1rem 0 0.4rem">{euro(p["priceCents"])}</p>'
+            f'<p class="shop-muted">E-Book (EPUB), Deutsch. Lieferung per E-Mail nach Zahlung.{wc}</p>'
+        )
         if p.get("sellable"):
             action = (
-                f'<button type="button" class="btn" data-add="{esc(p["id"])}">In den Warenkorb</button>'
-                '<a class="btn btn-ghost" id="after-add" hidden href="/shop/warenkorb">Zum Warenkorb</a>'
-                '<p class="muted">Im Testmodus wird nichts berechnet.</p>'
+                f'<button type="button" class="contact-btn" data-add="{esc(p["id"])}">In den Warenkorb</button>'
+                '<a class="contact-btn" id="after-add" hidden href="/shop/warenkorb">Zum Warenkorb</a>'
+                '<p class="shop-muted">Im Testmodus wird nichts berechnet.</p>'
             )
         else:
-            action = '<button type="button" class="btn" disabled>Derzeit nicht kaufbar</button>'
+            action = '<button type="button" class="contact-btn" disabled>Derzeit nicht kaufbar</button>'
     else:
         action = ""
         price = ""
-    words_meta = f'{p["wordCount"]} Wörter, {len(p.get("chapters") or [])} Kapitel' if p.get("wordCount") else ""
+    words_meta = ""
+    if p.get("wordCount"):
+        words_meta = f'{p["wordCount"]} Wörter, {len(p.get("chapters") or [])} Kapitel'.replace(",", ".")
+        # wordCount might be int; don't use comma thousands in German? 15836 is fine, or 15.836
+        words_meta = f'{p["wordCount"]:,} Wörter, {len(p.get("chapters") or [])} Kapitel'.replace(",", ".")
     html = (
         head(
             f'{p["title"]} | Shop | Salomon Owona',
@@ -386,29 +548,31 @@ def page_product(p):
             schema=schema_product(p),
         )
         + header("shop")
-        + f"""<main>
-  <div class="wrap">
-    {test_banner()}
-    <p class="breadcrumbs"><a href="/de">Start</a> · <a href="/shop/">Shop</a> · <a href="/shop/kategorie/{p["category"]}">{esc(cat_by_id(p["category"])["name"])}</a> · {esc(p["title"])}</p>
-    <article class="pdp">
-      {cover_html(p, lg=True, cls="pdp-cover")}
-      <div>
-        <p class="card-cat">{esc(cat_by_id(p["category"])["name"])}</p>
-        <h1>{esc(p["title"])}</h1>
-        <p>Von {AUTHOR}. {esc(words_meta)}</p>
-        <span class="ai-notice">Mit Hilfe von KI erstellt</span>
-        {price}
-        {''.join(notes)}
-        <div class="actions">{action}</div>
-        <h2>Über dieses Buch</h2>
-        <p>{esc(p.get("blurb") or "")}</p>
-        {toc}
-        <p class="muted">Sprache: Deutsch. Weitere Sprachen erscheinen erst, wenn eine lektorierte Datei vorliegt.</p>
-      </div>
-    </article>
-  </div>
-</main>
-"""
+        + section(
+            test_banner()
+            + '\n                <p class="shop-crumbs"><a href="/de">Start</a> · <a href="/shop/">Shop</a> · '
+            + f'<a href="/shop/kategorie/{p["category"]}">{esc(cat_by_id(p["category"])["name"])}</a> · '
+            + esc(p["title"])
+            + "</p>\n"
+            + '                <article>\n'
+            + '                    <div class="shop-pdp">\n'
+            + f'                        {cover_html(p, lg=True)}\n'
+            + "                        <div>\n"
+            + f'                            <p class="shop-muted">{esc(cat_by_id(p["category"])["name"])}</p>\n'
+            + f"                            <h1>{esc(p['title'])}</h1>\n"
+            + f'                            <p>Von {AUTHOR}. {esc(words_meta)}</p>\n'
+            + '                            <span class="shop-ai">Mit Hilfe von KI erstellt</span>\n'
+            + f"                            {price}\n"
+            + f"                            {''.join(notes)}\n"
+            + f'                            <div class="shop-actions">{action}</div>\n'
+            + "                        </div>\n"
+            + "                    </div>\n"
+            + "                    <h2>Über dieses Buch</h2>\n"
+            + f'                    <p class="bio-text">{esc(p.get("blurb") or "")}</p>\n'
+            + f"                    {toc}\n"
+            + '                    <p class="shop-muted">Sprache: Deutsch. Weitere Sprachen erscheinen erst, wenn eine lektorierte Datei vorliegt.</p>\n'
+            + "                </article>"
+        )
         + footer()
     )
     (SHOP / f"{p['slug']}.html").write_text(html, encoding="utf-8")
@@ -418,15 +582,12 @@ def page_cart():
     html = (
         head("Warenkorb | Shop | Salomon Owona", "Warenkorb im Shop von Salomon Owona.", f"{BASE}/shop/warenkorb")
         + header("cart")
-        + f"""<main>
-  <div class="wrap-narrow">
-    {test_banner()}
-    <p class="breadcrumbs"><a href="/shop/">Shop</a> · Warenkorb</p>
-    <h1>Warenkorb</h1>
-    <div id="cart-root"></div>
-  </div>
-</main>
-"""
+        + section(
+            test_banner()
+            + '\n                <p class="shop-crumbs"><a href="/shop/">Shop</a> · Warenkorb</p>\n'
+            + "                <h1>Warenkorb</h1>\n"
+            + '                <div id="cart-root"></div>'
+        )
         + footer()
     )
     (SHOP / "warenkorb.html").write_text(html, encoding="utf-8")
@@ -434,47 +595,48 @@ def page_cart():
 
 def page_checkout():
     html = (
-        head("Kasse | Shop | Salomon Owona", "Kasse im Shop von Salomon Owona. Testmodus: keine echte Zahlung.", f"{BASE}/shop/kasse")
+        head(
+            "Kasse | Shop | Salomon Owona",
+            "Kasse im Shop von Salomon Owona. Testmodus: keine echte Zahlung.",
+            f"{BASE}/shop/kasse",
+        )
         + header("cart")
-        + f"""<main>
-  <div class="wrap-narrow">
-    {test_banner()}
-    <p class="breadcrumbs"><a href="/shop/">Shop</a> · <a href="/shop/warenkorb">Warenkorb</a> · Kasse</p>
-    <h1>Kasse</h1>
-    <p class="muted">Zahlung wie im Shop von Owona Media: Karte über Stripe in Euro oder MTN Mobile Money / Orange Money über NotchPay in CFA-Franc (XAF). Im Testmodus wird der Ablauf nur simuliert.</p>
-    <div id="checkout-summary"></div>
-    <form id="checkout-form" class="form" novalidate>
-      <div class="form-row">
-        <div><label for="firstName">Vorname</label><input id="firstName" name="firstName" type="text" autocomplete="given-name" required></div>
-        <div><label for="lastName">Nachname</label><input id="lastName" name="lastName" type="text" autocomplete="family-name" required></div>
-      </div>
-      <div><label for="email">E-Mail (für den Download-Link)</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-      <div><label for="phone">Telefon (nötig für Mobile Money)</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
-      <fieldset class="pay-opts">
-        <legend>Zahlungsart</legend>
-        <label class="pay-opt"><input type="radio" name="pay" value="stripe" checked> Karte über Stripe (Euro)</label>
-        <label class="pay-opt"><input type="radio" name="pay" value="momo" id="pay-momo"> MTN / Orange Money über NotchPay (XAF)</label>
-        <div id="momo-extra" hidden>
-          <label for="channel">Netzwerk</label>
-          <select id="channel" name="channel">
-            <option value="cm.mobile">MTN oder Orange</option>
-            <option value="cm.mtn">MTN Mobile Money</option>
-            <option value="cm.orange">Orange Money</option>
-          </select>
-        </div>
-      </fieldset>
-      <div class="checks">
-        <label><input type="checkbox" name="agb" required> Ich habe die <a href="/shop/agb" target="_blank">AGB</a> gelesen und erkenne sie an. (Entwurf)</label>
-        <label><input type="checkbox" name="privacy" required> Ich habe die <a href="/datenschutz" target="_blank">Datenschutzhinweise</a> gelesen.</label>
-        <label><input type="checkbox" name="widerruf" required> Ich stimme zu, dass mit der Erfüllung (Bereitstellung des E-Books) vor Ablauf der Widerrufsfrist begonnen wird, und mir ist bewusst, dass ich mein Widerrufsrecht mit Beginn der Erfüllung verliere. Hinweise: <a href="/shop/widerruf" target="_blank">Widerrufsbelehrung</a>.</label>
-      </div>
-      <p class="err" data-error></p>
-      <button class="btn" type="submit">Testkauf simulieren</button>
-      <p class="muted">Es wird keine Zahlung ausgeführt. Der echte Verkauf bleibt ausgeschaltet, bis der Shop freigegeben ist und die Zahlungswege auf dem Server für diese Marke eingerichtet sind.</p>
-    </form>
-  </div>
-</main>
-"""
+        + section(
+            test_banner()
+            + '\n                <p class="shop-crumbs"><a href="/shop/">Shop</a> · <a href="/shop/warenkorb">Warenkorb</a> · Kasse</p>\n'
+            + "                <h1>Kasse</h1>\n"
+            + '                <p class="bio-text">Zahlung wie im Shop von Owona Media: Karte über Stripe in Euro oder MTN Mobile Money / Orange Money über NotchPay in CFA-Franc (XAF). Im Testmodus wird der Ablauf nur simuliert.</p>\n'
+            + '                <div id="checkout-summary"></div>\n'
+            + '                <form id="checkout-form" class="shop-form" novalidate>\n'
+            + '                    <div class="shop-form-row">\n'
+            + '                        <div><label for="firstName">Vorname</label><input id="firstName" name="firstName" type="text" autocomplete="given-name" required></div>\n'
+            + '                        <div><label for="lastName">Nachname</label><input id="lastName" name="lastName" type="text" autocomplete="family-name" required></div>\n'
+            + "                    </div>\n"
+            + '                    <div><label for="email">E-Mail (für den Download-Link)</label><input id="email" name="email" type="email" autocomplete="email" required></div>\n'
+            + '                    <div><label for="phone">Telefon (nötig für Mobile Money)</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>\n'
+            + '                    <fieldset class="shop-pay">\n'
+            + "                        <legend>Zahlungsart</legend>\n"
+            + '                        <label class="shop-pay-opt"><input type="radio" name="pay" value="stripe" checked> Karte über Stripe (Euro)</label>\n'
+            + '                        <label class="shop-pay-opt"><input type="radio" name="pay" value="momo" id="pay-momo"> MTN / Orange Money über NotchPay (XAF)</label>\n'
+            + '                        <div id="momo-extra" hidden>\n'
+            + '                            <label for="channel">Netzwerk</label>\n'
+            + '                            <select id="channel" name="channel">\n'
+            + '                                <option value="cm.mobile">MTN oder Orange</option>\n'
+            + '                                <option value="cm.mtn">MTN Mobile Money</option>\n'
+            + '                                <option value="cm.orange">Orange Money</option>\n'
+            + "                            </select>\n"
+            + "                        </div>\n"
+            + "                    </fieldset>\n"
+            + '                    <div class="shop-checks">\n'
+            + '                        <label><input type="checkbox" name="agb" required> Ich habe die <a href="/shop/agb" target="_blank">AGB</a> gelesen und erkenne sie an. (Entwurf)</label>\n'
+            + '                        <label><input type="checkbox" name="privacy" required> Ich habe die <a href="/datenschutz" target="_blank">Datenschutzhinweise</a> gelesen.</label>\n'
+            + '                        <label><input type="checkbox" name="widerruf" required> Ich stimme zu, dass mit der Erfüllung (Bereitstellung des E-Books) vor Ablauf der Widerrufsfrist begonnen wird, und mir ist bewusst, dass ich mein Widerrufsrecht mit Beginn der Erfüllung verliere. Hinweise: <a href="/shop/widerruf" target="_blank">Widerrufsbelehrung</a>.</label>\n'
+            + "                    </div>\n"
+            + '                    <p class="shop-err" data-error></p>\n'
+            + '                    <button class="contact-btn" type="submit">Testkauf simulieren</button>\n'
+            + '                    <p class="shop-muted">Es wird keine Zahlung ausgeführt. Der echte Verkauf bleibt ausgeschaltet, bis der Shop freigegeben ist und die Zahlungswege auf dem Server für diese Marke eingerichtet sind.</p>\n'
+            + "                </form>"
+        )
         + footer()
     )
     (SHOP / "kasse.html").write_text(html, encoding="utf-8")
@@ -484,16 +646,13 @@ def page_thanks():
     html = (
         head("Danke | Shop | Salomon Owona", "Testbestellung im Shop von Salomon Owona.", f"{BASE}/shop/danke")
         + header("shop")
-        + f"""<main>
-  <div class="wrap-narrow">
-    {test_banner()}
-    <h1>Testkauf abgeschlossen</h1>
-    <p>Es wurde <strong>nichts berechnet</strong> und kein E-Book versendet. Der Ablauf der Kasse ist geprüft: Angaben, Einwilligungen und Warenkorb greifen.</p>
-    <p>Sobald der Shop freigegeben ist, kommt nach einer echten Zahlung der Download-Link per E-Mail, so wie im Shop von Owona Media.</p>
-    <div class="actions"><a class="btn" href="/shop/">Zurück zum Shop</a></div>
-  </div>
-</main>
-"""
+        + section(
+            test_banner()
+            + "\n                <h1>Testkauf abgeschlossen</h1>\n"
+            + "                <p>Es wurde <strong>nichts berechnet</strong> und kein E-Book versendet. Der Ablauf der Kasse ist geprüft: Angaben, Einwilligungen und Warenkorb greifen.</p>\n"
+            + "                <p>Sobald der Shop freigegeben ist, kommt nach einer echten Zahlung der Download-Link per E-Mail, so wie im Shop von Owona Media.</p>\n"
+            + '                <div class="shop-actions"><a class="contact-btn" href="/shop/">Zurück zum Shop</a></div>'
+        )
         + footer()
     )
     (SHOP / "danke.html").write_text(html, encoding="utf-8")
@@ -542,19 +701,154 @@ WIDERRUF = r'''<h1>Widerrufsbelehrung</h1>
 
 
 def legal_page(slug, title, body, desc):
+    body = body.replace('class="draft-banner"', 'class="values-box shop-draft"')
     html = (
         head(f"{title} | Shop | Salomon Owona", desc, f"{BASE}/shop/{slug}")
         + header("shop")
-        + f"""<main>
-  <div class="wrap-narrow">
-    <p class="breadcrumbs"><a href="/shop/">Shop</a> · {esc(title)}</p>
-    {body}
-  </div>
-</main>
-"""
+        + section(
+            '<p class="shop-crumbs"><a href="/shop/">Shop</a> · '
+            + esc(title)
+            + "</p>\n                "
+            + body
+        )
         + footer()
     )
     (SHOP / f"{slug}.html").write_text(html, encoding="utf-8")
+
+
+FEATURED_SLUGS = [
+    "vibe-coding-saas",
+    "psychologie-e-commerce",
+    "erziehung-im-wandel",
+    "amazon-horus",
+]
+
+
+def featured_book_cards():
+    cards = []
+    for slug in FEATURED_SLUGS:
+        try:
+            p = product(slug)
+        except StopIteration:
+            continue
+        cards.append(card(p))
+    return "\n                    ".join(cards)
+
+
+BUECHER = {
+    "de.html": {
+        "nav_after": '<a href="#projects">Projekte</a>',
+        "nav_insert": '<a href="#projects">Projekte</a>\n            <a href="#buecher">Bücher</a>',
+        "comment": "        <!-- 5b. Bücher -->",
+        "h2": "Bücher",
+        "lead": "E-Books von Salomon Owona – auf Deutsch, im gleichen Haus wie diese Seite. Der Shop ist angelegt, verkauft aber noch nicht.",
+        "cta": "Zum Shop",
+        "contact_comment": "        <!-- 6. Kontakt -->",
+    },
+    "en.html": {
+        "nav_after": '<a href="#projects">Projects</a>',
+        "nav_insert": '<a href="#projects">Projects</a>\n                    <a href="#buecher">Books</a>',
+        "comment": "        <!-- 5b. Books -->",
+        "h2": "Books",
+        "lead": "E-books by Salomon Owona. The shop is in German and is part of this site. Sales start only after it is released.",
+        "cta": "To the shop",
+        "contact_comment": "        <!-- 6. Contact -->",
+    },
+    "fr.html": {
+        "nav_after": '<a href="#projects">Projets</a>',
+        "nav_insert": '<a href="#projects">Projets</a>\n                    <a href="#buecher">Livres</a>',
+        "comment": "        <!-- 5b. Livres -->",
+        "h2": "Livres",
+        "lead": "Livres numériques de Salomon Owona. La boutique est en allemand et fait partie de ce site. La vente commencera seulement après sa mise en ligne.",
+        "cta": "Vers la boutique",
+        "contact_comment": "        <!-- 6. Contact -->",
+    },
+    "index.html": {
+        "nav_after": '<a href="#projects">Miradi</a>',
+        "nav_insert": '<a href="#projects">Miradi</a>\n            <a href="#buecher">Vitabu</a>',
+        "comment": "        <!-- 5b. Vitabu -->",
+        "h2": "Vitabu",
+        "lead": "Vitabu vya Salomon Owona. Duka lipo kwa Kidachi na ni sehemu ya tovuti hii. Mauzo yataanza baada ya idhini.",
+        "cta": "Nenda dukani",
+        "contact_comment": "        <!-- 6. Kontakt -->",
+    },
+    "sw.html": {
+        "nav_after": '<a href="#projects">Miradi</a>',
+        "nav_insert": '<a href="#projects">Miradi</a>\n            <a href="#buecher">Vitabu</a>',
+        "comment": "        <!-- 5b. Vitabu -->",
+        "h2": "Vitabu",
+        "lead": "Vitabu vya Salomon Owona. Duka lipo kwa Kidachi na ni sehemu ya tovuti hii. Mauzo yataanza baada ya idhini.",
+        "cta": "Nenda dukani",
+        "contact_comment": "        <!-- 6. Kontakt -->",
+    },
+}
+
+
+def patch_buecher_section():
+    """Add a Bücher/Books section on every language home page, matching #projects."""
+    cards = featured_book_cards()
+    for name, cfg in BUECHER.items():
+        path = ROOT / name
+        if not path.exists():
+            continue
+        t = path.read_text(encoding="utf-8")
+        # sidebar link (idempotent — inspect the HTML nav, not the CSS class)
+        if 'href="#buecher"' not in _sidebar_html(t):
+            if cfg["nav_after"] in _sidebar_html(t):
+                # replace only inside the nav
+                nav = _sidebar_html(t)
+                t = t.replace(nav, nav.replace(cfg["nav_after"], cfg["nav_insert"], 1), 1)
+        block = (
+                cfg["comment"] + "\n"
+                '        <section id="buecher">\n'
+                '            <div class="container-shifted">\n'
+                f'                <h2>{cfg["h2"]}</h2>\n'
+                f'                <p class="bio-text">{cfg["lead"]}</p>\n'
+                '                <div class="project-grid">\n'
+                f"                    {cards}\n"
+                "                </div>\n"
+                f'                <a href="/shop/" class="contact-btn">{cfg["cta"]}</a>\n'
+                "            </div>\n"
+                "        </section>\n\n"
+            )
+        if 'id="buecher"' in t:
+            t = re.sub(
+                r'(?:        <!-- 5b\.[^>]*-->\n)?        <section id="buecher">[\s\S]*?</section>\n\n',
+                block,
+                t,
+                count=1,
+            )
+        else:
+            marker = cfg["contact_comment"] + "\n        <section id=\"contact\">"
+            alt = "        <section id=\"contact\">"
+            if marker in t:
+                t = t.replace(marker, block + marker, 1)
+            elif alt in t:
+                t = t.replace(alt, block + alt, 1)
+            else:
+                raise RuntimeError(f"cannot insert Bücher section into {name}")
+        path.write_text(t, encoding="utf-8")
+
+
+
+def _sidebar_html(t):
+    m = re.search(r'<nav class="sidebar-nav">[\s\S]*?</nav>', t)
+    return m.group(0) if m else ""
+
+
+def _dedupe_sidebar_shop(t):
+    def repl(m):
+        block = m.group(0)
+        prev = None
+        while prev != block:
+            prev = block
+            block = re.sub(
+                r'(<a href="[^"]+"[^>]*>[^<]*</a>)\s*\n\s*\1',
+                r'\1',
+                block,
+            )
+        return block
+    return re.sub(r'<nav class="sidebar-nav">[\s\S]*?</nav>', repl, t, count=1)
 
 
 def patch_site():
@@ -574,16 +868,14 @@ def patch_site():
         if not path.exists():
             continue
         t = path.read_text(encoding="utf-8")
-        if "/shop/" in t and "sidebar-nav" in t and t.count('href="/shop/"') >= 1 and "Shop" in t[t.find("sidebar-nav"):t.find("sidebar-nav")+800]:
-            pass  # may still need insert
-        if old and old in t and 'href="/shop/"' not in t[t.find("sidebar-nav"):t.find("sidebar-nav")+600]:
+        if old and old in t and 'href="/shop/"' not in _sidebar_html(t):
             t = t.replace(old, new, 1)
         # sw homepage
         if path.name in ("index.html", "sw.html"):
             t2 = t
             # typical sw contact link
             for cand in ('<a href="#contact">Mawasiliano</a>', '<a href="#contact">Kontakt</a>', '<a href="#contact">Contact</a>'):
-                if cand in t2 and 'href="/shop/"' not in t2[t2.find("sidebar-nav"):t2.find("sidebar-nav")+600]:
+                if cand in t2 and 'href="/shop/"' not in _sidebar_html(t2):
                     t2 = t2.replace(cand, cand + '\n            <a href="/shop/">Duka (Kidachi)</a>', 1)
                     break
             t = t2
@@ -709,6 +1001,7 @@ E-Book-Shop von Salomon Owona auf Deutsch (Testmodus, Verkauf erst nach Freigabe
                         )
                 h["value"] = val
     vpath.write_text(_json.dumps(v, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    patch_buecher_section()
 
 
 def main():
